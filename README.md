@@ -6,6 +6,8 @@ Trabalho Semestral de Estrutura de Dados
 ## Tarefas 
 - Débora
     - [ ] Requisitos
+        - [x] Funcionais
+        - [ ] Não Funcionais 
     - [ ] Diagrama de Classes
 
 - Luan 
