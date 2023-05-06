@@ -8,7 +8,7 @@ Trabalho Semestral de Estrutura de Dados
     - [ ] Requisitos
         - [x] Funcionais
         - [ ] Não Funcionais 
-    - [ ] Diagrama de Classes
+    - [x] Diagrama de Classes
 
 - Luan 
     - [ ] Caso de uso
