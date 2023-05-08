@@ -5,13 +5,13 @@ Trabalho Semestral de Estrutura de Dados
 
 ## Tarefas 
 - Débora
-    - [ ] Requisitos
+    - [x] Requisitos
         - [x] Funcionais
-        - [ ] Não Funcionais 
+        - [x] Não Funcionais 
     - [x] Diagrama de Classes
 
 - Luan 
-    - [ ] Caso de uso
+    - [x] Caso de uso
     - [ ] Protótipos
 
 - Matheus
