@@ -1,10 +1,12 @@
 package model;
 
-public class Professor {
+import br.fatec.ListObject.ListObject;
 
-	public Professor() 
-	{
-		
-	}
+public class Professor
+{
+	public String login;
+	public ListObject area;
+	public ListObject grupos;
+	public ListObject reunioes;
 
 }
