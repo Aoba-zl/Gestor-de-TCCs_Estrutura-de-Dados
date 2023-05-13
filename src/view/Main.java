@@ -6,6 +6,7 @@ public class Main {
 	{
 		
 		System.out.println("aaaa");
+		System.out.println("test");
 
 	}
 
