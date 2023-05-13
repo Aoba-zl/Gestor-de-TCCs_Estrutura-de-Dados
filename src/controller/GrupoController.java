@@ -23,11 +23,11 @@ public class GrupoController
         grupo.tema = tema;
     }
 
-    public Aluno getGrupoAlunos() {
+    public Aluno[] getGrupoAlunos() {
         return grupo.alunos;
     }
 
-    public void setGrupoAlunos(Aluno alunos) {
+    public void setGrupoAlunos(Aluno[] alunos) {
         grupo.alunos = alunos;
     }
 
