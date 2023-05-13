@@ -12,11 +12,11 @@ Trabalho Semestral de Estrutura de Dados
 
 - Luan 
     - [x] Caso de uso
-    - [ ] Protótipos
+    - [x] Protótipos
 
 - Matheus
-    - [ ] VCP
-    - [ ] Diagrama de Sequência
+    - [x] VCP
+    - [x] Diagrama de Sequência
 
 ## Regrinhas
 - Manter Descrição das alterações nos commits (para que todos possam compreender o que ocorre)
