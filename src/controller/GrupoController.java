@@ -7,11 +7,11 @@ import model.Grupo;
 public class GrupoController
 {
     Grupo grupo;
-    public int getGrupoCodigo() {
+    public String getGrupoCodigo() {
         return grupo.codigo;
     }
 
-    public void setGrupoCodigo(int codigo) {
+    public void setGrupoCodigo(String codigo) {
         grupo.codigo = codigo;
     }
 
