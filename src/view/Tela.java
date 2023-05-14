@@ -34,10 +34,8 @@ import javax.swing.ScrollPaneConstants;
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
-	private MaskFormatter formatterRA;
-	private MaskFormatter formatterString;
 	/**
-	 * Launch the application. apenas test
+	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -90,15 +88,6 @@ public class Tela extends JFrame {
 		JButton btnSalvaAluno = new JButton("Salvar");
 		btnSalvaAluno.setBounds(300, 160, 100, 30);
 		pAluno.add(btnSalvaAluno);
-		
-		try {
-			formatterRA = new MaskFormatter("#############");
-			formatterString = new MaskFormatter("***********************");
-			formatterString.setValidCharacters("abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-			formatterString.setPlaceholderCharacter(' ');
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
 		JFormattedTextField tfRA = new JFormattedTextField();
 		tfRA.addKeyListener(new KeyAdapter() {
