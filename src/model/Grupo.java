@@ -2,16 +2,16 @@ package model;
 
 public class Grupo
 {
-	public String codigo;
+	public int codigo;
 	public String tema;
 	public Aluno[] alunos;
 	public Area area;
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 

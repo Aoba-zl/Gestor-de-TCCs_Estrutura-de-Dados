@@ -20,8 +20,8 @@ public class Main {
 		aluno1.setNome("Roberto");
 
 		try {
-			manterAluno.salvarDados(aluno.getRa(), aluno.getNome());
-			manterAluno.salvarDados(aluno1.getRa(), aluno1.getNome());
+			manterAluno.salvarDados(aluno);
+			manterAluno.salvarDados(aluno1);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}

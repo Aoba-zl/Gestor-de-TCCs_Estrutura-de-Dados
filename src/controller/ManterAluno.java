@@ -8,27 +8,29 @@ import java.io.*;
 public class ManterAluno {
 
 	
-	public void salvarDados(String ra, String nome) throws IOException
+	public void salvarDados(Aluno aluno) throws IOException
 	{
-		if (ra.length() == 13)
+		if (aluno.validaAlunoRA(aluno.getRa()))
 		{
 			File dir= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados");
 			if (dir.exists() && dir.isDirectory())
 			{
 				File file= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados", "Alunos.csv");
 				boolean existe= false;
-				if (file.exists()){
+				if (file.exists())
+				{
 					existe= true;
-					verificarAluno(ra);
+					verificarAluno(aluno.getRa());
 				}
 				FileWriter fileWriter= new FileWriter(file, existe);
 				PrintWriter print= new PrintWriter(fileWriter);
 				StringBuffer buffer= new StringBuffer();
 				String alunoArquivo= "";
-				if (existe == false){
+				if (existe == false)
+				{
 					alunoArquivo= String.valueOf(buffer.append("RA;Nome \n"));
 				}
-				alunoArquivo= String.valueOf(buffer.append(ra +";"+ nome +"\n"));
+				alunoArquivo= String.valueOf(buffer.append(aluno.getRa() +";"+ aluno.getNome() +"\n"));
 				print.write(alunoArquivo);
 				print.flush();
 				print.close();
@@ -56,7 +58,8 @@ public class ManterAluno {
 			String linha = buffer.readLine();
 			while (linha != null)
 			{
-				if (linha.contains(ra)){
+				if (linha.contains(ra))
+				{
 					throw new IOException("RA já registrado");
 				}
 				linha= buffer.readLine();
@@ -68,7 +71,7 @@ public class ManterAluno {
 		}
 	}
 	
-	public String pesquisarAluno(String ra) throws IOException
+	public String pesquisarAluno(Aluno aluno) throws IOException
 	{
 		File file= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados", "Alunos.csv");
 		if (file.exists() && file.isFile())
@@ -79,8 +82,9 @@ public class ManterAluno {
 			String linha = buffer.readLine();
 			while (linha != null)
 			{
-				if (linha.contains(ra)){
-					return ra;
+				if (linha.contains(aluno.getRa()))
+				{
+					return aluno.getRa();
 				}
 				linha= buffer.readLine();
 			}
@@ -91,5 +95,4 @@ public class ManterAluno {
 			throw new IOException("Arquivo inválido");
 		}
 	}
-
 }
