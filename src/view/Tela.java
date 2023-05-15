@@ -30,10 +30,13 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
 
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
+	private JTable table;
+	private JTable table_1;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -331,6 +334,25 @@ public class Tela extends JFrame {
 		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setBounds(30, 98, 267, 86);
+		pConsultarGrupos.add(scrollPane_1);
+		
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
+			}
+		));
+		table.getColumnModel().getColumn(1).setPreferredWidth(78);
+		table.getColumnModel().getColumn(2).setPreferredWidth(83);
+		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(true);
+		
 		JPanel pOrientacoes = new JPanel();
 		tabbedPane.addTab("Orientações", null, pOrientacoes, null);
 		pOrientacoes.setLayout(new BorderLayout(0, 0));
@@ -478,5 +500,22 @@ public class Tela extends JFrame {
 		JButton btnPesquisarReuniao = new JButton("Pesquisar");
 		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
 		pReuniaoMarcado.add(btnPesquisarReuniao);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane_2.setBounds(20, 89, 403, 95);
+		pReuniaoMarcado.add(scrollPane_2);
+		
+		table_1 = new JTable();
+		scrollPane_2.setViewportView(table_1);
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Tema", "Data", "C\u00F3d. Grupo", "Conclu\u00EDda"
+			}
+		));
+		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
 	}
 }
