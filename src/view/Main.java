@@ -15,9 +15,13 @@ public class Main {
 		Aluno aluno= new Aluno();
 		aluno.setRa("1234567891011");
 		aluno.setNome("Roberto");
+		Aluno aluno1= new Aluno();
+		aluno1.setRa("1234567891012");
+		aluno1.setNome("Roberto");
 
 		try {
 			manterAluno.salvarDados(aluno.getRa(), aluno.getNome());
+			manterAluno.salvarDados(aluno1.getRa(), aluno1.getNome());
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
