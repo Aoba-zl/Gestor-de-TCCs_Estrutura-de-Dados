@@ -482,7 +482,5 @@ public class Tela extends JFrame {
 		JButton btnPesquisarReuniao = new JButton("Pesquisar");
 		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
 		pReuniaoMarcado.add(btnPesquisarReuniao);
-
-
 	}
 }

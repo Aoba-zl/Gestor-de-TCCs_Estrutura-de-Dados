@@ -20,12 +20,7 @@ public class BTReuniaoSalvaController implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        String cmd= e.getActionCommand();
-        if (cmd.equals("Salvar")){
-            salvar();
-        }
-        if (cmd.equals("Buscar")){
-        }
+        salvar();
 
         cod.setText("");
         assunto.setText("");
