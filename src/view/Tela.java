@@ -31,12 +31,14 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
 
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
+	private JButton btnBuscarAssunto;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,7 +58,7 @@ public class Tela extends JFrame {
 	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 480, 300);
+		setBounds(100, 100, 600, 375);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -71,26 +73,27 @@ public class Tela extends JFrame {
 		pAluno.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Dados Aluno");
+		lblNewLabel.setBounds(30, 11, 100, 31);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setBackground(UIManager.getColor("Button.disabledShadow"));
-		lblNewLabel.setBounds(30, 11, 100, 31);
 		pAluno.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("RA:");
+		lblNewLabel_1.setBounds(105, 118, 68, 14);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(84, 91, 68, 14);
 		pAluno.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Nome:");
+		lblNewLabel_1_1.setBounds(105, 143, 68, 14);
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_1.setBounds(84, 116, 68, 14);
 		pAluno.add(lblNewLabel_1_1);
 		
 		JButton btnSalvaAluno = new JButton("Salvar");
-		btnSalvaAluno.setBounds(300, 160, 100, 30);
+		btnSalvaAluno.setBounds(459, 257, 100, 30);
 		pAluno.add(btnSalvaAluno);
 		
 		JFormattedTextField tfRA = new JFormattedTextField();
+		tfRA.setBounds(158, 117, 144, 20);
 		tfRA.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
@@ -105,10 +108,10 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfRA.setBounds(137, 90, 144, 20);
 		pAluno.add(tfRA);
 		
 		JFormattedTextField tfNome = new JFormattedTextField();
+		tfNome.setBounds(158, 143, 144, 20);
 		tfNome.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) 
@@ -124,8 +127,20 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfNome.setBounds(137, 116, 144, 20);
 		pAluno.add(tfNome);
+		
+		JButton btnBuscarAluno = new JButton("Buscar");
+		btnBuscarAluno.setBounds(321, 116, 76, 23);
+		pAluno.add(btnBuscarAluno);
+		
+		JButton btnExcluirAluno = new JButton("Excluir");
+		btnExcluirAluno.setBounds(349, 257, 100, 30);
+		pAluno.add(btnExcluirAluno);
+		
+		JLabel lblMensagemAluno = new JLabel("");
+		lblMensagemAluno.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemAluno.setBounds(300, 21, 116, 57);
+		pAluno.add(lblMensagemAluno);
 		
 		JPanel pGrupo = new JPanel();
 		tabbedPane.addTab("Grupos", null, pGrupo, null);
@@ -163,7 +178,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfRA_1.setBounds(83, 56, 100, 20);
+		tfRA_1.setBounds(64, 57, 100, 20);
 		pCadGrupo.add(tfRA_1);
 		
 		JLabel lblNewLabel_1_2_1 = new JLabel("RA:");
@@ -186,7 +201,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfRA_2.setBounds(83, 82, 100, 20);
+		tfRA_2.setBounds(64, 83, 100, 20);
 		pCadGrupo.add(tfRA_2);
 		
 		JLabel lblNewLabel_1_2_2 = new JLabel("RA:");
@@ -209,7 +224,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfRA_3.setBounds(83, 108, 100, 20);
+		tfRA_3.setBounds(64, 109, 100, 20);
 		pCadGrupo.add(tfRA_3);
 		
 		JLabel lblNewLabel_1_2_3 = new JLabel("RA:");
@@ -232,35 +247,35 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfRA_4.setBounds(83, 134, 100, 20);
+		tfRA_4.setBounds(64, 135, 100, 20);
 		pCadGrupo.add(tfRA_4);
 		
 		JLabel lblNewLabel_1_2_4 = new JLabel("Código:");
 		lblNewLabel_1_2_4.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4.setBounds(234, 56, 51, 16);
+		lblNewLabel_1_2_4.setBounds(294, 58, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4);
 		
 		JLabel lblNewLabel_1_2_4_1 = new JLabel("Tema:");
 		lblNewLabel_1_2_4_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_1.setBounds(234, 81, 51, 16);
+		lblNewLabel_1_2_4_1.setBounds(294, 83, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_1);
 		
 		JLabel lblNewLabel_1_2_4_2 = new JLabel("Área");
 		lblNewLabel_1_2_4_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_2.setBounds(234, 108, 51, 16);
+		lblNewLabel_1_2_4_2.setBounds(294, 110, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_2);
 		
 		JLabel lblNewLabel_1_2_4_3 = new JLabel("SubÁrea");
 		lblNewLabel_1_2_4_3.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_3.setBounds(234, 133, 51, 16);
+		lblNewLabel_1_2_4_3.setBounds(294, 135, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_3);
 		
 		JFormattedTextField tfCodGrupo = new JFormattedTextField();
@@ -279,24 +294,44 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfCodGrupo.setBounds(295, 53, 100, 20);
+		tfCodGrupo.setBounds(355, 55, 100, 20);
 		pCadGrupo.add(tfCodGrupo);
 		
 		JFormattedTextField tfTema = new JFormattedTextField();
-		tfTema.setBounds(295, 78, 100, 20);
+		tfTema.setBounds(355, 80, 100, 20);
 		pCadGrupo.add(tfTema);
 		
 		JComboBox cbArea = new JComboBox();
-		cbArea.setBounds(295, 104, 100, 20);
+		cbArea.setBounds(355, 106, 100, 20);
 		pCadGrupo.add(cbArea);
 		
 		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setBounds(295, 129, 100, 20);
+		cbSubArea.setBounds(355, 131, 100, 20);
 		pCadGrupo.add(cbSubArea);
 		
 		JButton btnSalvaGrupos = new JButton("Salvar");
-		btnSalvaGrupos.setBounds(330, 160, 100, 30);
+		btnSalvaGrupos.setBounds(454, 229, 100, 30);
 		pCadGrupo.add(btnSalvaGrupos);
+		
+		JButton btnBuscarRA1 = new JButton("Buscar");
+		btnBuscarRA1.setBounds(174, 55, 79, 23);
+		pCadGrupo.add(btnBuscarRA1);
+		
+		JButton btnBuscarRA2 = new JButton("Buscar");
+		btnBuscarRA2.setBounds(174, 81, 79, 23);
+		pCadGrupo.add(btnBuscarRA2);
+		
+		JButton btnBuscarRA3 = new JButton("Buscar");
+		btnBuscarRA3.setBounds(174, 107, 79, 23);
+		pCadGrupo.add(btnBuscarRA3);
+		
+		JButton btnBuscarRA4 = new JButton("Buscar");
+		btnBuscarRA4.setBounds(174, 133, 79, 23);
+		pCadGrupo.add(btnBuscarRA4);
+		
+		JButton btnBuscarCodGrupo = new JButton("Buscar");
+		btnBuscarCodGrupo.setBounds(465, 55, 79, 23);
+		pCadGrupo.add(btnBuscarCodGrupo);
 		
 		JPanel pConsultarGrupos = new JPanel();
 		tabbedPane_2.addTab("Consultar Grupos Cadastrados", null, pConsultarGrupos, null);
@@ -416,6 +451,10 @@ public class Tela extends JFrame {
 		btnSalvaReuniao.setBounds(330, 160, 100, 30);
 		pMarcaReuniao.add(btnSalvaReuniao);
 		
+		JButton btnBuscarCodReuniao = new JButton("Buscar");
+		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
+		pMarcaReuniao.add(btnBuscarCodReuniao);
+		
 		JPanel pAddPassos = new JPanel();
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
 		pAddPassos.setLayout(null);
@@ -477,6 +516,14 @@ public class Tela extends JFrame {
 		JButton btnSalvaPassos = new JButton("Salvar");
 		btnSalvaPassos.setBounds(330, 160, 100, 30);
 		pAddPassos.add(btnSalvaPassos);
+		
+		JButton btnBuscarCodPassos = new JButton("Buscar");
+		btnBuscarCodPassos.setBounds(310, 51, 79, 23);
+		pAddPassos.add(btnBuscarCodPassos);
+		
+		btnBuscarAssunto = new JButton("Buscar");
+		btnBuscarAssunto.setBounds(310, 82, 79, 23);
+		pAddPassos.add(btnBuscarAssunto);
 		
 		JPanel pReuniaoMarcado = new JPanel();
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
