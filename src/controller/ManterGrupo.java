@@ -36,9 +36,9 @@ public class ManterGrupo {
 		}
 	}
 
-	private int geraCodigo(String area, String subArea){
+//	private int geraCodigo(String area, String subArea){
 
-	}
+//	}
 	
 	public void selecaoArea(Area area, Grupo grupo) throws IOException
 	{
@@ -52,7 +52,7 @@ public class ManterGrupo {
 				if (linha.contains(area.getNome())){
 					String[] vet= linha.split(";");
 					area.setNome(vet[1]);
-					grupo.setArea(area.getNome());  // Não está pronto
+//					grupo.setArea(area.getNome());  // Não está pronto
 				}
 			}
 		}
@@ -65,7 +65,7 @@ public class ManterGrupo {
 	{
 		File dir= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados");
 		if (dir.exists() && dir.isDirectory()){
-			grupo.setCodigo(geraCodigo(String.valueOf(grupo.getArea()), grupo.getArea().getSubArea()));
+//			grupo.setCodigo(geraCodigo(String.valueOf(grupo.getArea()), grupo.getArea().getSubArea()));
 			File file= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados", "Grupos.csv");
 			boolean existe= false;
 			if (file.exists()){

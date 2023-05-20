@@ -1,5 +1,7 @@
 package view;
 
+import telaController.BTReuniaoSalvaController;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -350,10 +352,10 @@ public class Tela extends JFrame {
 		lblMarcarReuniao.setBounds(30, 11, 127, 20);
 		pMarcaReuniao.add(lblMarcarReuniao);
 		
-		JLabel lblNewLabel_1_2_5 = new JLabel("Código do grupo:");
-		lblNewLabel_1_2_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5.setBounds(55, 64, 127, 20);
-		pMarcaReuniao.add(lblNewLabel_1_2_5);
+		JLabel lblcodGrupo = new JLabel("Código do grupo:");
+		lblcodGrupo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblcodGrupo.setBounds(55, 64, 127, 20);
+		pMarcaReuniao.add(lblcodGrupo);
 		
 		JFormattedTextField ftCodGrupoReuniao = new JFormattedTextField();
 		ftCodGrupoReuniao.addKeyListener(new KeyAdapter() {
@@ -480,5 +482,9 @@ public class Tela extends JFrame {
 		JButton btnPesquisarReuniao = new JButton("Pesquisar");
 		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
 		pReuniaoMarcado.add(btnPesquisarReuniao);
+
+
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 	}
 }

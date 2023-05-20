@@ -67,7 +67,7 @@ public class ManterAluno {
 		}
 		else
 		{
-			throw new IOException("Arquivo inválido");
+			throw new IOException("Arquivo alunos inválido");
 		}
 	}
 	
