@@ -484,7 +484,5 @@ public class Tela extends JFrame {
 		pReuniaoMarcado.add(btnPesquisarReuniao);
 
 
-		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao);
-		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 	}
 }
