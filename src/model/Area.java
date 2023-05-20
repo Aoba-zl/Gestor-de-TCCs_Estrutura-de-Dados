@@ -20,4 +20,11 @@ public class Area
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	@Override
+	public String toString() {
+		return "Area [subArea=" + subArea + ", nome=" + nome + "]";
+	}
+	
+	
 }

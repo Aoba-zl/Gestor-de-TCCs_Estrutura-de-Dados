@@ -7,6 +7,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
+
+import telaController.BotaoGrupoPesquisaController;
+import telaController.BotaoGrupoSalvarControlle;
+
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import java.awt.FlowLayout;
@@ -32,6 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
+import javax.swing.DefaultComboBoxModel;
 
 public class Tela extends JFrame {
 
@@ -54,7 +59,7 @@ public class Tela extends JFrame {
 	}
 
 
-
+	
 	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -302,10 +307,12 @@ public class Tela extends JFrame {
 		pCadGrupo.add(tfTema);
 		
 		JComboBox cbArea = new JComboBox();
+		cbArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
 		cbArea.setBounds(355, 106, 100, 20);
 		pCadGrupo.add(cbArea);
 		
 		JComboBox cbSubArea = new JComboBox();
+		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
 		cbSubArea.setBounds(355, 131, 100, 20);
 		pCadGrupo.add(cbSubArea);
 		
@@ -564,5 +571,19 @@ public class Tela extends JFrame {
 			}
 		));
 		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
+		
+		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1);
+		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2);
+		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3);
+		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4);
+		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo);
+		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
+		
+		btnBuscarRA1.addActionListener(bRaCont1);
+		btnBuscarRA2.addActionListener(bRaCont2);
+		btnBuscarRA3.addActionListener(bRaCont3);
+		btnBuscarRA4.addActionListener(bRaCont4);
+		btnBuscarCodGrupo.addActionListener(bCodCont);
+		btnSalvaGrupos.addActionListener(sGrupoCont);
 	}
 }

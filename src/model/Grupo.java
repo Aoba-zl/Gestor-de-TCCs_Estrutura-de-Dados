@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Grupo
 {
 	public String codigo;
@@ -38,4 +40,11 @@ public class Grupo
 	public void setArea(Area area) {
 		this.area = area;
 	}
+
+	@Override
+	public String toString() {
+		return "Grupo [codigo=" + codigo + ", tema=" + tema + ", alunos=" + Arrays.toString(alunos) + ", area=" + area
+				+ "]";
+	}
+	
 }
