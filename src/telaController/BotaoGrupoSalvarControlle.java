@@ -16,12 +16,12 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 	private JFormattedTextField[] RA = new JFormattedTextField[4];
 	private JFormattedTextField cod;
 	private JFormattedTextField tema;
-	private JComboBox area;
-	private JComboBox subArea;
+	private JComboBox<String> area;
+	private JComboBox<String> subArea;
 	
 	public BotaoGrupoSalvarControlle(JFormattedTextField RA1, JFormattedTextField RA2, JFormattedTextField RA3,
-			JFormattedTextField RA4, JFormattedTextField cod, JFormattedTextField tema, JComboBox cbArea, JComboBox cbSubArea) {
-		
+			JFormattedTextField RA4, JFormattedTextField cod, JFormattedTextField tema, JComboBox<String> cbArea, JComboBox<String> cbSubArea) 
+	{
 		this.RA[0] = RA1;
 		this.RA[1] = RA2;
 		this.RA[2] = RA3;
