@@ -1,5 +1,6 @@
 package view;
 
+import telaController.BTReuniaoBuscaCodigoController;
 import telaController.BTReuniaoSalvaController;
 
 import java.awt.EventQueue;
@@ -566,5 +567,10 @@ public class Tela extends JFrame {
 			}
 		));
 		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
+
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao);
+		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 	}
 }
