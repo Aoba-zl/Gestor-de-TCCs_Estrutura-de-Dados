@@ -3,6 +3,7 @@ package telaController;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -29,6 +30,17 @@ public class BotaoGrupoPesquisaController implements ActionListener
 	{
 		buscar();
 	}
+	
+    private String getArquivoAluno()
+    {
+        String caminhoRaiz, caminhoArquivo;
+
+        caminhoRaiz = System.getProperty("user.home") + File.separator;
+        caminhoRaiz += "TEMP" + File.separator;
+        caminhoArquivo = caminhoRaiz + "Alunos.csv";
+
+        return caminhoArquivo;
+    }
 
 	private boolean validaCampoRA(JFormattedTextField campo)
     {
