@@ -37,6 +37,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
 
 public class Tela extends JFrame {
 
@@ -259,28 +260,28 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4.setBounds(294, 58, 51, 16);
+		lblNewLabel_1_2_4.setBounds(280, 60, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4);
 		
 		JLabel lblNewLabel_1_2_4_1 = new JLabel("Tema:");
 		lblNewLabel_1_2_4_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_1.setBounds(294, 83, 51, 16);
+		lblNewLabel_1_2_4_1.setBounds(280, 85, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_1);
 		
 		JLabel lblNewLabel_1_2_4_2 = new JLabel("Área");
 		lblNewLabel_1_2_4_2.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_2.setBounds(294, 110, 51, 16);
+		lblNewLabel_1_2_4_2.setBounds(280, 112, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_2);
 		
 		JLabel lblNewLabel_1_2_4_3 = new JLabel("SubÁrea");
 		lblNewLabel_1_2_4_3.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_3.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_3.setBounds(294, 135, 51, 16);
+		lblNewLabel_1_2_4_3.setBounds(280, 137, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_3);
 		
 		JFormattedTextField tfCodGrupo = new JFormattedTextField();
@@ -299,45 +300,45 @@ public class Tela extends JFrame {
 				}
 			}
 		});
-		tfCodGrupo.setBounds(355, 55, 100, 20);
+		tfCodGrupo.setBounds(341, 57, 100, 20);
 		pCadGrupo.add(tfCodGrupo);
 		
 		JFormattedTextField tfTema = new JFormattedTextField();
-		tfTema.setBounds(355, 80, 100, 20);
+		tfTema.setBounds(341, 82, 100, 20);
 		pCadGrupo.add(tfTema);
 		
 		JComboBox cbArea = new JComboBox();
 		cbArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
-		cbArea.setBounds(355, 106, 100, 20);
+		cbArea.setBounds(341, 108, 100, 20);
 		pCadGrupo.add(cbArea);
 		
 		JComboBox cbSubArea = new JComboBox();
 		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
-		cbSubArea.setBounds(355, 131, 100, 20);
+		cbSubArea.setBounds(341, 133, 100, 20);
 		pCadGrupo.add(cbSubArea);
 		
 		JButton btnSalvaGrupos = new JButton("Salvar");
-		btnSalvaGrupos.setBounds(454, 229, 100, 30);
+		btnSalvaGrupos.setBounds(442, 217, 100, 30);
 		pCadGrupo.add(btnSalvaGrupos);
 		
 		JButton btnBuscarRA1 = new JButton("Buscar");
-		btnBuscarRA1.setBounds(174, 55, 79, 23);
+		btnBuscarRA1.setBounds(191, 57, 79, 23);
 		pCadGrupo.add(btnBuscarRA1);
 		
 		JButton btnBuscarRA2 = new JButton("Buscar");
-		btnBuscarRA2.setBounds(174, 81, 79, 23);
+		btnBuscarRA2.setBounds(191, 83, 79, 23);
 		pCadGrupo.add(btnBuscarRA2);
 		
 		JButton btnBuscarRA3 = new JButton("Buscar");
-		btnBuscarRA3.setBounds(174, 107, 79, 23);
+		btnBuscarRA3.setBounds(191, 109, 79, 23);
 		pCadGrupo.add(btnBuscarRA3);
 		
 		JButton btnBuscarRA4 = new JButton("Buscar");
-		btnBuscarRA4.setBounds(174, 133, 79, 23);
+		btnBuscarRA4.setBounds(191, 135, 79, 23);
 		pCadGrupo.add(btnBuscarRA4);
 		
 		JButton btnBuscarCodGrupo = new JButton("Buscar");
-		btnBuscarCodGrupo.setBounds(465, 55, 79, 23);
+		btnBuscarCodGrupo.setBounds(463, 57, 79, 23);
 		pCadGrupo.add(btnBuscarCodGrupo);
 		
 		JPanel pConsultarGrupos = new JPanel();
@@ -572,11 +573,43 @@ public class Tela extends JFrame {
 		));
 		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
 		
-		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1);
-		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2);
-		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3);
-		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4);
-		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo);
+		
+		
+		JLabel lblMessageRA1Grupo = new JLabel("");
+		lblMessageRA1Grupo.setForeground(Color.RED);
+		lblMessageRA1Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageRA1Grupo.setBounds(166, 57, 23, 20);
+		pCadGrupo.add(lblMessageRA1Grupo);
+		
+		JLabel lblMessageRA2Grupo = new JLabel("");
+		lblMessageRA2Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageRA2Grupo.setForeground(Color.RED);
+		lblMessageRA2Grupo.setBounds(166, 83, 23, 20);
+		pCadGrupo.add(lblMessageRA2Grupo);
+		
+		JLabel lblMessageRA3Grupo = new JLabel("");
+		lblMessageRA3Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageRA3Grupo.setForeground(Color.RED);
+		lblMessageRA3Grupo.setBounds(166, 109, 23, 20);
+		pCadGrupo.add(lblMessageRA3Grupo);
+		
+		JLabel lblMessageRA4Grupo = new JLabel("");
+		lblMessageRA4Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageRA4Grupo.setForeground(Color.RED);
+		lblMessageRA4Grupo.setBounds(166, 135, 23, 20);
+		pCadGrupo.add(lblMessageRA4Grupo);
+		
+		JLabel lblMessageCodGrupo = new JLabel("");
+		lblMessageCodGrupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageCodGrupo.setForeground(Color.RED);
+		lblMessageCodGrupo.setBounds(442, 57, 23, 20);
+		pCadGrupo.add(lblMessageCodGrupo);
+		
+		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1, lblMessageRA1Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2, lblMessageRA2Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3, lblMessageRA3Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
+		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
 		
 		btnBuscarRA1.addActionListener(bRaCont1);
