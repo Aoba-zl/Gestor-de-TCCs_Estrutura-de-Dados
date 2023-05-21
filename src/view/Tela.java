@@ -568,8 +568,8 @@ public class Tela extends JFrame {
 		));
 		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
 
-		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao);
-		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao);
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMarcarReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, lblMarcarReuniao);
 		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
 		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 	}
