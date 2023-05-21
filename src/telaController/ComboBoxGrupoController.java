@@ -11,14 +11,14 @@ public class ComboBoxGrupoController implements ActionListener
 {
 
 	private JComboBox<String> selecao;
-	private String[] area;
+	private String[] areaLista;
 	private ListString[] subArea;
 	
 	
 	public ComboBoxGrupoController(JComboBox<String> selecao, String[] area, ListString[] subArea) 
 	{
 		this.selecao = selecao;
-		this.area = area;
+		this.areaLista = area;
 		this.subArea = subArea;
 	}
 
@@ -34,10 +34,11 @@ public class ComboBoxGrupoController implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		String areas = selecao.getSelectedItem().toString();
+		String area = selecao.getSelectedItem().toString();
 		
 		
-		if (areas.equals(area[1]))
+		
+		if (area.equals(areaLista[1]))
 		{
 			System.out.println("ok");
 		}
