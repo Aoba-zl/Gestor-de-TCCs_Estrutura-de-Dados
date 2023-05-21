@@ -2,8 +2,8 @@ package model;
 
 public class Area
 {
-	public String subArea;
 	public String nome;
+	public String subArea;
 
 	public String getSubArea() {
 		return subArea;
@@ -20,4 +20,11 @@ public class Area
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	@Override
+	public String toString() {
+		return "Area [subArea=" + subArea + ", nome=" + nome + "]";
+	}
+	
+	
 }

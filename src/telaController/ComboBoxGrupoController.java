@@ -1,0 +1,47 @@
+package telaController;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JComboBox;
+
+import br.fatec.ListString.ListString;
+
+public class ComboBoxGrupoController implements ActionListener
+{
+
+	private JComboBox<String> selecao;
+	private String[] areaLista;
+	private ListString[] subArea;
+	
+	
+	public ComboBoxGrupoController(JComboBox<String> selecao, String[] area, ListString[] subArea) 
+	{
+		this.selecao = selecao;
+		this.areaLista = area;
+		this.subArea = subArea;
+	}
+
+	public int hashCode(String area)
+	{
+		int posit = Integer.parseInt(area.substring(0, 1));
+		return posit;
+		
+	}
+	
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		String area = selecao.getSelectedItem().toString();
+		
+		
+		
+		if (area.equals(areaLista[1]))
+		{
+			System.out.println("ok");
+		}
+		
+	}
+}
