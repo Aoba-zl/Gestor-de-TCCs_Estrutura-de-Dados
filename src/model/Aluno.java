@@ -29,7 +29,7 @@ public class Aluno
 
 	@Override
 	public String toString() {
-		return "Aluno [ra=" + ra + ", nome=" + nome + "]";
+		return this.ra + ";" + this.nome;
 	}
 	
 	

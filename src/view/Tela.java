@@ -10,8 +10,7 @@ import javax.swing.text.NumberFormatter;
 
 import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
-import telaController.BotaoGrupoPesquisaController;
-import telaController.BotaoGrupoSalvarControlle;
+import telaController.*;
 
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
@@ -110,71 +109,7 @@ public class Tela extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblNewLabel.setBackground(UIManager.getColor("Button.disabledShadow"));
 		pAluno.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("RA:");
-		lblNewLabel_1.setBounds(105, 118, 68, 14);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pAluno.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("Nome:");
-		lblNewLabel_1_1.setBounds(105, 143, 68, 14);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pAluno.add(lblNewLabel_1_1);
-		
-		JButton btnSalvaAluno = new JButton("Salvar");
-		btnSalvaAluno.setBounds(459, 257, 100, 30);
-		pAluno.add(btnSalvaAluno);
-		
-		JFormattedTextField tfRA = new JFormattedTextField();
-		tfRA.setBounds(158, 117, 144, 20);
-		tfRA.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e) 
-			{
-				char i = e.getKeyChar();
-				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
-				{
-					tfRA.setEditable(true);
-				}
-				else
-				{
-					tfRA.setEditable(false);
-				}
-			}
-		});
-		pAluno.add(tfRA);
-		
-		JFormattedTextField tfNome = new JFormattedTextField();
-		tfNome.setBounds(158, 143, 144, 20);
-		tfNome.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) 
-			{
-				char c = e.getKeyChar();
-				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c))
-				{
-					tfNome.setEditable(true);
-				}
-				else
-				{
-					tfNome.setEditable(false);					
-				}
-			}
-		});
-		pAluno.add(tfNome);
-		
-		JButton btnBuscarAluno = new JButton("Buscar");
-		btnBuscarAluno.setBounds(321, 116, 76, 23);
-		pAluno.add(btnBuscarAluno);
-		
-		JButton btnExcluirAluno = new JButton("Excluir");
-		btnExcluirAluno.setBounds(349, 257, 100, 30);
-		pAluno.add(btnExcluirAluno);
-		
-		JLabel lblMensagemAluno = new JLabel("");
-		lblMensagemAluno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemAluno.setBounds(300, 21, 116, 57);
-		pAluno.add(lblMensagemAluno);
-		
+
 		JPanel pGrupo = new JPanel();
 		tabbedPane.addTab("Grupos", null, pGrupo, null);
 		pGrupo.setLayout(new BorderLayout(0, 0));
@@ -333,24 +268,22 @@ public class Tela extends JFrame {
 		JFormattedTextField tfTema = new JFormattedTextField();
 		tfTema.setBounds(341, 82, 100, 20);
 		pCadGrupo.add(tfTema);
-		
-		
+
+
 		this.arquivoArea = getArquivoArea();
 		String[] area = selecionaArea(arquivoArea);
-		
+
 		int tamArea = area.length;
 
-		String[] areaFormated = new String[tamArea - 1];
-		
-		String[] subArea = selecionaArea(arquivoArea);
+		String[] areaFormatted = new String[tamArea - 1];
 		ListString lista = new ListString();
-		
-		for (int i = 1; i < tamArea; i++)
+
+		for (int i = 0; i < tamArea - 1; i++)
 		{
-			StringTokenizer stArea = new StringTokenizer(area[i], ",");
-			
-			areaFormated[i] = stArea.nextToken();
-			
+			StringTokenizer stArea = new StringTokenizer(area[i + 1], ",");
+
+			areaFormatted[i] = stArea.nextToken();
+
 			while(stArea.hasMoreTokens())
 			{
 				if (lista.isEmpty())
@@ -363,10 +296,23 @@ public class Tela extends JFrame {
 					}
 			}
 		}
-		
+
+		String[] subArea = new String[lista.size()];
+		int tamLista = lista.size();
+
+		for (int i = 0; i < tamLista; i++)
+		{
+			try {
+				subArea[i] = lista.get(0);
+				lista.removeFirst();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+
 		
 		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(areaFormated));
+		cbArea.setModel(new DefaultComboBoxModel(areaFormatted));
 		cbArea.setBounds(341, 108, 100, 20);
 		pCadGrupo.add(cbArea);
 		
@@ -676,5 +622,87 @@ public class Tela extends JFrame {
 		btnBuscarRA4.addActionListener(bRaCont4);
 		btnBuscarCodGrupo.addActionListener(bCodCont);
 		btnSalvaGrupos.addActionListener(sGrupoCont);
+
+		// Tela Aluno
+		JLabel lblAlunoDados = new JLabel("Dados Aluno");
+		lblAlunoDados.setBounds(30, 11, 100, 31);
+		lblAlunoDados.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblAlunoDados.setBackground(UIManager.getColor("Button.disabledShadow"));
+		pAluno.add(lblAlunoDados);
+
+		JLabel lblAlunoRA = new JLabel("RA:");
+		lblAlunoRA.setBounds(105, 118, 68, 14);
+		lblAlunoRA.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		pAluno.add(lblAlunoRA);
+
+		JLabel lblAlunoNome = new JLabel("Nome:");
+		lblAlunoNome.setBounds(105, 143, 68, 14);
+		lblAlunoNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		pAluno.add(lblAlunoNome);
+		JButton btnSalvaAluno = new JButton("Salvar");
+		btnSalvaAluno.setBounds(459, 257, 100, 30);
+		pAluno.add(btnSalvaAluno);
+
+		JFormattedTextField tfRA = new JFormattedTextField();
+		tfRA.setBounds(158, 117, 144, 20);
+		tfRA.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e)
+			{
+				char i = e.getKeyChar();
+				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
+				{
+					tfRA.setEditable(true);
+				}
+				else
+				{
+					tfRA.setEditable(false);
+				}
+			}
+		});
+		pAluno.add(tfRA);
+
+		JFormattedTextField tfNome = new JFormattedTextField();
+		tfNome.setBounds(158, 143, 144, 20);
+		tfNome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e)
+			{
+				char c = e.getKeyChar();
+				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c))
+				{
+					tfNome.setEditable(true);
+				}
+				else
+				{
+					tfNome.setEditable(false);
+				}
+			}
+		});
+		pAluno.add(tfNome);
+
+		JButton btnBuscarAluno = new JButton("Buscar");
+		btnBuscarAluno.setBounds(321, 116, 76, 23);
+		pAluno.add(btnBuscarAluno);
+
+		JButton btnExcluirAluno = new JButton("Excluir");
+		btnExcluirAluno.setBounds(349, 257, 100, 30);
+		pAluno.add(btnExcluirAluno);
+		btnExcluirAluno.setVisible(false);
+
+		JLabel lblMensagemAluno = new JLabel("");
+		lblMensagemAluno.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemAluno.setBounds(300, 21, 280, 70);
+		pAluno.add(lblMensagemAluno);
+
+		AlunoBtnBuscaController buscaController = new AlunoBtnBuscaController(tfRA, tfNome,
+				lblMensagemAluno, btnExcluirAluno);
+		AlunoBtnSalvarController salvarController = new AlunoBtnSalvarController(tfRA, tfNome,
+				lblMensagemAluno);
+		AlunoBtnExcluirController excluirController = new AlunoBtnExcluirController(tfRA, tfNome,
+				lblMensagemAluno, btnExcluirAluno);
+		btnBuscarAluno.addActionListener(buscaController);
+		btnSalvaAluno.addActionListener(salvarController);
+		btnExcluirAluno.addActionListener(excluirController);
+
 	}
 }
