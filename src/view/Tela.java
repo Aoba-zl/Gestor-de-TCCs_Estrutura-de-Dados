@@ -12,6 +12,7 @@ import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
 import telaController.BotaoGrupoPesquisaController;
 import telaController.BotaoGrupoSalvarControlle;
+import telaController.ComboBoxController;
 import telaController.ComboBoxGrupoController;
 
 import javax.swing.JTextField;
@@ -51,7 +52,6 @@ public class Tela extends JFrame {
 	private JTable table;
 	private JTable table_1;
 	private JButton btnBuscarAssunto;
-	private String arquivoArea;
 	private ListString[] listaSubArea;
 	
 	public static void main(String[] args) {
@@ -67,36 +67,6 @@ public class Tela extends JFrame {
 		});
 	}
 
-	
-	private int hashCodeArea(String numero)
-	{
-		int posit = Integer.parseInt(numero.substring(0, 1));
-		
-		return posit;
-	}
-
-	private String[] selecionaArea(String arquivoArea)
-	{
-		FileLibrary openFile = new FileLibrary(arquivoArea);
-		
-		try {
-			return openFile.getContentFile().split("\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	private String getArquivoArea()
-    {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator + "ProfessorA" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Professor-AreasdeAtuacao.csv";
-
-        return caminhoArquivo;
-    }
 	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -343,72 +313,22 @@ public class Tela extends JFrame {
 		tfTema.setBounds(341, 82, 100, 20);
 		pCadGrupo.add(tfTema);
 		
+		ComboBoxController cbControll = new ComboBoxController(listaSubArea);
 		
-		
-		
-		this.arquivoArea = getArquivoArea();
-		String[] area = selecionaArea(arquivoArea);
-		
-		
-		listaSubArea = new ListString[area.length - 1];
-		int tamArea = area.length;
-		
-		for (int i = 0; i < tamArea - 1; i++)
-		{
-			listaSubArea[i] = new ListString();
+		String[] area = {};
+		try {
+			area = cbControll.area();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
-
-		String[] areaFormatted = new String[tamArea - 1];
-		for (int i = 0; i < tamArea - 1; i++)
-		{
-			StringTokenizer stArea = new StringTokenizer(area[i + 1], ",");
-			
-			areaFormatted[i] = stArea.nextToken();
-			
-			int hash = hashCodeArea(areaFormatted[i]);
-			
-			
-			while(stArea.hasMoreTokens())
-			{
-				if (listaSubArea[i].isEmpty())
-					listaSubArea[hash - 1].addFirst(stArea.nextToken());
-				else
-					try {
-						listaSubArea[hash - 1].addLast(stArea.nextToken());
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-			}
-		}
-		
-		
+		String[] subArea = cbControll.subArea();
+		listaSubArea = cbControll.pegaList();
 		
 		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(areaFormatted));
+		cbArea.setModel(new DefaultComboBoxModel(area));
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
-		int tama = 0;
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			tama += listaSubArea[i].size();
-		}
-		String[] subArea = new String[tama];
-		int cont = 0;
-		
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			for (int j = 0; j < listaSubArea[i].size(); j++)
-			{
-				try {
-					subArea[cont] = listaSubArea[i].get(j);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				cont++;
-			}
-		}
 		
 		
 		JComboBox cbSubArea = new JComboBox();
@@ -458,7 +378,7 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1);
 		
 		JComboBox cbAreaConsulta = new JComboBox();
-		cbAreaConsulta.setModel(new DefaultComboBoxModel(areaFormatted));
+		cbAreaConsulta.setModel(new DefaultComboBoxModel(area));
 		cbAreaConsulta.setBounds(91, 48, 100, 20);
 		pConsultarGrupos.add(cbAreaConsulta);
 		
@@ -564,10 +484,10 @@ public class Tela extends JFrame {
 		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
 		pMarcaReuniao.add(btnBuscarCodReuniao);
 		
-		JLabel lblMensagemReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
-		lblMensagemReuniao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemReuniao.setBounds(410, 11, 132, 75);
-		pMarcaReuniao.add(lblMensagemReuniao);
+		JLabel lblMessageReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMessageReuniao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageReuniao.setBounds(410, 11, 132, 75);
+		pMarcaReuniao.add(lblMessageReuniao);
 		
 		JPanel pAddPassos = new JPanel();
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
@@ -717,7 +637,7 @@ public class Tela extends JFrame {
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
 		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
-		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, areaFormatted, listaSubArea);
+		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, area, listaSubArea);
 		
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
