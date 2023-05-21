@@ -2,8 +2,8 @@ package model;
 
 public class Area
 {
-	public String subArea;
 	public String nome;
+	public String subArea;
 
 	public String getSubArea() {
 		return subArea;

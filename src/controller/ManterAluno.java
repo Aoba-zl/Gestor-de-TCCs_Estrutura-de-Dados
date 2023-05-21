@@ -29,7 +29,7 @@ public class ManterAluno {
 		}
 		return null;
 	}
-	
+
 	private boolean raValido(String ra)
 	{
 		return (ra.length() == 13);

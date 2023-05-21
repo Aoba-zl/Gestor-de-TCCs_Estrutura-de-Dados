@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
+import br.fatec.FileLibrary.FileLibrary;
+import br.fatec.ListString.ListString;
 import telaController.BotaoGrupoPesquisaController;
 import telaController.BotaoGrupoSalvarControlle;
 
@@ -22,11 +24,14 @@ import java.awt.Font;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -45,6 +50,7 @@ public class Tela extends JFrame {
 	private JTable table;
 	private JTable table_1;
 	private JButton btnBuscarAssunto;
+	private String arquivoArea;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,7 +66,28 @@ public class Tela extends JFrame {
 	}
 
 
+	private String[] selecionaArea(String arquivoArea)
+	{
+		FileLibrary openFile = new FileLibrary(arquivoArea);
+		
+		try {
+			return openFile.getContentFile().split("\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
+	private String getArquivoArea()
+    {
+        String caminhoRaiz, caminhoArquivo;
+
+        caminhoRaiz = System.getProperty("user.home") + File.separator;
+        caminhoRaiz += "TEMP" + File.separator + "ProfessorA" + File.separator;
+        caminhoArquivo = caminhoRaiz + "Professor-AreasdeAtuacao.csv";
+
+        return caminhoArquivo;
+    }
 	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -307,13 +334,44 @@ public class Tela extends JFrame {
 		tfTema.setBounds(341, 82, 100, 20);
 		pCadGrupo.add(tfTema);
 		
+		
+		this.arquivoArea = getArquivoArea();
+		String[] area = selecionaArea(arquivoArea);
+		
+		int tamArea = area.length;
+
+		String[] areaFormated = new String[tamArea - 1];
+		
+		String[] subArea = selecionaArea(arquivoArea);
+		ListString lista = new ListString();
+		
+		for (int i = 1; i < tamArea; i++)
+		{
+			StringTokenizer stArea = new StringTokenizer(area[i], ",");
+			
+			areaFormated[i] = stArea.nextToken();
+			
+			while(stArea.hasMoreTokens())
+			{
+				if (lista.isEmpty())
+					lista.addFirst(stArea.nextToken());
+				else
+					try {
+						lista.addLast(stArea.nextToken());
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+			}
+		}
+		
+		
 		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
+		cbArea.setModel(new DefaultComboBoxModel(areaFormated));
 		cbArea.setBounds(341, 108, 100, 20);
 		pCadGrupo.add(cbArea);
 		
 		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {"a", "b", "c", "d"}));
+		cbSubArea.setModel(new DefaultComboBoxModel(subArea));
 		cbSubArea.setBounds(341, 133, 100, 20);
 		pCadGrupo.add(cbSubArea);
 		

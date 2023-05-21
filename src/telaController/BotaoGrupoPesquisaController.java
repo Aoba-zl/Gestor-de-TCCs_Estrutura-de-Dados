@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import br.fatec.FileLibrary.FileLibrary;
 import controller.ManterAluno;
+import controller.ManterGrupo;
 import model.Aluno;
 import model.Grupo;
 
@@ -21,7 +22,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 	private int conf;
 	private String arquivoAluno;
 	private Aluno aluno;
-	private ManterAluno manterAluno = new ManterAluno();
+	private ManterGrupo manterGrupo = new ManterGrupo();
 	
 	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagem, int conf)
 	{
@@ -75,9 +76,9 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				if (conf == 0)
 				{
 					String ra = pesq.getText();
-					String [] alunos = getAlunos(arquivoAluno);
+					String[] alunos = getAlunos(arquivoAluno);
 					
-					aluno = manterAluno.pesquisarAluno(alunos, ra);
+					aluno = manterGrupo.buscarAluno(alunos, ra);
 					
 					if (aluno == null)
 					{
