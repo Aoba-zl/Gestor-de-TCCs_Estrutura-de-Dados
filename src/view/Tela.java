@@ -615,26 +615,22 @@ public class Tela extends JFrame {
 		
 		
 		JLabel lblMessageRA1Grupo = new JLabel("");
-		lblMessageRA1Grupo.setForeground(Color.RED);
 		lblMessageRA1Grupo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessageRA1Grupo.setBounds(166, 57, 23, 20);
 		pCadGrupo.add(lblMessageRA1Grupo);
 		
 		JLabel lblMessageRA2Grupo = new JLabel("");
 		lblMessageRA2Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA2Grupo.setForeground(Color.RED);
 		lblMessageRA2Grupo.setBounds(166, 83, 23, 20);
 		pCadGrupo.add(lblMessageRA2Grupo);
 		
 		JLabel lblMessageRA3Grupo = new JLabel("");
 		lblMessageRA3Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA3Grupo.setForeground(Color.RED);
 		lblMessageRA3Grupo.setBounds(166, 109, 23, 20);
 		pCadGrupo.add(lblMessageRA3Grupo);
 		
 		JLabel lblMessageRA4Grupo = new JLabel("");
 		lblMessageRA4Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA4Grupo.setForeground(Color.RED);
 		lblMessageRA4Grupo.setBounds(166, 135, 23, 20);
 		pCadGrupo.add(lblMessageRA4Grupo);
 		
