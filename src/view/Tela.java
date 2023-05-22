@@ -52,8 +52,8 @@ import java.awt.event.ActionListener;
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-	private JTable table_1;
+	private JTable tableGrupoCad;
+	private JTable tableReuniaoMarcada;
 	private JButton btnBuscarAssunto;
 	private ListString[] listaSubArea;
 	
@@ -380,43 +380,43 @@ public class Tela extends JFrame {
 		
 		JComboBox cbAreaConsulta = new JComboBox();
 		cbAreaConsulta.setModel(new DefaultComboBoxModel(area));
-		cbAreaConsulta.setBounds(91, 48, 100, 20);
+		cbAreaConsulta.setBounds(75, 49, 189, 20);
 		pConsultarGrupos.add(cbAreaConsulta);
 		
 		JLabel lblNewLabel_1_2_4_2_1_1 = new JLabel("SubÁrea");
 		lblNewLabel_1_2_4_2_1_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_2_1_1.setBounds(211, 50, 66, 16);
+		lblNewLabel_1_2_4_2_1_1.setBounds(274, 50, 66, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
 		JComboBox cbSubAreaConsulta = new JComboBox();
 		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(new String[] {""}));
-		cbSubAreaConsulta.setBounds(287, 49, 100, 20);
+		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
 		JButton btnPesquisarGrupos = new JButton("Pesquisar");
 		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(30, 98, 267, 86);
-		pConsultarGrupos.add(scrollPane_1);
+		JScrollPane spGrupoCad = new JScrollPane();
+		spGrupoCad.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		spGrupoCad.setBounds(30, 98, 267, 86);
+		pConsultarGrupos.add(spGrupoCad);
 		
-		table = new JTable();
-		scrollPane_1.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tableGrupoCad = new JTable();
+		spGrupoCad.setViewportView(tableGrupoCad);
+		tableGrupoCad.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 			}
 		));
-		table.getColumnModel().getColumn(1).setPreferredWidth(78);
-		table.getColumnModel().getColumn(2).setPreferredWidth(83);
-		table.setCellSelectionEnabled(true);
-		table.setColumnSelectionAllowed(true);
+		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(78);
+		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(83);
+		tableGrupoCad.setCellSelectionEnabled(true);
+		tableGrupoCad.setColumnSelectionAllowed(true);
 		
 		JPanel pOrientacoes = new JPanel();
 		tabbedPane.addTab("Orientações", null, pOrientacoes, null);
@@ -565,16 +565,16 @@ public class Tela extends JFrame {
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
 		pReuniaoMarcado.setLayout(null);
 		
-		JLabel lblDefinirPassos_1 = new JLabel("Reunião");
-		lblDefinirPassos_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDefinirPassos_1.setBackground(Color.WHITE);
-		lblDefinirPassos_1.setBounds(30, 11, 74, 20);
-		pReuniaoMarcado.add(lblDefinirPassos_1);
+		JLabel lblReuniao = new JLabel("Reunião");
+		lblReuniao.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblReuniao.setBackground(Color.WHITE);
+		lblReuniao.setBounds(30, 11, 74, 20);
+		pReuniaoMarcado.add(lblReuniao);
 		
-		JLabel lblNewLabel_1_2_5_3_3 = new JLabel("Pesquisa:");
-		lblNewLabel_1_2_5_3_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_3.setBounds(82, 58, 64, 20);
-		pReuniaoMarcado.add(lblNewLabel_1_2_5_3_3);
+		JLabel lblCodGrupoReunMarcada = new JLabel("Código do grupo:");
+		lblCodGrupoReunMarcada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCodGrupoReunMarcada.setBounds(37, 58, 109, 20);
+		pReuniaoMarcado.add(lblCodGrupoReunMarcada);
 		
 		JFormattedTextField ftPesquisarReuniao = new JFormattedTextField();
 		ftPesquisarReuniao.setBounds(156, 60, 121, 18);
@@ -584,22 +584,32 @@ public class Tela extends JFrame {
 		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
 		pReuniaoMarcado.add(btnPesquisarReuniao);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_2.setBounds(20, 89, 403, 95);
-		pReuniaoMarcado.add(scrollPane_2);
+		JScrollPane spReuniaoMarcada = new JScrollPane();
+		spReuniaoMarcada.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		spReuniaoMarcada.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		spReuniaoMarcada.setBounds(20, 89, 523, 170);
+		pReuniaoMarcado.add(spReuniaoMarcada);
 		
-		table_1 = new JTable();
-		scrollPane_2.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
+		tableReuniaoMarcada = new JTable();
+		spReuniaoMarcada.setViewportView(tableReuniaoMarcada);
+		tableReuniaoMarcada.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 			},
 			new String[] {
-				"Tema", "Data", "C\u00F3d. Grupo", "Conclu\u00EDda"
+				"C\u00F3d. Grupo", "Tema", "Data", "Status"
 			}
 		));
-		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
+		tableReuniaoMarcada.setEnabled(false);
+		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
+		
+		JLabel lblMessageReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMessageReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageReuniaoMarcada.setBounds(411, 0, 132, 75);
+		pReuniaoMarcado.add(lblMessageReuniaoMarcada);
 		
 		
 		
