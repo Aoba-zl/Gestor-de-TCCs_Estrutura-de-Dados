@@ -31,6 +31,11 @@ public class ManterGrupo {
 		return null;
 	}
 	
+//	public Grupo buscarGrupo()
+//	{
+//		
+//	}
+	
 	private boolean raValido(String ra)
 	{
 		return (ra.length() == 13);
