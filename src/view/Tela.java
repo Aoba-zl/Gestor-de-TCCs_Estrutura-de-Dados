@@ -640,13 +640,18 @@ public class Tela extends JFrame {
 		lblMessageCodGrupo.setBounds(442, 57, 23, 20);
 		pCadGrupo.add(lblMessageCodGrupo);
 		
+		JLabel lblMensagemGrupoCad = new JLabel("");
+		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemGrupoCad.setBounds(30, 197, 192, 48);
+		pCadGrupo.add(lblMensagemGrupoCad);
+		
 		JFormattedTextField[] RA = {tfRA_1, tfRA_2, tfRA_3, tfRA_4};
 		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1, lblMessageRA1Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2, lblMessageRA2Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3, lblMessageRA3Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
 		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
-		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(RA, tfCodGrupo, tfTema, cbArea, cbSubArea);
+		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(RA, tfCodGrupo, tfTema, cbArea, cbSubArea, lblMensagemGrupoCad);
 		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
 		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
 		bCodCont.setList(listaSubArea, area);
