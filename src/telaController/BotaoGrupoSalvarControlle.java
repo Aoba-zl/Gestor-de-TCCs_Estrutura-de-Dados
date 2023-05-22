@@ -40,7 +40,7 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 	}
 
 	private void salvar() {
-		if (this.subArea.getSelectedItem().equals(""))
+		if (this.subArea.getSelectedItem().equals("") || this.RA[0].equals(null) && this.RA[1].equals(null) && this.RA[2].equals(null) && this.RA[3].equals(null))
 		{
 			return;
 		}

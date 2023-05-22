@@ -41,9 +41,6 @@ public class ComboBoxController
 		
 		if (arq.exists() && arq.isFile())
 		{
-//			File file = openExistentFile(arquivoArea);
-			
-			
 			
 	        FileReader lerFlux = new FileReader(arq);
 			BufferedReader buffer = new BufferedReader(lerFlux);
@@ -56,11 +53,8 @@ public class ComboBoxController
 				content.append(linha).append("\n");
 	            linha = buffer.readLine();
 			}
-			
 			return content.toString().split("\n");
-			
 		}
-		
 		return null;
 	}
 	
@@ -74,7 +68,6 @@ public class ComboBoxController
 
         return caminhoArquivo;
     }
-	
 	
 	public String[] area() throws Exception
 	{

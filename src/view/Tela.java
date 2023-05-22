@@ -107,23 +107,23 @@ public class Tela extends JFrame {
 		btnSalvaAluno.setBounds(459, 257, 100, 30);
 		pAluno.add(btnSalvaAluno);
 		
-		JFormattedTextField tfRA = new JFormattedTextField();
-		tfRA.setBounds(158, 117, 144, 20);
-		tfRA.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftRA = new JFormattedTextField();
+		ftRA.setBounds(158, 117, 144, 20);
+		ftRA.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfRA.setEditable(true);
+					ftRA.setEditable(true);
 				}
 				else
 				{
-					tfRA.setEditable(false);
+					ftRA.setEditable(false);
 				}
 			}
 		});
-		pAluno.add(tfRA);
+		pAluno.add(ftRA);
 		
 		JFormattedTextField tfNome = new JFormattedTextField();
 		tfNome.setBounds(158, 143, 144, 20);
