@@ -313,7 +313,7 @@ public class Tela extends JFrame {
 		pCadGrupo.add(tfCodGrupo);
 		
 		JFormattedTextField tfTema = new JFormattedTextField();
-		tfTema.setBounds(341, 82, 100, 20);
+		tfTema.setBounds(341, 82, 213, 20);
 		pCadGrupo.add(tfTema);
 		
 		
@@ -327,13 +327,14 @@ public class Tela extends JFrame {
 		listaSubArea = cbControll.pegaList();
 		
 		
-		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(area));
+		JComboBox<String> cbArea = new JComboBox<String>();
+		cbArea.setModel(new DefaultComboBoxModel<String>(area));
+		cbArea.setSelectedIndex(0);
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
-		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {""}));
+		JComboBox<String> cbSubArea = new JComboBox<String>();
+		cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
 		
@@ -378,8 +379,8 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4_2_1.setBounds(30, 50, 51, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1);
 		
-		JComboBox cbAreaConsulta = new JComboBox();
-		cbAreaConsulta.setModel(new DefaultComboBoxModel(area));
+		JComboBox<String> cbAreaConsulta = new JComboBox<String>();
+		cbAreaConsulta.setModel(new DefaultComboBoxModel<String>(area));
 		cbAreaConsulta.setBounds(75, 49, 189, 20);
 		pConsultarGrupos.add(cbAreaConsulta);
 		
@@ -390,8 +391,8 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4_2_1_1.setBounds(274, 50, 66, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
-		JComboBox cbSubAreaConsulta = new JComboBox();
-		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(new String[] {""}));
+		JComboBox<String> cbSubAreaConsulta = new JComboBox<String>();
+		cbSubAreaConsulta.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
@@ -643,14 +644,17 @@ public class Tela extends JFrame {
 		lblMessageCodGrupo.setBounds(442, 57, 23, 20);
 		pCadGrupo.add(lblMessageCodGrupo);
 		
+		JFormattedTextField[] RA = {tfRA_1, tfRA_2, tfRA_3, tfRA_4};
 		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1, lblMessageRA1Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2, lblMessageRA2Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3, lblMessageRA3Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
 		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
-		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
+		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(RA, tfCodGrupo, tfTema, cbArea, cbSubArea);
 		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
 		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+		bCodCont.setList(listaSubArea, area);
+		bCodCont.setComand(RA, tfTema, cbArea, cbSubArea);
 		
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);

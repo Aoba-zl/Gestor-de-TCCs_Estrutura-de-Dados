@@ -53,6 +53,8 @@ public class ComboBoxController
 				content.append(linha).append("\n");
 	            linha = buffer.readLine();
 			}
+			buffer.close();
+            lerFlux.close();
 			return content.toString().split("\n");
 		}
 		return null;
