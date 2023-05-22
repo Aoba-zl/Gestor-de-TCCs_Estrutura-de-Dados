@@ -115,34 +115,6 @@ public class ComboBoxController
 		
 	}
 	
-	public String[] subArea()
-	{
-		
-		int tama = 0;
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			tama += listaSubArea[i].size();
-		}
-		String[] subArea = new String[tama];
-		int cont = 0;
-		
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			for (int j = 0; j < listaSubArea[i].size(); j++)
-			{
-				try {
-					subArea[cont] = listaSubArea[i].get(j);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				cont++;
-			}
-		}
-		
-		return subArea;
-		
-	}
-	
 	public ListString[] pegaList()
 	{
 		return this.listaSubArea;

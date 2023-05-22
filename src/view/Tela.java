@@ -333,6 +333,7 @@ public class Tela extends JFrame {
 		pCadGrupo.add(cbArea);
 		
 		JComboBox cbSubArea = new JComboBox();
+		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {""}));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
 		
@@ -390,6 +391,7 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
 		JComboBox cbSubAreaConsulta = new JComboBox();
+		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(new String[] {""}));
 		cbSubAreaConsulta.setBounds(287, 49, 100, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		

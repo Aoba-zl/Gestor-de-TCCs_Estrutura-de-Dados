@@ -58,10 +58,6 @@ public class ComboBoxGrupoController implements ActionListener
 				break;
 			}
 		}
-		
 		this.subArea.setModel(new DefaultComboBoxModel(subArea));
-		
-		
-		
 	}
 }
