@@ -3,15 +3,20 @@ package telaController;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
-import br.fatec.FileLibrary.FileLibrary;
-import controller.ManterAluno;
+
+import br.fatec.ListString.ListString;
 import controller.ManterGrupo;
 import model.Aluno;
+import model.Area;
 import model.Grupo;
 
 public class BotaoGrupoPesquisaController implements ActionListener
@@ -25,14 +30,20 @@ public class BotaoGrupoPesquisaController implements ActionListener
 	private Aluno aluno;
 	private Grupo grupo;
 	private ManterGrupo manterGrupo = new ManterGrupo();
+	private ListString[] listaSubArea;
+	private String[] areas;
+	private JFormattedTextField[] RA;
+	private JFormattedTextField ftTema;
+	private JComboBox<String> cbArea;
+	private JComboBox<String> cbSubArea;
 	
 	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagem, int conf)
 	{
 		this.pesq = pesq;
 		this.mensagem = mensagem;
 		this.conf = conf;
-		this.arquivoAluno = getArquivoAluno("Aluno.csv");
-		this.arquivoGrupo = getArquivoAluno("Grupo.csv");
+		this.arquivoAluno = getArqDiretorio("Alunos.csv");
+		this.arquivoGrupo = getArqDiretorio("Grupos.csv");
 	}
 	
 	@Override
@@ -41,19 +52,62 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		buscar();
 	}
 	
-	private String[] getAlunos(String arquivoAluno) throws Exception
+	public void setList(ListString[] subArea, String[] area)
 	{
-		FileLibrary openFile = new FileLibrary(arquivoAluno);
-		return openFile.getContentFile().split("\n");
+		this.areas = area;
+		this.listaSubArea = subArea;
 	}
 	
-    private String getArquivoAluno(String nomeArq)
+	public void setComand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea)
+	{
+		this.RA = RA;
+		this.ftTema = ftTema;
+		this.cbArea = cbArea;
+		this.cbSubArea = cbSubArea;
+	}
+	
+	public int hashCodeArea(String area)
+	{
+		return (Integer.parseInt(area.substring(0, 1)) - 1);
+	}
+	
+	public int hashCodeSubArea(String area)
+	{
+		return (Integer.parseInt(area.substring(1, 2)));		
+	}
+	
+	private String[] getArq(String arquivoAluno) throws Exception
+	{
+		File arq = new File(arquivoAluno);
+		
+		if (arq.exists() && arq.isFile())
+		{
+			
+	        FileReader lerFlux = new FileReader(arq);
+			BufferedReader buffer = new BufferedReader(lerFlux);
+			String linha = buffer.readLine();
+			StringBuilder content = new StringBuilder();
+			
+			
+			while(linha != null)
+			{
+				content.append(linha).append("\n");
+	            linha = buffer.readLine();
+			}
+			buffer.close();
+            lerFlux.close();
+			return content.toString().split("\n");
+		}
+		return null;
+	}
+	
+    private String getArqDiretorio(String nomeArq)
     {
         String caminhoRaiz, caminhoArquivo;
 
         caminhoRaiz = System.getProperty("user.home") + File.separator;
         caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Alunos.csv";
+        caminhoArquivo = caminhoRaiz + nomeArq;
 
         return caminhoArquivo;
     }
@@ -63,7 +117,16 @@ public class BotaoGrupoPesquisaController implements ActionListener
         if (campo.getText().length() != 13 && conf == 0 || campo.getText().length() != 4 && conf == 1)
         {
             mensagem.setText("x");
-        	mensagem.setBackground(Color.RED);
+        	mensagem.setForeground(Color.RED);
+        	if (conf == 1)
+        	{
+        		cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+        		for (int i = 0; i < 4; i++)
+        		{
+        			RA[i].setText("");
+        		}
+        		ftTema.setText("");
+        	}
         }
         return (campo.getText().length() == 13) && conf == 0 || (campo.getText().length() == 4) && conf == 1;
     }
@@ -79,14 +142,14 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				if (conf == 0)
 				{
 					String ra = pesq.getText();
-					String[] alunos = getAlunos(arquivoAluno);
+					String[] alunos = getArq(arquivoAluno);
 					
 					aluno = manterGrupo.buscarAluno(alunos, ra);
 					
 					if (aluno == null)
 					{
 			            mensagem.setText("x");
-			        	mensagem.setBackground(Color.RED);
+			        	mensagem.setForeground(Color.RED);
 					}
 					else
 					{
@@ -96,18 +159,63 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				}
 				else if (conf == 1)
 				{
-					Grupo grupo = new Grupo();
-					grupo.setCodigo(pesq.getText());
+					String cod = pesq.getText();
+					String[] procGrupo = getArq(arquivoGrupo);
+					int tamProcGrupo = procGrupo.length;
+					boolean test = false;
+					String[] aux;
+					for (int i = 1; i < tamProcGrupo; i++)
+					{
+						aux = procGrupo[i].split(";");
+						if (cod.equals(aux[0]))
+						{
+							test = true;
+							break;
+						}
+					}
+					if (!test)
+					{
+						mensagem.setText("x");
+			        	mensagem.setForeground(Color.RED);
+			        	for (int i = 0; i < 4; i++)
+						{
+							RA[i].setText("");
+						}
+			        	ftTema.setText("");
+			        	cbArea.setSelectedIndex(0);
+			        	cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+			        	return;
+					}
 					
-//					grupo = manterGrupo;
-					
-					System.out.println(grupo);
+					grupo = manterGrupo.buscarGrupo(procGrupo, cod);
+					int hash = hashCodeArea(cod);
+					Area area = new Area();
+					area.setNome(areas[hash]);
+					area.setSubArea(listaSubArea[hash].get(hashCodeSubArea(cod)));
+					grupo.setArea(area);
+					Aluno[] aluno = grupo.getAlunos();
+					int tamAluno = aluno.length;
+					for (int i = 0; i < tamAluno; i++)
+					{
+						RA[i].setText(aluno[i].getRa());
+					}
+					for (int i = 3; i >= tamAluno; i--)
+					{
+						RA[i].setText("");
+					}
+					ftTema.setText(grupo.getTema());
+					cbArea.setSelectedIndex(hash);
+					cbSubArea.setSelectedIndex(hashCodeSubArea(cod));
 				}
 		} catch (Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	
 	
 	
 }

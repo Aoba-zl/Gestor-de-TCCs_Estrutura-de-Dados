@@ -8,8 +8,41 @@ import java.io.*;
 import java.util.Arrays;
 
 public class ManterGrupo {
-
 	
+	private String[] getArq(String arquivoAluno) throws Exception
+	{
+		File arq = new File(arquivoAluno);
+		
+		if (arq.exists() && arq.isFile())
+		{
+			
+	        FileReader lerFlux = new FileReader(arq);
+			BufferedReader buffer = new BufferedReader(lerFlux);
+			String linha = buffer.readLine();
+			StringBuilder content = new StringBuilder();
+			
+			while(linha != null)
+			{
+				content.append(linha).append("\n");
+	            linha = buffer.readLine();
+			}
+			buffer.close();
+            lerFlux.close();
+			return content.toString().split("\n");
+		}
+		return null;
+	}
+	
+    private String getArqDiretorio(String nomeArq)
+    {
+        String caminhoRaiz, caminhoArquivo;
+
+        caminhoRaiz = System.getProperty("user.home") + File.separator;
+        caminhoRaiz += "TEMP" + File.separator;
+        caminhoArquivo = caminhoRaiz + nomeArq;
+
+        return caminhoArquivo;
+    }
 	
 	public Aluno buscarAluno(String[] alunos, String ra) throws IOException
 	{
@@ -17,7 +50,7 @@ public class ManterGrupo {
 		{
 			for (String dadosAluno: alunos) {
 				Aluno aluno = new Aluno();
-				String[] dados = dadosAluno.split(",");
+				String[] dados = dadosAluno.split(";");
 				if (dados.length == 2)
 				{
 					aluno.setRa(dados[0]);
@@ -31,10 +64,61 @@ public class ManterGrupo {
 		return null;
 	}
 	
-//	public Grupo buscarGrupo()
-//	{
-//		
-//	}
+	public Grupo buscarGrupo(String[] grupos, String cod)
+	{
+		
+		if (codValido(cod))
+		{
+			String arqAluno = getArqDiretorio("Alunos.csv");
+			String[] alunos = null;
+			try {
+				alunos = getArq(arqAluno);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			int tamGrupo = grupos.length;
+			
+			Grupo grupo = new Grupo();
+			
+			for (int g = 1; g < tamGrupo; g++)
+			{
+				String[] dados = grupos[g].split(";");
+				
+				if (dados[0].equals(cod))
+				{
+					int tam = dados.length;
+					grupo.setCodigo(dados[0]);
+					grupo.setTema(dados[1]);
+					Aluno[] aluno = new Aluno[tam - 2];
+					for (int i = 2; i < tam; i++)
+					{
+						aluno[i - 2] = new Aluno();
+						for (String getAluno: alunos)
+						{
+							String[] aux = getAluno.split(";");
+							if (aux[0].equals(dados[i]))
+							{
+								String[] auxAluno = getAluno.split(";");
+								aluno[i - 2].setRa(auxAluno[0]);
+								aluno[i - 2].setNome(auxAluno[1]);
+								break;
+							}
+						}
+					}
+					grupo.setAlunos(aluno);
+					return grupo;
+				}
+			}
+		}
+		
+		
+		return null;
+	}
+	
+	private boolean codValido(String cod)
+	{
+		return (cod.length() == 4);
+	}
 	
 	private boolean raValido(String ra)
 	{
