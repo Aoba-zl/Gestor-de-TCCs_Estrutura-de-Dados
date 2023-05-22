@@ -23,7 +23,7 @@ public class Area
 
 	@Override
 	public String toString() {
-		return "Area [subArea=" + subArea + ", nome=" + nome + "]";
+		return "Area [Area=" + nome + ", SubArea=" + subArea + "]";
 	}
 	
 	
