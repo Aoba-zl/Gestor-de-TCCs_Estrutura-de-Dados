@@ -21,7 +21,9 @@ public class BotaoGrupoPesquisaController implements ActionListener
 	private JLabel mensagem;
 	private int conf;
 	private String arquivoAluno;
+	private String arquivoGrupo;
 	private Aluno aluno;
+	private Grupo grupo;
 	private ManterGrupo manterGrupo = new ManterGrupo();
 	
 	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagem, int conf)
@@ -29,7 +31,8 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.pesq = pesq;
 		this.mensagem = mensagem;
 		this.conf = conf;
-		this.arquivoAluno = getArquivoAluno();
+		this.arquivoAluno = getArquivoAluno("Aluno.csv");
+		this.arquivoGrupo = getArquivoAluno("Grupo.csv");
 	}
 	
 	@Override
@@ -44,7 +47,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		return openFile.getContentFile().split("\n");
 	}
 	
-    private String getArquivoAluno()
+    private String getArquivoAluno(String nomeArq)
     {
         String caminhoRaiz, caminhoArquivo;
 
@@ -95,6 +98,9 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				{
 					Grupo grupo = new Grupo();
 					grupo.setCodigo(pesq.getText());
+					
+//					grupo = manterGrupo;
+					
 					System.out.println(grupo);
 				}
 		} catch (Exception e)

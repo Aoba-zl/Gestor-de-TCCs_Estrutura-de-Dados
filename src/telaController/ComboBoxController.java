@@ -84,7 +84,7 @@ public class ComboBoxController
 		String[] areaFormatted = new String[tamArea - 1];
 		for (int i = 0; i < tamArea - 1; i++)
 		{
-			StringTokenizer stArea = new StringTokenizer(area[i + 1], ",");
+			StringTokenizer stArea = new StringTokenizer(area[i + 1], ";");
 			
 			areaFormatted[i] = stArea.nextToken();
 			

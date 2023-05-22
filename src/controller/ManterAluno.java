@@ -16,7 +16,7 @@ public class ManterAluno {
 		{
 			for (String dadosAluno: alunos) {
 				Aluno aluno = new Aluno();
-				String[] dados = dadosAluno.split(",");
+				String[] dados = dadosAluno.split(";");
 				if (dados.length == 2)
 				{
 					aluno.setRa(dados[0]);
