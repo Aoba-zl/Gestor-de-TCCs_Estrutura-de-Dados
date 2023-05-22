@@ -10,10 +10,7 @@ import javax.swing.text.NumberFormatter;
 
 import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
-import telaController.BotaoGrupoPesquisaController;
-import telaController.BotaoGrupoSalvarControlle;
-import telaController.ComboBoxController;
-import telaController.ComboBoxGrupoController;
+import telaController.*;
 
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
@@ -651,7 +648,11 @@ public class Tela extends JFrame {
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
 		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
 		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
-		
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMessageReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMessageReuniao);
+
+		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
 		btnBuscarRA3.addActionListener(bRaCont3);

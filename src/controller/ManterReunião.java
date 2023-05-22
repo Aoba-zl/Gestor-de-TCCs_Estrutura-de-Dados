@@ -5,6 +5,8 @@ import br.fatec.ListObject.ListObject;
 import model.Grupo;
 import model.Reuniao;
 
+import java.io.*;
+
 public class ManterReunião {
 
 
@@ -14,7 +16,7 @@ public class ManterReunião {
 		for (int i = 0; i < tamanho; i++) {
 			String dado= (String) grupos.get(i);
 			String[] dados= dado.split(";");
-			if (dados[0].equals(codigo)){
+			if (Integer.toString(codigo).equals(dados[0])){
 				Grupo grupo= new Grupo();
 				grupo.setCodigo(Integer.parseInt(dados[0]));
 				return grupo;
@@ -37,36 +39,57 @@ public class ManterReunião {
 	}
 
 	public static void salvarReuniao(Reuniao reuniao, String caminhoArquivo, boolean reuniaoExiste) throws Exception {
-		FileLibrary abreArquivoReuniao= new FileLibrary(caminhoArquivo);
-		String conteudoArquivoReuniao= abreArquivoReuniao.getContentFile();
-		String strReuniao= reuniao.toString();
-		if (!reuniaoExiste){
-			conteudoArquivoReuniao+= strReuniao + "\n";
-		}
-		else {
-			conteudoArquivoReuniao= autalizaDados(conteudoArquivoReuniao, strReuniao, reuniao.getCodigoGrupo());
-		}
-		abreArquivoReuniao.writeInFile(caminhoArquivo, conteudoArquivoReuniao);
-	}
-
-	private static String autalizaDados(String conteudoArquivoReuniao, String strReuniao, int codigoGrupo) {
-		String[] reunioes= conteudoArquivoReuniao.split("\n");
-		int codigo;
-		StringBuilder newConteudo= new StringBuilder();
-		int tamanho= reunioes.length;
-		for (int i = 0; i < tamanho; i++) {
-			String[] dados= reunioes[i].split(";");
-			codigo= Integer.parseInt(dados[0]);
-			String reuniao;
-
-			if (codigo == codigoGrupo){
-				reuniao= strReuniao;
+		File dir= new File(caminhoArquivo);
+		if (dir.exists() && dir.isDirectory()){
+			File arq= new File(caminhoArquivo, "Reuniões.csv");
+			if (!reuniaoExiste){
+				boolean existe= false;
+				if (arq.exists()){
+					existe= true;
+				}
+				FileWriter fileWriter= new FileWriter(arq, existe);
+				PrintWriter print= new PrintWriter(fileWriter);
+				print.write(reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus());
+				print.flush();
+				print.close();
+				fileWriter.close();
 			}
 			else {
-				reuniao = reunioes[i];
+				atualizaDados(caminhoArquivo, reuniao);
 			}
-			newConteudo.append(reuniao).append("\n");
 		}
-		return newConteudo.toString();
+		else {
+			throw new IOException("Arquivo inválido");
+		}
+	}
+
+	private static void atualizaDados(String caminhoArquivo, Reuniao reuniao) throws Exception {
+		File file= new File(caminhoArquivo, "Reuniões.csv");
+		FileReader lerFlux = new FileReader(file);
+		BufferedReader buffer = new BufferedReader(lerFlux);
+		StringBuilder content = new StringBuilder();
+
+		String linha = buffer.readLine();
+		while(linha != null) {
+			if (!linha.contains(Integer.toString(reuniao.getCodigoGrupo()))){
+				content.append(linha).append("\n");
+			}
+			else {
+				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus();;
+				content.append(linha).append("\n");
+			}
+			linha= buffer.readLine();
+
+		}
+		file.delete();
+		FileWriter fileWriter= new FileWriter(file, false);
+		PrintWriter print = new PrintWriter(fileWriter);
+		print.write(String.valueOf(content));
+		print.flush();
+		buffer.close();
+		lerFlux.close();
+		fileWriter.close();
+		print.close();
+
 	}
 }

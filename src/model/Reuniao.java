@@ -6,6 +6,7 @@ public class Reuniao
 	public String assunto;
 	public String passos;
 	public int codigoGrupo;
+	public boolean status;
 
 	public String getData() {
 		return data;
@@ -37,5 +38,13 @@ public class Reuniao
 
 	public void setCodigoGrupo(int codigoGrupo) {
 		this.codigoGrupo = codigoGrupo;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

@@ -8,21 +8,27 @@ import model.Grupo;
 import model.Reuniao;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class BTReuniaoBuscaCodigoController implements ActionListener {
 
     private JFormattedTextField cod;
+    private JFormattedTextField assunto;
+    private JFormattedTextField data;
     private JLabel mensagem;
     private Grupo grupo;
 
-    public BTReuniaoBuscaCodigoController(JFormattedTextField cod, JLabel mensagem) {
+    public BTReuniaoBuscaCodigoController(JFormattedTextField cod, JFormattedTextField assunto, JFormattedTextField data, JLabel mensagem) {
         this.cod = cod;
-        this.mensagem= mensagem;
+        this.assunto = assunto;
+        this.data = data;
+        this.mensagem = mensagem;
     }
-
 
     public void actionPerformed(ActionEvent e){
         if (!validaCampoCod(cod)){
@@ -34,11 +40,26 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
             ListObject grupos= getGrupos();
 
             grupo= ManterReunião.pesquisarCodGrupo(grupos, codigo);
+            Reuniao reuniao= ManterReunião.validaReuniao(getReunioes(), codigo);
 
             if (grupo == null){
+                mensagem.setForeground(Color.RED);
                 mensagem.setText("<html> Grupo não encontrado no Sistema" +
                         "<br> Por favor, digite novamente." +
                         "</html>");
+            }
+            else if (reuniao != null){
+                mensagem.setForeground(Color.black);
+                mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
+                        "<br> Clique em \"Salvar\" para alterar os dados." +
+                        "</html>");
+                assunto.setText(reuniao.getAssunto());
+                data.setText(reuniao.getData());
+            }
+            else {
+
+                mensagem.setForeground(Color.black);
+                mensagem.setText("<html> Grupo validado </html>");
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -60,6 +81,56 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
         return (campo.getText().length() > 0 && campo.getText().length() < 5);
     }
 
+    private String getArquivoReunioes(){
+        String caminhoRaiz, caminhoArquivo;
+
+        caminhoRaiz = System.getProperty("user.home") + File.separator;
+        caminhoRaiz += "TEMP";
+
+        return caminhoRaiz;
+    }
+
+    public ListObject getReunioes() throws Exception{
+        String caminhoArquivo= getArquivoReunioes();
+        File dir = new File(caminhoArquivo);
+        if (dir.exists() && dir.isDirectory()){
+            File file= new File(caminhoArquivo, "Reuniões.csv");
+            FileReader lerFlux = new FileReader(file);
+            BufferedReader buffer = new BufferedReader(lerFlux);
+            String linha = buffer.readLine();
+            StringBuilder content = new StringBuilder();
+
+            while(linha != null)
+            {
+                content.append(linha).append("\n");
+                linha = buffer.readLine();
+            }
+
+            String[] reuniaoVet= content.toString().split("\n");
+
+            ListObject lista= new ListObject();
+            int tamanho= reuniaoVet.length;
+            for (int i = 0; i < tamanho; i++) {
+                Reuniao reuniao= new Reuniao();
+                String[] dados= reuniaoVet[i].split(";");
+                reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
+                reuniao.setAssunto(dados[1]);
+                reuniao.setData(dados[2]);
+                if (lista.isEmpty()){
+                    lista.addFirst(reuniao);
+                }
+                else {
+                    lista.addLast(reuniao);
+                }
+            }
+
+            return lista;
+        }
+        else {
+            return null;
+        }
+    }
+
 
 
     private String getArquivoGrupos(){
@@ -74,18 +145,38 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
 
     public ListObject getGrupos() throws Exception {
         String arquivoGrupos= getArquivoGrupos();
-        FileLibrary openFile = new FileLibrary(arquivoGrupos);
-        ListObject lista= new ListObject();
-        String[] vet= openFile.getContentFile().split("\n");
-        int tamanho= vet.length;
-        for (int i = 0; i < tamanho; i++) {
-            if (lista.isEmpty()){
-                lista.addFirst(vet[i]);
+        File arq = new File(arquivoGrupos);
+        if (arq.exists() && arq.isFile()) {
+
+
+            FileReader lerFlux = new FileReader(arq);
+            BufferedReader buffer = new BufferedReader(lerFlux);
+            String linha = buffer.readLine();
+            StringBuilder content = new StringBuilder();
+
+            while(linha != null)
+            {
+                content.append(linha).append("\n");
+                linha = buffer.readLine();
             }
-            else {
-                lista.addLast(vet[i]);
+
+            String[] grupo= content.toString().split("\n");
+
+            ListObject lista= new ListObject();
+            int tamanho= grupo.length;
+            for (int i = 0; i < tamanho; i++) {
+                if (lista.isEmpty()){
+                    lista.addFirst(grupo[i]);
+                }
+                else {
+                    lista.addLast(grupo[i]);
+                }
             }
+            return lista;
         }
-        return lista;
+        else {
+            return null;
+        }
+
     }
 }
