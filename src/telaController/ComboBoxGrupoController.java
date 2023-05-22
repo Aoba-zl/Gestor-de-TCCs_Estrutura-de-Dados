@@ -3,6 +3,7 @@ package telaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import br.fatec.ListString.ListString;
@@ -11,15 +12,17 @@ public class ComboBoxGrupoController implements ActionListener
 {
 
 	private JComboBox<String> selecao;
+	private JComboBox<String> subArea;
 	private String[] areaLista;
-	private ListString[] subArea;
+	private ListString[] listSubArea;
 	
 	
-	public ComboBoxGrupoController(JComboBox<String> selecao, String[] area, ListString[] subArea) 
+	public ComboBoxGrupoController(JComboBox<String> selecao, JComboBox<String> subArea, String[] area, ListString[] listSubArea) 
 	{
 		this.selecao = selecao;
-		this.areaLista = area;
 		this.subArea = subArea;
+		this.areaLista = area;
+		this.listSubArea = listSubArea;
 	}
 
 	public int hashCode(String area)
@@ -29,19 +32,36 @@ public class ComboBoxGrupoController implements ActionListener
 		
 	}
 	
-	
-
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		String area = selecao.getSelectedItem().toString();
+		String[] subArea = null;
 		
+		int tamArea = this.areaLista.length;
 		
-		
-		if (area.equals(areaLista[1]))
+		for (int i = 0; i < tamArea; i++)
 		{
-			System.out.println("ok");
+			if (area.equals(areaLista[i]))
+			{
+				int tamListSubArea = this.listSubArea[i].size();
+				subArea = new String[tamListSubArea];
+				
+				for (int j = 0; j < tamListSubArea; j++)
+				{
+					try {
+						subArea[j] = this.listSubArea[i].get(j);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+				}
+				break;
+			}
 		}
+		
+		this.subArea.setModel(new DefaultComboBoxModel(subArea));
+		
+		
 		
 	}
 }

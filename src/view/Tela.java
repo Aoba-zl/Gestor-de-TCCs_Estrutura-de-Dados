@@ -23,8 +23,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.UIManager;
 import java.awt.Font;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -33,6 +35,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.Date;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -313,26 +316,23 @@ public class Tela extends JFrame {
 		tfTema.setBounds(341, 82, 100, 20);
 		pCadGrupo.add(tfTema);
 		
-		ComboBoxController cbControll = new ComboBoxController(listaSubArea);
 		
+		ComboBoxController cbControll = new ComboBoxController(listaSubArea);
 		String[] area = {};
 		try {
 			area = cbControll.area();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		String[] subArea = cbControll.subArea();
 		listaSubArea = cbControll.pegaList();
+		
 		
 		JComboBox cbArea = new JComboBox();
 		cbArea.setModel(new DefaultComboBoxModel(area));
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
-		
-		
 		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setModel(new DefaultComboBoxModel(subArea));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
 		
@@ -390,7 +390,6 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
 		JComboBox cbSubAreaConsulta = new JComboBox();
-		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(subArea));
 		cbSubAreaConsulta.setBounds(287, 49, 100, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
@@ -455,6 +454,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
+		
 		ftCodGrupoReuniao.setBounds(192, 66, 119, 20);
 		pMarcaReuniao.add(ftCodGrupoReuniao);
 		
@@ -637,7 +637,8 @@ public class Tela extends JFrame {
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
 		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
-		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, area, listaSubArea);
+		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
+		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
 		
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
@@ -646,5 +647,6 @@ public class Tela extends JFrame {
 		btnBuscarCodGrupo.addActionListener(bCodCont);
 		btnSalvaGrupos.addActionListener(sGrupoCont);
 		cbArea.addActionListener(cbAreaCont);
+		cbAreaConsulta.addActionListener(cbAreaConsultCont);
 	}
 }
