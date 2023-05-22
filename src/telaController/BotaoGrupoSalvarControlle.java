@@ -2,11 +2,12 @@ package telaController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
 
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 
+import controller.ManterGrupo;
 import model.Aluno;
 import model.Area;
 import model.Grupo;
@@ -18,6 +19,7 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 	private JFormattedTextField tema;
 	private JComboBox<String> area;
 	private JComboBox<String> subArea;
+	private ManterGrupo manterGrupo = new ManterGrupo();
 	
 	
 	public BotaoGrupoSalvarControlle(JFormattedTextField[] RA, JFormattedTextField cod, JFormattedTextField tema, JComboBox<String> cbArea, JComboBox<String> cbSubArea) 
@@ -58,6 +60,12 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 		grupo.setTema(tema.getText());
 		grupo.setAlunos(aluno);
 		grupo.setArea(area);
+		
+		try {
+			manterGrupo.salvarDados(grupo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println(grupo);
 	}

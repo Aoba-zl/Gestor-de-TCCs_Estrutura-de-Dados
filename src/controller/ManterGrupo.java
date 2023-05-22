@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class ManterGrupo {
 	
-	private String[] getArq(String arquivoAluno) throws Exception
+	private String getArq(String arquivoAluno) throws Exception
 	{
 		File arq = new File(arquivoAluno);
 		
@@ -28,7 +28,7 @@ public class ManterGrupo {
 			}
 			buffer.close();
             lerFlux.close();
-			return content.toString().split("\n");
+			return content.toString();
 		}
 		return null;
 	}
@@ -72,7 +72,7 @@ public class ManterGrupo {
 			String arqAluno = getArqDiretorio("Alunos.csv");
 			String[] alunos = null;
 			try {
-				alunos = getArq(arqAluno);
+				alunos = getArq(arqAluno).split("\n");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -153,29 +153,35 @@ public class ManterGrupo {
 	
 	public void salvarDados(Grupo grupo) throws IOException
 	{
-		File dir= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados");
-		if (dir.exists() && dir.isDirectory()){
-//			grupo.setCodigo(geraCodigo(String.valueOf(grupo.getArea()), grupo.getArea().getSubArea()));
-			File file= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados", "Grupos.csv");
-			boolean existe= false;
-			if (file.exists()){
-				existe= true;
-			}
-			FileWriter fileWriter= new FileWriter(file, existe);
-			PrintWriter print= new PrintWriter(fileWriter);
-			StringBuffer buffer= new StringBuffer();
-			String GrupoArquivo= "";
-			if (existe == false){
-				print.write("Código;Tema;Subárea;Integrantes \n");
-			}
-			print.write(grupo.getCodigo() +";"+ grupo.getTema() +";"+ grupo.getArea().getSubArea() +";"+ Arrays.toString(grupo.getAlunos()));
-			print.flush();
-			print.close();
-			fileWriter.close();
+		String arqDiretorio = getArqDiretorio("Grupos.csv");
+		boolean existe = false;
+		File arq = new File(arqDiretorio);
+		if (!arq.exists())
+			existe = true;
+		
+		Aluno[] alunos = grupo.getAlunos();
+		int tamAlunos = alunos.length;
+		String arqContent = null;
+		try {
+			arqContent = getArq(arqDiretorio);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		else {
-			throw new IOException("Diretorio Inválido!");
+		String content = grupo.codigo + ";" + grupo.tema;
+		
+		for (int i = 0; i < tamAlunos; i++)
+		{
+			content += ";" + alunos[i].getRa();
 		}
+		
+		content = arqContent + content;
+		
+		FileWriter write = new FileWriter(arq, existe);
+		PrintWriter arqWriter = new PrintWriter(write);
+		
+		arqWriter.write(content);
+		arqWriter.close();
+		write.close();		
 	}
 	
 }
