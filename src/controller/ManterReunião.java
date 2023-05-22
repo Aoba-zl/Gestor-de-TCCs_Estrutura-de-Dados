@@ -49,7 +49,7 @@ public class ManterReunião {
 				}
 				FileWriter fileWriter= new FileWriter(arq, existe);
 				PrintWriter print= new PrintWriter(fileWriter);
-				print.write(reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus());
+				print.write(reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus() +"\n");
 				print.flush();
 				print.close();
 				fileWriter.close();
