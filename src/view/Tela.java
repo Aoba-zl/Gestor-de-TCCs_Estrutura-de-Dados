@@ -486,10 +486,10 @@ public class Tela extends JFrame {
 		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
 		pMarcaReuniao.add(btnBuscarCodReuniao);
 		
-		JLabel lblMessageReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
-		lblMessageReuniao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageReuniao.setBounds(410, 11, 132, 75);
-		pMarcaReuniao.add(lblMessageReuniao);
+		JLabel lblMensagemReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMensagemReuniao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemReuniao.setBounds(410, 11, 132, 75);
+		pMarcaReuniao.add(lblMensagemReuniao);
 		
 		JPanel pAddPassos = new JPanel();
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
@@ -606,10 +606,10 @@ public class Tela extends JFrame {
 		tableReuniaoMarcada.setEnabled(false);
 		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
 		
-		JLabel lblMessageReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
-		lblMessageReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageReuniaoMarcada.setBounds(411, 0, 132, 75);
-		pReuniaoMarcado.add(lblMessageReuniaoMarcada);
+		JLabel lblMensagemReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMensagemReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemReuniaoMarcada.setBounds(411, 0, 132, 75);
+		pReuniaoMarcado.add(lblMensagemReuniaoMarcada);
 		
 		
 		
