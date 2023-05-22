@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class ManterGrupo {
 	
-	private String getArq(String arquivoAluno) throws Exception
+	public String getArq(String arquivoAluno) throws Exception
 	{
 		File arq = new File(arquivoAluno);
 		
@@ -33,7 +33,7 @@ public class ManterGrupo {
 		return null;
 	}
 	
-    private String getArqDiretorio(String nomeArq)
+    public String getArqDiretorio(String nomeArq)
     {
         String caminhoRaiz, caminhoArquivo;
 
@@ -151,37 +151,36 @@ public class ManterGrupo {
 		}
 	}
 	
-	public void salvarDados(Grupo grupo) throws IOException
+	public void salvarDados(Grupo grupo)
 	{
-		String arqDiretorio = getArqDiretorio("Grupos.csv");
-		boolean existe = false;
-		File arq = new File(arqDiretorio);
-		if (!arq.exists())
-			existe = true;
-		
-		Aluno[] alunos = grupo.getAlunos();
-		int tamAlunos = alunos.length;
-		String arqContent = null;
 		try {
-			arqContent = getArq(arqDiretorio);
+			String arqDiretorio = getArqDiretorio("Grupos.csv");
+			File arq = new File(arqDiretorio);
+			boolean existe = false;
+			if (!arq.exists())
+				existe = true;
+			
+			String arqContent = getArq(arqDiretorio);
+			Aluno[] alunos = grupo.getAlunos();
+			int tamAlunos = alunos.length;
+			String content = grupo.codigo + ";" + grupo.tema;
+			
+			for (int i = 0; i < tamAlunos; i++)
+			{
+				content += ";" + alunos[i].getRa();
+			}
+			
+			content = arqContent + content;
+			
+			FileWriter write = new FileWriter(arq, existe);
+			PrintWriter arqWriter = new PrintWriter(write);
+			
+			arqWriter.write(content);
+			arqWriter.close();
+			write.close();		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String content = grupo.codigo + ";" + grupo.tema;
-		
-		for (int i = 0; i < tamAlunos; i++)
-		{
-			content += ";" + alunos[i].getRa();
-		}
-		
-		content = arqContent + content;
-		
-		FileWriter write = new FileWriter(arq, existe);
-		PrintWriter arqWriter = new PrintWriter(write);
-		
-		arqWriter.write(content);
-		arqWriter.close();
-		write.close();		
 	}
 	
 }
