@@ -10,10 +10,7 @@ import javax.swing.text.NumberFormatter;
 
 import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
-import telaController.BotaoGrupoPesquisaController;
-import telaController.BotaoGrupoSalvarControlle;
-import telaController.ComboBoxController;
-import telaController.ComboBoxGrupoController;
+import telaController.*;
 
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
@@ -70,7 +67,6 @@ public class Tela extends JFrame {
 		});
 	}
 
-	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 375);
