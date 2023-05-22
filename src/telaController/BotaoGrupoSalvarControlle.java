@@ -40,6 +40,11 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 	}
 
 	private void salvar() {
+		if (this.subArea.getSelectedItem().equals(""))
+		{
+			return;
+		}
+		
 		Grupo grupo = new Grupo();
 		Aluno[] aluno = new Aluno[4];
 		Area area = new Area();

@@ -12,6 +12,7 @@ import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
 import telaController.BotaoGrupoPesquisaController;
 import telaController.BotaoGrupoSalvarControlle;
+import telaController.ComboBoxController;
 import telaController.ComboBoxGrupoController;
 
 import javax.swing.JTextField;
@@ -22,8 +23,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.UIManager;
 import java.awt.Font;
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -32,6 +35,7 @@ import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.sql.Date;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -48,10 +52,9 @@ import java.awt.event.ActionListener;
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-	private JTable table_1;
+	private JTable tableGrupoCad;
+	private JTable tableReuniaoMarcada;
 	private JButton btnBuscarAssunto;
-	private String arquivoArea;
 	private ListString[] listaSubArea;
 	
 	public static void main(String[] args) {
@@ -67,36 +70,6 @@ public class Tela extends JFrame {
 		});
 	}
 
-	
-	private int hashCodeArea(String numero)
-	{
-		int posit = Integer.parseInt(numero.substring(0, 1));
-		
-		return posit;
-	}
-
-	private String[] selecionaArea(String arquivoArea)
-	{
-		FileLibrary openFile = new FileLibrary(arquivoArea);
-		
-		try {
-			return openFile.getContentFile().split("\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	private String getArquivoArea()
-    {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator + "ProfessorA" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Professor-AreasdeAtuacao.csv";
-
-        return caminhoArquivo;
-    }
 	
 	public Tela() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -344,75 +317,23 @@ public class Tela extends JFrame {
 		pCadGrupo.add(tfTema);
 		
 		
-		
-		
-		this.arquivoArea = getArquivoArea();
-		String[] area = selecionaArea(arquivoArea);
-		
-		
-		listaSubArea = new ListString[area.length - 1];
-		int tamArea = area.length;
-		
-		for (int i = 0; i < tamArea - 1; i++)
-		{
-			listaSubArea[i] = new ListString();
+		ComboBoxController cbControll = new ComboBoxController(listaSubArea);
+		String[] area = {};
+		try {
+			area = cbControll.area();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
-
-		String[] areaFormatted = new String[tamArea - 1];
-		for (int i = 0; i < tamArea - 1; i++)
-		{
-			StringTokenizer stArea = new StringTokenizer(area[i + 1], ",");
-			
-			areaFormatted[i] = stArea.nextToken();
-			
-			int hash = hashCodeArea(areaFormatted[i]);
-			
-			
-			while(stArea.hasMoreTokens())
-			{
-				if (listaSubArea[i].isEmpty())
-					listaSubArea[hash - 1].addFirst(stArea.nextToken());
-				else
-					try {
-						listaSubArea[hash - 1].addLast(stArea.nextToken());
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-			}
-		}
-		
+		listaSubArea = cbControll.pegaList();
 		
 		
 		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(areaFormatted));
+		cbArea.setModel(new DefaultComboBoxModel(area));
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
-		int tama = 0;
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			tama += listaSubArea[i].size();
-		}
-		String[] subArea = new String[tama];
-		int cont = 0;
-		
-		for (int i = 0; i < listaSubArea.length; i++)
-		{
-			for (int j = 0; j < listaSubArea[i].size(); j++)
-			{
-				try {
-					subArea[cont] = listaSubArea[i].get(j);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				cont++;
-			}
-		}
-		
-		
 		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setModel(new DefaultComboBoxModel(subArea));
+		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {""}));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
 		
@@ -458,44 +379,44 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1);
 		
 		JComboBox cbAreaConsulta = new JComboBox();
-		cbAreaConsulta.setModel(new DefaultComboBoxModel(areaFormatted));
-		cbAreaConsulta.setBounds(91, 48, 100, 20);
+		cbAreaConsulta.setModel(new DefaultComboBoxModel(area));
+		cbAreaConsulta.setBounds(75, 49, 189, 20);
 		pConsultarGrupos.add(cbAreaConsulta);
 		
 		JLabel lblNewLabel_1_2_4_2_1_1 = new JLabel("SubÁrea");
 		lblNewLabel_1_2_4_2_1_1.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblNewLabel_1_2_4_2_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_2_4_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_4_2_1_1.setBounds(211, 50, 66, 16);
+		lblNewLabel_1_2_4_2_1_1.setBounds(274, 50, 66, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
 		JComboBox cbSubAreaConsulta = new JComboBox();
-		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(subArea));
-		cbSubAreaConsulta.setBounds(287, 49, 100, 20);
+		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(new String[] {""}));
+		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
 		JButton btnPesquisarGrupos = new JButton("Pesquisar");
 		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setBounds(30, 98, 267, 86);
-		pConsultarGrupos.add(scrollPane_1);
+		JScrollPane spGrupoCad = new JScrollPane();
+		spGrupoCad.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		spGrupoCad.setBounds(30, 98, 267, 86);
+		pConsultarGrupos.add(spGrupoCad);
 		
-		table = new JTable();
-		scrollPane_1.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tableGrupoCad = new JTable();
+		spGrupoCad.setViewportView(tableGrupoCad);
+		tableGrupoCad.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 			}
 		));
-		table.getColumnModel().getColumn(1).setPreferredWidth(78);
-		table.getColumnModel().getColumn(2).setPreferredWidth(83);
-		table.setCellSelectionEnabled(true);
-		table.setColumnSelectionAllowed(true);
+		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(78);
+		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(83);
+		tableGrupoCad.setCellSelectionEnabled(true);
+		tableGrupoCad.setColumnSelectionAllowed(true);
 		
 		JPanel pOrientacoes = new JPanel();
 		tabbedPane.addTab("Orientações", null, pOrientacoes, null);
@@ -535,6 +456,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
+		
 		ftCodGrupoReuniao.setBounds(192, 66, 119, 20);
 		pMarcaReuniao.add(ftCodGrupoReuniao);
 		
@@ -564,10 +486,10 @@ public class Tela extends JFrame {
 		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
 		pMarcaReuniao.add(btnBuscarCodReuniao);
 		
-		JLabel lblMensagemReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
-		lblMensagemReuniao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemReuniao.setBounds(410, 11, 132, 75);
-		pMarcaReuniao.add(lblMensagemReuniao);
+		JLabel lblMessageReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMessageReuniao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageReuniao.setBounds(410, 11, 132, 75);
+		pMarcaReuniao.add(lblMessageReuniao);
 		
 		JPanel pAddPassos = new JPanel();
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
@@ -643,16 +565,16 @@ public class Tela extends JFrame {
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
 		pReuniaoMarcado.setLayout(null);
 		
-		JLabel lblDefinirPassos_1 = new JLabel("Reunião");
-		lblDefinirPassos_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDefinirPassos_1.setBackground(Color.WHITE);
-		lblDefinirPassos_1.setBounds(30, 11, 74, 20);
-		pReuniaoMarcado.add(lblDefinirPassos_1);
+		JLabel lblReuniao = new JLabel("Reunião");
+		lblReuniao.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblReuniao.setBackground(Color.WHITE);
+		lblReuniao.setBounds(30, 11, 74, 20);
+		pReuniaoMarcado.add(lblReuniao);
 		
-		JLabel lblNewLabel_1_2_5_3_3 = new JLabel("Pesquisa:");
-		lblNewLabel_1_2_5_3_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_3.setBounds(82, 58, 64, 20);
-		pReuniaoMarcado.add(lblNewLabel_1_2_5_3_3);
+		JLabel lblCodGrupoReunMarcada = new JLabel("Código do grupo:");
+		lblCodGrupoReunMarcada.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblCodGrupoReunMarcada.setBounds(37, 58, 109, 20);
+		pReuniaoMarcado.add(lblCodGrupoReunMarcada);
 		
 		JFormattedTextField ftPesquisarReuniao = new JFormattedTextField();
 		ftPesquisarReuniao.setBounds(156, 60, 121, 18);
@@ -662,22 +584,32 @@ public class Tela extends JFrame {
 		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
 		pReuniaoMarcado.add(btnPesquisarReuniao);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_2.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_2.setBounds(20, 89, 403, 95);
-		pReuniaoMarcado.add(scrollPane_2);
+		JScrollPane spReuniaoMarcada = new JScrollPane();
+		spReuniaoMarcada.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		spReuniaoMarcada.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		spReuniaoMarcada.setBounds(20, 89, 523, 170);
+		pReuniaoMarcado.add(spReuniaoMarcada);
 		
-		table_1 = new JTable();
-		scrollPane_2.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
+		tableReuniaoMarcada = new JTable();
+		spReuniaoMarcada.setViewportView(tableReuniaoMarcada);
+		tableReuniaoMarcada.setModel(new DefaultTableModel(
 			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
 			},
 			new String[] {
-				"Tema", "Data", "C\u00F3d. Grupo", "Conclu\u00EDda"
+				"C\u00F3d. Grupo", "Tema", "Data", "Status"
 			}
 		));
-		table_1.getColumnModel().getColumn(3).setPreferredWidth(64);
+		tableReuniaoMarcada.setEnabled(false);
+		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
+		
+		JLabel lblMessageReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		lblMessageReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMessageReuniaoMarcada.setBounds(411, 0, 132, 75);
+		pReuniaoMarcado.add(lblMessageReuniaoMarcada);
 		
 		
 		
@@ -717,7 +649,8 @@ public class Tela extends JFrame {
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
 		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
-		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, areaFormatted, listaSubArea);
+		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
+		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
 		
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
@@ -726,5 +659,6 @@ public class Tela extends JFrame {
 		btnBuscarCodGrupo.addActionListener(bCodCont);
 		btnSalvaGrupos.addActionListener(sGrupoCont);
 		cbArea.addActionListener(cbAreaCont);
+		cbAreaConsulta.addActionListener(cbAreaConsultCont);
 	}
 }
