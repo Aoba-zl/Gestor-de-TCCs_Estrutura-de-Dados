@@ -79,12 +79,13 @@ public class BotaoGrupoSalvarController implements ActionListener
 		return grupo;
 	}
 	
-	private void salvar() {
+	private Boolean verificacao()
+	{
 		if (this.RA[0].getText().equals("") && this.RA[1].getText().equals("")
 				&& this.RA[2].getText().equals("") && this.RA[3].getText().equals(""))
 		{
 			this.mensagem.setText("Digite pelo menos 1 RA!");
-			return;
+			return false;
 		}
 		for (int i = 0; i < 4; i++)
 		{
@@ -96,32 +97,53 @@ public class BotaoGrupoSalvarController implements ActionListener
 				}
 				if(i != j && this.RA[i].getText().equals(this.RA[j].getText()))
 				{
-					this.mensagem.setText("Um RA não pode ser igual ao outro!");
-					return;
+					this.mensagem.setText("<html>Um RA não <br>pode ser igual ao outro!</html>");
+					return false;
 				}
 			}
 		}
+		if (this.tema.getText().equals("") )
+		{
+			this.mensagem.setText("Digite o tema do grupo!");
+			return false;
+		}
+		if (!this.cod.getText().toString().substring(0, 2).equals(this.area.getSelectedItem().toString().substring(0, 1)
+				+ this.subArea.getSelectedItem().toString().substring(0, 1)))
+		{
+			this.mensagem.setText("<html>Os dois primeiros digitos tem <br>que ser igual a área e a subárea!");
+			return false;
+		}
+		if (this.cod.getText().toString().length() != 4)
+		{
+			this.mensagem.setText("O codigo tem quer 4 digitos.");
+			return false;
+		}
+		if (this.cod.getText().toString().length() != 4)
+		{
+			this.mensagem.setText("O codigo tem quer 4 digitos.");
+			return false;
+		}
+		return true;
+	}
+	
+	private void salvar() {
+		
+		if (!verificacao())
+			return;
+		
 		if (this.subArea.getSelectedItem().equals("") )
 		{
 			this.mensagem.setText("Selecione uma subArea!");
 			return;
 		}
-		if (this.tema.getText().equals("") )
-		{
-			this.mensagem.setText("Digite o tema do grupo!");
-			return;
-		}
+		
 		if (!this.cod.getText().toString().substring(0, 2).equals(this.area.getSelectedItem().toString().substring(0, 1)
 			+ this.subArea.getSelectedItem().toString().substring(0, 1)))
 		{
-			this.mensagem.setText("<html>Os dois primeiros digitos tem <br>que ser iguais a área e a subárea!");
+			this.mensagem.setText("<html>Os dois primeiros digitos tem <br>que ser igual a área e a subárea!");
 			return;
 		}
-		if (this.cod.getText().toString().length() != 4)
-		{
-			this.mensagem.setText("O codigo tem quer 4 digitos.");
-			return;
-		}
+		
 		
 		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
 		String arqAlunos = manterGrupo.getArqDiretorio("Alunos.csv");
@@ -152,7 +174,32 @@ public class BotaoGrupoSalvarController implements ActionListener
 	
 	private void alterar() 
 	{
+		if (!verificacao())
+			return;
 		
+		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
+		String arqAlunos = manterGrupo.getArqDiretorio("Alunos.csv");
+		try {
+			arqGrupo = manterGrupo.getArq(arqGrupo);
+			arqAlunos = manterGrupo.getArq(arqAlunos);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		Grupo grupo = new Grupo();
+		grupo = setGrupo();	
+		
+		if (!verifica.verificaGrupoExiste(arqGrupo, grupo, this.mensagem))
+			return;
+			
+		if (!verifica.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
+			return;
+		
+		manterGrupo.excluirGrupo(grupo);
+		
+		
+		manterGrupo.salvarGrupo(grupo);
+		this.mensagem.setText("Grupo alterado!");
 		
 	}
 	
