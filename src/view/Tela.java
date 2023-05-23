@@ -2,6 +2,7 @@ package view;
 
 import br.fatec.ListString.ListString;
 import telaController.*;
+import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -105,92 +106,92 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2.setBounds(30, 57, 43, 14);
 		pCadGrupo.add(lblNewLabel_1_2);
 		
-		JFormattedTextField tfRA_1 = new JFormattedTextField();
-		tfRA_1.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftRA_1 = new JFormattedTextField();
+		ftRA_1.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfRA_1.setEditable(true);
+					ftRA_1.setEditable(true);
 				}
 				else
 				{
-					tfRA_1.setEditable(false);
+					ftRA_1.setEditable(false);
 				}
 			}
 		});
-		tfRA_1.setBounds(64, 57, 100, 20);
-		pCadGrupo.add(tfRA_1);
+		ftRA_1.setBounds(64, 57, 100, 20);
+		pCadGrupo.add(ftRA_1);
 		
 		JLabel lblNewLabel_1_2_1 = new JLabel("RA:");
 		lblNewLabel_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_1.setBounds(30, 83, 43, 14);
 		pCadGrupo.add(lblNewLabel_1_2_1);
 		
-		JFormattedTextField tfRA_2 = new JFormattedTextField();
-		tfRA_2.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftRA_2 = new JFormattedTextField();
+		ftRA_2.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfRA_2.setEditable(true);
+					ftRA_2.setEditable(true);
 				}
 				else
 				{
-					tfRA_2.setEditable(false);
+					ftRA_2.setEditable(false);
 				}
 			}
 		});
-		tfRA_2.setBounds(64, 83, 100, 20);
-		pCadGrupo.add(tfRA_2);
+		ftRA_2.setBounds(64, 83, 100, 20);
+		pCadGrupo.add(ftRA_2);
 		
 		JLabel lblNewLabel_1_2_2 = new JLabel("RA:");
 		lblNewLabel_1_2_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_2.setBounds(30, 109, 43, 14);
 		pCadGrupo.add(lblNewLabel_1_2_2);
 		
-		JFormattedTextField tfRA_3 = new JFormattedTextField();
-		tfRA_3.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftRA_3 = new JFormattedTextField();
+		ftRA_3.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfRA_3.setEditable(true);
+					ftRA_3.setEditable(true);
 				}
 				else
 				{
-					tfRA_3.setEditable(false);
+					ftRA_3.setEditable(false);
 				}
 			}
 		});
-		tfRA_3.setBounds(64, 109, 100, 20);
-		pCadGrupo.add(tfRA_3);
+		ftRA_3.setBounds(64, 109, 100, 20);
+		pCadGrupo.add(ftRA_3);
 		
 		JLabel lblNewLabel_1_2_3 = new JLabel("RA:");
 		lblNewLabel_1_2_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_3.setBounds(30, 135, 43, 14);
 		pCadGrupo.add(lblNewLabel_1_2_3);
 		
-		JFormattedTextField tfRA_4 = new JFormattedTextField();
-		tfRA_4.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftRA_4 = new JFormattedTextField();
+		ftRA_4.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfRA_4.setEditable(true);
+					ftRA_4.setEditable(true);
 				}
 				else
 				{
-					tfRA_4.setEditable(false);
+					ftRA_4.setEditable(false);
 				}
 			}
 		});
-		tfRA_4.setBounds(64, 135, 100, 20);
-		pCadGrupo.add(tfRA_4);
+		ftRA_4.setBounds(64, 135, 100, 20);
+		pCadGrupo.add(ftRA_4);
 		
 		JLabel lblNewLabel_1_2_4 = new JLabel("Código:");
 		lblNewLabel_1_2_4.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -220,28 +221,28 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4_3.setBounds(280, 137, 51, 16);
 		pCadGrupo.add(lblNewLabel_1_2_4_3);
 		
-		JFormattedTextField tfCodGrupo = new JFormattedTextField();
-		tfCodGrupo.addKeyListener(new KeyAdapter() {
+		JFormattedTextField ftCodGrupo = new JFormattedTextField();
+		ftCodGrupo.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) 
 			{
 				char i = e.getKeyChar();
 				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
 				{
-					tfCodGrupo.setEditable(true);
+					ftCodGrupo.setEditable(true);
 				}
 				else
 				{
-					tfCodGrupo.setEditable(false);
+					ftCodGrupo.setEditable(false);
 				}
 			}
 		});
-		tfCodGrupo.setBounds(341, 57, 100, 20);
-		pCadGrupo.add(tfCodGrupo);
+		ftCodGrupo.setBounds(341, 57, 100, 20);
+		pCadGrupo.add(ftCodGrupo);
 		
-		JFormattedTextField tfTema = new JFormattedTextField();
-		tfTema.setBounds(341, 82, 100, 20);
-		pCadGrupo.add(tfTema);
+		JFormattedTextField ftTema = new JFormattedTextField();
+		ftTema.setBounds(341, 82, 213, 20);
+		pCadGrupo.add(ftTema);
 		
 		
 		ComboBoxController cbControll = new ComboBoxController(listaSubArea);
@@ -254,19 +255,20 @@ public class Tela extends JFrame {
 		listaSubArea = cbControll.pegaList();
 
 		
-		JComboBox cbArea = new JComboBox();
-		cbArea.setModel(new DefaultComboBoxModel(area));
+		JComboBox<String> cbArea = new JComboBox<String>();
+		cbArea.setModel(new DefaultComboBoxModel<String>(area));
+		cbArea.setSelectedIndex(0);
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
-		JComboBox cbSubArea = new JComboBox();
-		cbSubArea.setModel(new DefaultComboBoxModel(new String[] {""}));
+		JComboBox<String> cbSubArea = new JComboBox<String>();
+		cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
 		
-		JButton btnSalvaGrupos = new JButton("Salvar");
-		btnSalvaGrupos.setBounds(442, 217, 100, 30);
-		pCadGrupo.add(btnSalvaGrupos);
+		JButton btnSalvaAlteraGrupos = new JButton("Salvar");
+		btnSalvaAlteraGrupos.setBounds(442, 217, 100, 30);
+		pCadGrupo.add(btnSalvaAlteraGrupos);
 		
 		JButton btnBuscarRA1 = new JButton("Buscar");
 		btnBuscarRA1.setBounds(191, 57, 79, 23);
@@ -305,8 +307,8 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4_2_1.setBounds(30, 50, 51, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1);
 		
-		JComboBox cbAreaConsulta = new JComboBox();
-		cbAreaConsulta.setModel(new DefaultComboBoxModel(area));
+		JComboBox<String> cbAreaConsulta = new JComboBox<String>();
+		cbAreaConsulta.setModel(new DefaultComboBoxModel<String>(area));
 		cbAreaConsulta.setBounds(75, 49, 189, 20);
 		pConsultarGrupos.add(cbAreaConsulta);
 		
@@ -317,8 +319,8 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_4_2_1_1.setBounds(274, 50, 66, 16);
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
-		JComboBox cbSubAreaConsulta = new JComboBox();
-		cbSubAreaConsulta.setModel(new DefaultComboBoxModel(new String[] {""}));
+		JComboBox<String> cbSubAreaConsulta = new JComboBox<String>();
+		cbSubAreaConsulta.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
@@ -560,35 +562,57 @@ public class Tela extends JFrame {
 		
 		
 		
-		JLabel lblMessageRA1Grupo = new JLabel("");
-		lblMessageRA1Grupo.setForeground(Color.RED);
-		lblMessageRA1Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA1Grupo.setBounds(166, 57, 23, 20);
-		pCadGrupo.add(lblMessageRA1Grupo);
+		JLabel lblMensagemRA1Grupo = new JLabel("");
+		lblMensagemRA1Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemRA1Grupo.setBounds(166, 57, 23, 20);
+		pCadGrupo.add(lblMensagemRA1Grupo);
 		
-		JLabel lblMessageRA2Grupo = new JLabel("");
-		lblMessageRA2Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA2Grupo.setForeground(Color.RED);
-		lblMessageRA2Grupo.setBounds(166, 83, 23, 20);
-		pCadGrupo.add(lblMessageRA2Grupo);
+		JLabel lblMensagemRA2Grupo = new JLabel("");
+		lblMensagemRA2Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemRA2Grupo.setBounds(166, 83, 23, 20);
+		pCadGrupo.add(lblMensagemRA2Grupo);
 		
-		JLabel lblMessageRA3Grupo = new JLabel("");
-		lblMessageRA3Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA3Grupo.setForeground(Color.RED);
-		lblMessageRA3Grupo.setBounds(166, 109, 23, 20);
-		pCadGrupo.add(lblMessageRA3Grupo);
+		JLabel lblMensagemRA3Grupo = new JLabel("");
+		lblMensagemRA3Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemRA3Grupo.setBounds(166, 109, 23, 20);
+		pCadGrupo.add(lblMensagemRA3Grupo);
 		
-		JLabel lblMessageRA4Grupo = new JLabel("");
-		lblMessageRA4Grupo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMessageRA4Grupo.setForeground(Color.RED);
-		lblMessageRA4Grupo.setBounds(166, 135, 23, 20);
-		pCadGrupo.add(lblMessageRA4Grupo);
+		JLabel lblMensagemRA4Grupo = new JLabel("");
+		lblMensagemRA4Grupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemRA4Grupo.setBounds(166, 135, 23, 20);
+		pCadGrupo.add(lblMensagemRA4Grupo);
 		
 		JLabel lblMessageCodGrupo = new JLabel("");
 		lblMessageCodGrupo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessageCodGrupo.setForeground(Color.RED);
 		lblMessageCodGrupo.setBounds(442, 57, 23, 20);
 		pCadGrupo.add(lblMessageCodGrupo);
+		
+		JLabel lblMensagemGrupoCad = new JLabel("");
+		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemGrupoCad.setBounds(30, 197, 192, 48);
+		pCadGrupo.add(lblMensagemGrupoCad);
+
+		JButton btnExcluirGrupos = new JButton("Excluir");
+		btnExcluirGrupos.setBounds(329, 217, 100, 30);
+		btnExcluirGrupos.setVisible(false);
+		pCadGrupo.add(btnExcluirGrupos);
+
+		JFormattedTextField[] RA = {ftRA_1, ftRA_2, ftRA_3, ftRA_4};
+		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(ftRA_1, lblMensagemRA1Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(ftRA_2, lblMensagemRA2Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(ftRA_3, lblMensagemRA3Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(ftRA_4, lblMensagemRA4Grupo, 0);
+		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(ftCodGrupo, lblMessageCodGrupo, 1);
+		BotaoGrupoSalvarController bSGrupoCont = new BotaoGrupoSalvarController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad);
+		BotaoGrupoExcluirController bExGrupoCont = new BotaoGrupoExcluirController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad);
+		ComboBoxAreaGrupoController cbAreaCont = new ComboBoxAreaGrupoController(cbArea, cbSubArea, area, listaSubArea);
+		ComboBoxSubAreaController cbSubAreaCont = new ComboBoxSubAreaController(cbArea, cbSubArea, ftCodGrupo);
+		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+		bCodCont.setList(listaSubArea, area);
+		bCodCont.setComand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad, btnSalvaAlteraGrupos, btnExcluirGrupos);
+		bSGrupoCont.commands(btnSalvaAlteraGrupos, btnExcluirGrupos);
+		bExGrupoCont.command(btnSalvaAlteraGrupos, btnExcluirGrupos);
 		
 		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1, lblMessageRA1Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2, lblMessageRA2Grupo, 0);
@@ -608,8 +632,10 @@ public class Tela extends JFrame {
 		btnBuscarRA3.addActionListener(bRaCont3);
 		btnBuscarRA4.addActionListener(bRaCont4);
 		btnBuscarCodGrupo.addActionListener(bCodCont);
-		btnSalvaGrupos.addActionListener(sGrupoCont);
+		btnSalvaAlteraGrupos.addActionListener(bSGrupoCont);
+		btnExcluirGrupos.addActionListener(bExGrupoCont);
 		cbArea.addActionListener(cbAreaCont);
+		cbSubArea.addActionListener(cbSubAreaCont);
 		cbAreaConsulta.addActionListener(cbAreaConsultCont);
 
 		// Tela Aluno

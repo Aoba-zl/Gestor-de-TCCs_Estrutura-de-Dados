@@ -8,7 +8,7 @@ import javax.swing.JComboBox;
 
 import br.fatec.ListString.ListString;
 
-public class ComboBoxGrupoController implements ActionListener
+public class ComboBoxAreaGrupoController implements ActionListener
 {
 
 	private JComboBox<String> selecao;
@@ -17,7 +17,7 @@ public class ComboBoxGrupoController implements ActionListener
 	private ListString[] listSubArea;
 	
 	
-	public ComboBoxGrupoController(JComboBox<String> selecao, JComboBox<String> subArea, String[] area, ListString[] listSubArea) 
+	public ComboBoxAreaGrupoController(JComboBox<String> selecao, JComboBox<String> subArea, String[] area, ListString[] listSubArea) 
 	{
 		this.selecao = selecao;
 		this.subArea = subArea;
@@ -29,7 +29,6 @@ public class ComboBoxGrupoController implements ActionListener
 	{
 		int posit = Integer.parseInt(area.substring(0, 1));
 		return posit;
-		
 	}
 	
 	@Override
@@ -58,6 +57,6 @@ public class ComboBoxGrupoController implements ActionListener
 				break;
 			}
 		}
-		this.subArea.setModel(new DefaultComboBoxModel(subArea));
+		this.subArea.setModel(new DefaultComboBoxModel<String>(subArea));
 	}
 }

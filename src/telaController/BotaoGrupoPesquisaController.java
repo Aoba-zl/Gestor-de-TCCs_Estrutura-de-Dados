@@ -5,34 +5,45 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 
-import br.fatec.FileLibrary.FileLibrary;
-import controller.ManterAluno;
+
+import br.fatec.ListString.ListString;
 import controller.ManterGrupo;
 import model.Aluno;
+import model.Area;
 import model.Grupo;
 
 public class BotaoGrupoPesquisaController implements ActionListener
 {
 	
 	private JFormattedTextField pesq;
-	private JLabel mensagem;
+	private JLabel mensagemGrupo;
+	private JLabel mensagemGrupoCad;
 	private int conf;
-	private String arquivoAluno;
 	private String arquivoGrupo;
 	private Aluno aluno;
 	private Grupo grupo;
 	private ManterGrupo manterGrupo = new ManterGrupo();
-	
-	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagem, int conf)
+	private ListString[] listaSubArea;
+	private String[] areas;
+	private JFormattedTextField[] RA;
+	private JFormattedTextField ftTema;
+	private JComboBox<String> cbArea;
+	private JComboBox<String> cbSubArea;
+	private JButton btnSalvaAlteraGrupos;
+	private JButton btnExcluirGrupos;
+
+	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagemGrupo, int conf)
 	{
 		this.pesq = pesq;
-		this.mensagem = mensagem;
+		this.mensagemGrupo = mensagemGrupo;
 		this.conf = conf;
-		this.arquivoAluno = getArquivoAluno("Aluno.csv");
-		this.arquivoGrupo = getArquivoAluno("Grupo.csv");
+		this.arquivoGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
 	}
 	
 	@Override
@@ -41,29 +52,48 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		buscar();
 	}
 	
-	private String[] getAlunos(String arquivoAluno) throws Exception
+	public void setList(ListString[] subArea, String[] area)
 	{
-		FileLibrary openFile = new FileLibrary(arquivoAluno);
-		return openFile.getContentFile().split("\n");
+		this.areas = area;
+		this.listaSubArea = subArea;
 	}
 	
-    private String getArquivoAluno(String nomeArq)
-    {
-        String caminhoRaiz, caminhoArquivo;
+	public void setComand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
+	{
+		this.RA = RA;
+		this.ftTema = ftTema;
+		this.cbArea = cbArea;
+		this.cbSubArea = cbSubArea;
+		this.mensagemGrupoCad = mensagemGrupoCad;
+		this.btnSalvaAlteraGrupos = btnSalvaAlteraGrupos;
+		this.btnExcluirGrupos = btnExcluirGrupos;
+	}
 
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Alunos.csv";
+	public int hashCodeArea(String area)
+	{
+		return (Integer.parseInt(area.substring(0, 1)) - 1);
+	}
 
-        return caminhoArquivo;
-    }
+	public int hashCodeSubArea(String area)
+	{
+		return (Integer.parseInt(area.substring(1, 2)));
+	}
 
 	private boolean validaCampo(JFormattedTextField campo)
     {
         if (campo.getText().length() != 13 && conf == 0 || campo.getText().length() != 4 && conf == 1)
         {
-            mensagem.setText("x");
-        	mensagem.setBackground(Color.RED);
+            mensagemGrupo.setText("x");
+        	mensagemGrupo.setForeground(Color.RED);
+        	if (conf == 1)
+        	{
+        		cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+        		for (int i = 0; i < 4; i++)
+        		{
+        			RA[i].setText("");
+        		}
+        		ftTema.setText("");
+        	}
         }
         return (campo.getText().length() == 13) && conf == 0 || (campo.getText().length() == 4) && conf == 1;
     }
@@ -74,19 +104,17 @@ public class BotaoGrupoPesquisaController implements ActionListener
             return;
 		
 		try {
-				mensagem.setText("");
-				mensagem.setBackground(null);
+				mensagemGrupo.setText("");
 				if (conf == 0)
 				{
 					String ra = pesq.getText();
-					String[] alunos = getAlunos(arquivoAluno);
 					
-					aluno = manterGrupo.buscarAluno(alunos, ra);
+					aluno = manterGrupo.buscarAluno(ra);
 					
 					if (aluno == null)
 					{
-			            mensagem.setText("x");
-			        	mensagem.setBackground(Color.RED);
+			            mensagemGrupo.setText("x");
+			        	mensagemGrupo.setForeground(Color.RED);
 					}
 					else
 					{
@@ -96,13 +124,64 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				}
 				else if (conf == 1)
 				{
-					Grupo grupo = new Grupo();
-					grupo.setCodigo(Integer.parseInt(pesq.getText()));
-					System.out.println(grupo);
+					String cod = pesq.getText();
+					String[] procGrupo = manterGrupo.getArq(arquivoGrupo).split("\n");
+					int tamProcGrupo = procGrupo.length;
+					boolean test = false;
+					String[] aux;
+					for (int i = 1; i < tamProcGrupo; i++)
+					{
+						aux = procGrupo[i].split(";");
+						if (cod.equals(aux[0]))
+						{
+							test = true;
+							break;
+						}
+					}
+					if (!test)
+					{
+						mensagemGrupo.setText("x");
+			        	mensagemGrupo.setForeground(Color.RED);
+			        	mensagemGrupoCad.setText("O código não existe.");
+			        	btnExcluirGrupos.setVisible(false);
+			        	btnSalvaAlteraGrupos.setText("Salvar");
+			        	for (int i = 0; i < 4; i++)
+						{
+							RA[i].setText("");
+						}
+			        	ftTema.setText("");
+			        	cbArea.setSelectedIndex(0);
+			        	cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+			        	return;
+					}
+
+					btnExcluirGrupos.setVisible(true);
+					btnSalvaAlteraGrupos.setText("Alterar");
+					mensagemGrupoCad.setText("");
+					grupo = manterGrupo.buscarGrupo(procGrupo, cod);
+					int hash = hashCodeArea(cod);
+					Area area = new Area();
+					area.setNome(areas[hash]);
+					area.setSubArea(listaSubArea[hash].get(hashCodeSubArea(cod)));
+					grupo.setArea(area);
+					Aluno[] aluno = grupo.getAlunos();
+					int tamAluno = aluno.length;
+					for (int i = 0; i < tamAluno; i++)
+					{
+						RA[i].setText(aluno[i].getRa());
+					}
+					for (int i = 3; i >= tamAluno; i--)
+					{
+						RA[i].setText("");
+					}
+					ftTema.setText(grupo.getTema());
+					cbArea.setSelectedIndex(hash);
+					cbSubArea.setSelectedIndex(hashCodeSubArea(cod));
+					pesq.setText(cod);
 				}
 		} catch (Exception e)
 		{
-			
+			e.printStackTrace();
 		}
 	}
 	
