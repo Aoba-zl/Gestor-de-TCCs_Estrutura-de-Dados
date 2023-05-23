@@ -87,7 +87,7 @@ public class ManterGrupo {
 				if (dados[0].equals(cod))
 				{
 					int tam = dados.length;
-					grupo.setCodigo(dados[0]);
+					grupo.setCodigo(Integer.parseInt(dados[0]));
 					grupo.setTema(dados[1]);
 					Aluno[] aluno = new Aluno[tam - 2];
 					for (int i = 2; i < tam; i++)

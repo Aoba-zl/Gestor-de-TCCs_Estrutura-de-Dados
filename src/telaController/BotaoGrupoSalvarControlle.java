@@ -45,7 +45,7 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 		
 		for (int i = 0; i < tamAluno; i++)
 		{
-			for (int j = 0; j < tamContent; j++)
+			for (int j = 1; j < tamContent; j++)
 			{
 				String[] formattedContent = content[j].split(";");
 				
@@ -71,13 +71,15 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 		try {
 			String[] content = arqContent.split("\n");
 			Aluno[] alunos = grupo.getAlunos();
+			int tam = content.length;
 			
-			for (String eachContent: content)
+			for (int g = 1; g < tam; g++)
 			{
-				String[] formattedContent = eachContent.split(";");
 				
-				if (grupo.getCodigo().equals(formattedContent[0]))
-				{
+				String[] formattedContent = content[g].split(";");
+				
+				if (grupo.getCodigo() == Integer.parseInt(formattedContent[0]))
+				{ 
 					mensagem.setText("O grupo ja existe!");
 					return false;
 				}
@@ -136,7 +138,7 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 		
 		area.setNome(this.area.getSelectedItem().toString());
 		area.setSubArea(this.subArea.getSelectedItem().toString());
-		grupo.setCodigo(cod.getText());
+		grupo.setCodigo(Integer.parseInt(cod.getText()));
 		grupo.setTema(tema.getText());
 		grupo.setAlunos(aluno);
 		grupo.setArea(area);
