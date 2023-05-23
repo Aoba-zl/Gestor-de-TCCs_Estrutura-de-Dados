@@ -613,15 +613,7 @@ public class Tela extends JFrame {
 		bCodCont.setComand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad, btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bSGrupoCont.commands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bExGrupoCont.command(btnSalvaAlteraGrupos, btnExcluirGrupos);
-		
-		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(tfRA_1, lblMessageRA1Grupo, 0);
-		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(tfRA_2, lblMessageRA2Grupo, 0);
-		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(tfRA_3, lblMessageRA3Grupo, 0);
-		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(tfRA_4, lblMessageRA4Grupo, 0);
-		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(tfCodGrupo, lblMessageCodGrupo, 1);
-		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
-		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
-		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 
