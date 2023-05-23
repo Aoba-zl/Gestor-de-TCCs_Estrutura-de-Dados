@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class OrientacaoBtnBuscaGrupo implements ActionListener
+public class PassosBtnBuscaGrupo implements ActionListener
 {
     private final JLabel lblMensagem;
     private final JFormattedTextField campoCodGrupo;
@@ -22,9 +22,9 @@ public class OrientacaoBtnBuscaGrupo implements ActionListener
     private ListObject reunioes;
     private Reuniao ultimaReuniaoGrupo;
 
-    public OrientacaoBtnBuscaGrupo(JLabel lblMensagem, JFormattedTextField campoCodGrupo,
-                                   JFormattedTextField campoAssunto, JTextArea campoPassos,
-                                   JButton btnSalvar)
+    public PassosBtnBuscaGrupo(JLabel lblMensagem, JFormattedTextField campoCodGrupo,
+                               JFormattedTextField campoAssunto, JTextArea campoPassos,
+                               JButton btnSalvar)
     {
         this.lblMensagem = lblMensagem;
         this.campoCodGrupo = campoCodGrupo;

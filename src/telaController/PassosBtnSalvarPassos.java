@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class OrientacaoBtnSalvarPassos implements ActionListener
+public class PassosBtnSalvarPassos implements ActionListener
 {
     private final JLabel lblMensagem;
     private final JFormattedTextField campoCodGrupo, campoAssunto;
@@ -20,9 +20,9 @@ public class OrientacaoBtnSalvarPassos implements ActionListener
     private ManterPassos manterPassos = new ManterPassos();
     private ListObject reunioes;
 
-    public OrientacaoBtnSalvarPassos(JLabel lblMensagem, JFormattedTextField campoCodGrupo,
-                                     JFormattedTextField campoAssunto, JTextArea campoPassos,
-                                     JCheckBox checkBoxStatus)
+    public PassosBtnSalvarPassos(JLabel lblMensagem, JFormattedTextField campoCodGrupo,
+                                 JFormattedTextField campoAssunto, JTextArea campoPassos,
+                                 JCheckBox checkBoxStatus)
     {
         this.lblMensagem = lblMensagem;
         this.campoCodGrupo = campoCodGrupo;

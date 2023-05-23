@@ -460,11 +460,11 @@ public class Tela extends JFrame {
 		lblMensagemDefinirPassos.setBounds(411, 0, 132, 75);
 		pAddPassos.add(lblMensagemDefinirPassos);
 
-		OrientacaoBtnBuscaGrupo btnBuscaGrupo =
-				new OrientacaoBtnBuscaGrupo(lblMensagemDefinirPassos, ftCodGrupoPassos,
+		PassosBtnBuscaGrupo btnBuscaGrupo =
+				new PassosBtnBuscaGrupo(lblMensagemDefinirPassos, ftCodGrupoPassos,
 						ftAssuntoReuniaoPassos, taPassos, btnSalvarPassos);
-		OrientacaoBtnSalvarPassos btnSalvarPassosCtrl =
-				new OrientacaoBtnSalvarPassos(lblMensagemDefinirPassos, ftCodGrupoPassos,
+		PassosBtnSalvarPassos btnSalvarPassosCtrl =
+				new PassosBtnSalvarPassos(lblMensagemDefinirPassos, ftCodGrupoPassos,
 						ftAssuntoReuniaoPassos, taPassos, checkBoxStatus_Passos);
 		btnBuscarCodPassos.addActionListener(btnBuscaGrupo);
 		btnSalvarPassos.addActionListener(btnSalvarPassosCtrl);
