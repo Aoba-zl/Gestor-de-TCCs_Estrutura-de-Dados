@@ -65,7 +65,7 @@ public class BTReuniaoSalvaController implements ActionListener {
                 }
                 if (file.exists()){
                     Reuniao reuniaoVerifica= ManterReunião.validaReuniao(getReunioes(), reuniao.getCodigoGrupo());
-                    if (reuniaoVerifica != null){
+                    if (reuniaoVerifica != null && !reuniaoVerifica.isStatus()){
 
                         mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
                                 "<br> Clique em \"Salvar\" para alterar os dados" +
