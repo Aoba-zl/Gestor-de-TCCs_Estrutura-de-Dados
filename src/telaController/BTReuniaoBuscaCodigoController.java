@@ -32,10 +32,12 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (!validaCampoCod(cod)){
+            mensagem.setForeground(Color.RED);
             return;
         }
 
         try {
+            mensagem.setForeground(Color.black);
             int codigo= Integer.parseInt(cod.getText());
             ListObject grupos= getGrupos();
 
@@ -48,7 +50,7 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                         "<br> Por favor, digite novamente." +
                         "</html>");
             }
-            else if (reuniao != null){
+            else if (reuniao != null && !reuniao.isStatus()){
                 mensagem.setForeground(Color.black);
                 mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
                         "<br> Clique em \"Salvar\" para alterar os dados." +
@@ -78,7 +80,7 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
         else if (campo.getText().length() > 4){
             mensagem.setText("Codigo inválido");
         }
-        return (campo.getText().length() > 0 && campo.getText().length() < 5);
+        return (campo.getText().length() == 4);
     }
 
     private String getArquivoReunioes(){

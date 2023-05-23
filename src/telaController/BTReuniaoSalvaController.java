@@ -31,11 +31,14 @@ public class BTReuniaoSalvaController implements ActionListener {
     public void actionPerformed(ActionEvent e){
 
         if (!validaCampoCod(cod)){
+            mensagem.setForeground(Color.RED);
             return;
         }
 
 
         try {
+            mensagem.setForeground(Color.black);
+
             Grupo grupoCod;
             Reuniao reuniao= new Reuniao();
 
