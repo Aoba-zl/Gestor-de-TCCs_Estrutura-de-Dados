@@ -1,8 +1,8 @@
 package telaController;
 
-import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListObject.ListObject;
 import br.fatec.StackObject.StackObject;
+import controller.ManterPassos;
 import model.Reuniao;
 
 import javax.swing.*;
@@ -34,47 +34,6 @@ public class OrientacaoBtnBuscaGrupo implements ActionListener
         this.caminhoArquivoReunioes = getArquivoReunioes();
     }
 
-    private ListObject getReunioes() throws Exception {
-        ListObject reunioes = new ListObject();
-        FileLibrary abreArquivo = new FileLibrary(this.caminhoArquivoReunioes);
-        String[] linhasArquivo = abreArquivo.getContentFile().split("\n");
-        int quantidadeLinhas = linhasArquivo.length;
-        if (quantidadeLinhas == 0)
-            return null;
-
-        for (int index = 1; index < quantidadeLinhas; index++)
-        {
-            Reuniao reuniao = montarReuniao(linhasArquivo[index]);
-            if (reunioes.isEmpty())
-                reunioes.addFirst(reuniao);
-            else
-                reunioes.addLast(reuniao);
-        }
-
-        return reunioes;
-    }
-
-    private Reuniao montarReuniao(String linhaComDados) {
-        String[] dadosReunioes = linhaComDados.split(";");
-        Reuniao reuniao = new Reuniao();
-        int codigo;
-        String assunto, data, strStatus;
-        boolean status;
-
-        codigo = Integer.parseInt(dadosReunioes[0]);
-        assunto = dadosReunioes[1];
-        data = dadosReunioes[2];
-        strStatus = dadosReunioes[3].toLowerCase();
-        status = strStatus.contains("não") ? false : true;
-
-        reuniao.setCodigoGrupo(codigo);
-        reuniao.setAssunto(assunto);
-        reuniao.setData(data);
-        reuniao.setStatus(status);
-
-        return reuniao;
-    }
-
     private String getArquivoReunioes()
     {
         String caminhoRaiz, caminhoArquivo;
@@ -88,7 +47,7 @@ public class OrientacaoBtnBuscaGrupo implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        // caminhoArquivoReunioes reunioesGrupo grupo
+        btnSalvar.setEnabled(false);
 
         lblMensagem.setText("");
         lblMensagem.setForeground(Color.black);
@@ -100,8 +59,10 @@ public class OrientacaoBtnBuscaGrupo implements ActionListener
             return;
         }
 
+        ManterPassos manterPassos = new ManterPassos();
+
         try {
-            this.reunioes = getReunioes();
+            this.reunioes = manterPassos.getReunioes(getArquivoReunioes());
 
             if (reunioes == null)
             {
