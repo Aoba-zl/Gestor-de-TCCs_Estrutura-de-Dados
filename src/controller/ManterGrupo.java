@@ -1,17 +1,16 @@
 package controller;
 
 import model.Aluno;
-import model.Area;
 import model.Grupo;
 
 import java.io.*;
-import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class ManterGrupo {
 	
-	public String getArq(String arquivoAluno) throws Exception
+	public String getArq(String arquivo) throws Exception
 	{
-		File arq = new File(arquivoAluno);
+		File arq = new File(arquivo);
 		
 		if (arq.exists() && arq.isFile())
 		{
@@ -44,29 +43,35 @@ public class ManterGrupo {
         return caminhoArquivo;
     }
 	
-	public Aluno buscarAluno(String[] alunos, String ra) throws IOException
+	public Aluno buscarAluno(String ra) throws IOException
 	{
-		if (raValido(ra))
-		{
-			for (String dadosAluno: alunos) {
-				Aluno aluno = new Aluno();
-				String[] dados = dadosAluno.split(";");
-				if (dados.length == 2)
-				{
-					aluno.setRa(dados[0]);
-					aluno.setNome(dados[1]);
-
-					if (aluno.getRa().equals(ra))
-						return aluno;
+		try {
+			String arquivoAluno = getArqDiretorio("Alunos.csv");
+			String[] alunos = getArq(arquivoAluno).split("\n");
+			
+			if (raValido(ra))
+			{
+				for (String dadosAluno: alunos) {
+					Aluno aluno = new Aluno();
+					String[] dados = dadosAluno.split(";");
+					if (dados.length == 2)
+					{
+						aluno.setRa(dados[0]);
+						aluno.setNome(dados[1]);
+	
+						if (aluno.getRa().equals(ra))
+							return aluno;
+					}
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
 	
 	public Grupo buscarGrupo(String[] grupos, String cod)
 	{
-		
 		if (codValido(cod))
 		{
 			String arqAluno = getArqDiretorio("Alunos.csv");
@@ -125,33 +130,7 @@ public class ManterGrupo {
 		return (ra.length() == 13);
 	}
 	
-	public void selecaoArea1() throws Exception
-	{
-		
-	}
-	
-	public void selecaoArea(Area area, Grupo grupo) throws IOException
-	{
-		File file= new File("C:\\Users\\T-GAMER\\OneDrive - Fatec Centro Paula Souza\\Desktop 1\\Coisinhas\\codigos\\Java\\Gestor-de-TCCs_Estrutura-de-Dados", "Areas.csv");
-		if (file.exists() && file.isFile()){
-			FileInputStream abreFluxoArq = new FileInputStream(file);
-			InputStreamReader leitorFluxo = new InputStreamReader(abreFluxoArq);
-			BufferedReader buffer = new BufferedReader(leitorFluxo);
-			String linha= buffer.readLine();
-			while (linha != null){
-				if (linha.contains(area.getNome())){
-					String[] vet= linha.split(";");
-					area.setNome(vet[1]);
-//					grupo.setArea(area.getNome());  // Não está pronto
-				}
-			}
-		}
-		else {
-			throw new IOException("Arquivo Areas.csv Inválido!");
-		}
-	}
-	
-	public void salvarDados(Grupo grupo)
+	public void salvarGrupo(Grupo grupo)
 	{
 		try {
 			String arqDiretorio = getArqDiretorio("Grupos.csv");
@@ -181,6 +160,40 @@ public class ManterGrupo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void excluirGrupo(Grupo grupo)
+	{
+		String arqDiretorio = getArqDiretorio("Grupos.csv");
+		File arq = new File(arqDiretorio);
+		String content = "";
+		try {
+			if (arq.exists() && arq.isFile())
+			{
+				String arqContent = getArq(arqDiretorio);
+				StringTokenizer stContent = new StringTokenizer(arqContent, "\n");
+				
+				while(stContent.hasMoreTokens())
+				{
+					String auxContent = stContent.nextToken() + "\n";
+					String test = auxContent.substring(0, 4);
+					if (auxContent.substring(0, 4).equals(Integer.toString(grupo.getCodigo())))
+						auxContent = "";
+					
+					content += auxContent;
+				}
+				
+				FileWriter write = new FileWriter(arq);
+				PrintWriter arqWriter = new PrintWriter(write);
+				
+				arqWriter.write(content);
+				arqWriter.close();
+				write.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }
