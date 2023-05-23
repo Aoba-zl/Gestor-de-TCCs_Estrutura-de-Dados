@@ -176,7 +176,6 @@ public class ManterGrupo {
 				while(stContent.hasMoreTokens())
 				{
 					String auxContent = stContent.nextToken() + "\n";
-					String test = auxContent.substring(0, 4);
 					if (auxContent.substring(0, 4).equals(Integer.toString(grupo.getCodigo())))
 						auxContent = "";
 					
