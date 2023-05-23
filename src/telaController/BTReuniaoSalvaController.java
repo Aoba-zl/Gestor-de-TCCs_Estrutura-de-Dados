@@ -148,7 +148,7 @@ public class BTReuniaoSalvaController implements ActionListener {
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reuniões.csv");
+            File file= new File(caminhoArquivo, "Reunioes.csv");
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -164,7 +164,7 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             ListObject lista= new ListObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 0; i < tamanho; i++) {
+            for (int i = 1; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
