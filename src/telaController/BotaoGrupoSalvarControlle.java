@@ -57,7 +57,7 @@ public class BotaoGrupoSalvarControlle implements ActionListener
 		
 		area.setNome(this.area.getSelectedItem().toString());
 		area.setSubArea(this.subArea.getSelectedItem().toString());
-		grupo.setCodigo(cod.getText());
+		grupo.setCodigo(Integer.parseInt(cod.getText()));
 		grupo.setTema(tema.getText());
 		grupo.setAlunos(aluno);
 		grupo.setArea(area);

@@ -2,19 +2,11 @@ package model;
 
 public class Reuniao
 {
-	private String data;
-	private String assunto;
-	private String passos;
-	private int codigoGrupo;
-	private boolean status;
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+	public String data;
+	public String assunto;
+	public String passos;
+	public int codigoGrupo;
+	public boolean status;
 
 	public String getData() {
 		return data;
@@ -46,5 +38,13 @@ public class Reuniao
 
 	public void setCodigoGrupo(int codigoGrupo) {
 		this.codigoGrupo = codigoGrupo;
+	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

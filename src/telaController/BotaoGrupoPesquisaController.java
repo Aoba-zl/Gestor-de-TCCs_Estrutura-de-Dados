@@ -97,10 +97,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 				else if (conf == 1)
 				{
 					Grupo grupo = new Grupo();
-					grupo.setCodigo(pesq.getText());
-					
-//					grupo = manterGrupo;
-					
+					grupo.setCodigo(Integer.parseInt(pesq.getText()));
 					System.out.println(grupo);
 				}
 		} catch (Exception e)

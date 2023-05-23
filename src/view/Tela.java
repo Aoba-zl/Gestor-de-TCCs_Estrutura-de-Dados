@@ -5,10 +5,48 @@ import telaController.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+import javax.swing.text.NumberFormatter;
+
+import br.fatec.FileLibrary.FileLibrary;
+import br.fatec.ListString.ListString;
+import telaController.*;
+
+import javax.swing.JTextField;
+import javax.swing.JTabbedPane;
+import java.awt.FlowLayout;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import java.awt.Color;
+import javax.swing.UIManager;
+import java.awt.Font;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.StringTokenizer;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.sql.Date;
+
+import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.ImageIcon;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
 
 public class Tela extends JFrame {
 
@@ -45,7 +83,7 @@ public class Tela extends JFrame {
 		JPanel pAluno = new JPanel();
 		tabbedPane.addTab("Alunos", null, pAluno, null);
 		pAluno.setLayout(null);
-		
+
 		JPanel pGrupo = new JPanel();
 		tabbedPane.addTab("Grupos", null, pGrupo, null);
 		pGrupo.setLayout(new BorderLayout(0, 0));
@@ -345,6 +383,7 @@ public class Tela extends JFrame {
 				}
 			}
 		});
+		
 		ftCodGrupoReuniao.setBounds(192, 66, 119, 20);
 		pMarcaReuniao.add(ftCodGrupoReuniao);
 		
@@ -559,7 +598,11 @@ public class Tela extends JFrame {
 		BotaoGrupoSalvarControlle sGrupoCont = new BotaoGrupoSalvarControlle(tfRA_1, tfRA_2, tfRA_3, tfRA_4, tfCodGrupo, tfTema, cbArea, cbSubArea);
 		ComboBoxGrupoController cbAreaCont = new ComboBoxGrupoController(cbArea, cbSubArea, area, listaSubArea);
 		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensageReuniao);
 
+		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
 		btnBuscarRA3.addActionListener(bRaCont3);
