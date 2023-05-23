@@ -86,6 +86,21 @@ public class BotaoGrupoSalvarController implements ActionListener
 			this.mensagem.setText("Digite pelo menos 1 RA!");
 			return;
 		}
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				if(this.RA[j].getText().equals(""))
+				{
+					break;
+				}
+				if(i != j && this.RA[i].getText().equals(this.RA[j].getText()))
+				{
+					this.mensagem.setText("Um RA não pode ser igual ao outro!");
+					return;
+				}
+			}
+		}
 		if (this.subArea.getSelectedItem().equals("") )
 		{
 			this.mensagem.setText("Selecione uma subArea!");
@@ -100,6 +115,11 @@ public class BotaoGrupoSalvarController implements ActionListener
 			+ this.subArea.getSelectedItem().toString().substring(0, 1)))
 		{
 			this.mensagem.setText("<html>Os dois primeiros digitos tem <br>que ser iguais a área e a subárea!");
+			return;
+		}
+		if (this.cod.getText().toString().length() != 4)
+		{
+			this.mensagem.setText("O codigo tem quer 4 digitos.");
 			return;
 		}
 		
