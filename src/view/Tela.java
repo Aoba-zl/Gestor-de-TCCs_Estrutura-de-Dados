@@ -1,57 +1,20 @@
 package view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
-
-import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
 import telaController.*;
 
-import javax.swing.JTextField;
-import javax.swing.JTabbedPane;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.Color;
-import javax.swing.UIManager;
-import java.awt.Font;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.StringTokenizer;
-
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.sql.Date;
-
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ImageIcon;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
 
 public class Tela extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tableGrupoCad;
 	private JTable tableReuniaoMarcada;
-	private JButton btnBuscarAssunto;
 	private ListString[] listaSubArea;
 	
 	public static void main(String[] args) {
@@ -83,12 +46,6 @@ public class Tela extends JFrame {
 		tabbedPane.addTab("Alunos", null, pAluno, null);
 		pAluno.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Dados Aluno");
-		lblNewLabel.setBounds(30, 11, 100, 31);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel.setBackground(UIManager.getColor("Button.disabledShadow"));
-		pAluno.add(lblNewLabel);
-
 		JPanel pGrupo = new JPanel();
 		tabbedPane.addTab("Grupos", null, pGrupo, null);
 		pGrupo.setLayout(new BorderLayout(0, 0));
@@ -422,76 +379,15 @@ public class Tela extends JFrame {
 		lblMensagemReuniao.setBounds(410, 11, 132, 75);
 		pMarcaReuniao.add(lblMensagemReuniao);
 
+		// TODO add passos <
 		JPanel pAddPassos = new JPanel();
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
 		pAddPassos.setLayout(null);
-		
-		JLabel lblDefinirPassos = new JLabel("Definir Passos");
-		lblDefinirPassos.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDefinirPassos.setBackground(Color.WHITE);
-		lblDefinirPassos.setBounds(30, 11, 108, 20);
-		pAddPassos.add(lblDefinirPassos);
-		
-		JLabel lblNewLabel_1_2_5_3 = new JLabel("Código do grupo:");
-		lblNewLabel_1_2_5_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3.setBounds(55, 50, 127, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3);
-		
-		JLabel lblNewLabel_1_2_5_3_1 = new JLabel("Assunto da Reunião:");
-		lblNewLabel_1_2_5_3_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_1.setBounds(55, 81, 127, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3_1);
-		
-		JLabel lblNewLabel_1_2_5_3_2 = new JLabel("Passos:");
-		lblNewLabel_1_2_5_3_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_2.setBounds(55, 112, 61, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3_2);
-		
-		JFormattedTextField ftCodGrupoPassos = new JFormattedTextField();
-		ftCodGrupoPassos.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) 
-			{
-				char i = e.getKeyChar();
-				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
-				{
-					ftCodGrupoPassos.setEditable(true);
-				}
-				else
-				{
-					ftCodGrupoPassos.setEditable(false);
-				}
-			}
-		});
-		ftCodGrupoPassos.setBounds(192, 52, 108, 18);
-		pAddPassos.add(ftCodGrupoPassos);
-		
-		JFormattedTextField ftAssuntoReuniaoPassos = new JFormattedTextField();
-		ftAssuntoReuniaoPassos.setBounds(192, 83, 108, 18);
-		pAddPassos.add(ftAssuntoReuniaoPassos);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(126, 112, 174, 72);
-		pAddPassos.add(scrollPane);
-		
-		JTextArea taPassos = new JTextArea();
-		taPassos.setLineWrap(true);
-		scrollPane.setViewportView(taPassos);
-		
-		JButton btnSalvaPassos = new JButton("Salvar");
-		btnSalvaPassos.setBounds(330, 160, 100, 30);
-		pAddPassos.add(btnSalvaPassos);
-		
-		JButton btnBuscarCodPassos = new JButton("Buscar");
-		btnBuscarCodPassos.setBounds(310, 51, 79, 23);
-		pAddPassos.add(btnBuscarCodPassos);
-		
-		btnBuscarAssunto = new JButton("Buscar");
-		btnBuscarAssunto.setBounds(310, 82, 79, 23);
-		pAddPassos.add(btnBuscarAssunto);
-		
+
+		TelaPassos telaPassos = new TelaPassos();
+		telaPassos.setElements(tabbedPane_3, pAddPassos );
+
+		// TODO add passos >
 		JPanel pReuniaoMarcado = new JPanel();
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
 		pReuniaoMarcado.setLayout(null);
