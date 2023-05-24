@@ -8,6 +8,7 @@ public class Grupo
 	public String tema;
 	public Aluno[] alunos;
 	public Area area;
+	public Boolean status;
 
 	public int getCodigo() {
 		return codigo;
@@ -46,5 +47,12 @@ public class Grupo
 		return "Grupo [codigo=" + codigo + ", tema=" + tema + ", alunos=" + Arrays.toString(alunos) + ", area=" + area
 				+ "]";
 	}
-	
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 }

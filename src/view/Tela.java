@@ -414,7 +414,7 @@ public class Tela extends JFrame {
 		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
 		pMarcaReuniao.add(btnBuscarCodReuniao);
 		
-		JLabel lblMensagemReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		JLabel lblMensagemReuniao = new JLabel("");
 		lblMensagemReuniao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensagemReuniao.setBounds(410, 11, 132, 75);
 		pMarcaReuniao.add(lblMensagemReuniao);
@@ -542,10 +542,7 @@ public class Tela extends JFrame {
 		spReuniaoMarcada.setViewportView(tableReuniaoMarcada);
 		tableReuniaoMarcada.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{null, null, null, null}
 			},
 			new String[] {
 				"C\u00F3d. Grupo", "Tema", "Data", "Status"
@@ -554,7 +551,7 @@ public class Tela extends JFrame {
 		tableReuniaoMarcada.setEnabled(false);
 		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
 
-		JLabel lblMensagemReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		JLabel lblMensagemReuniaoMarcada = new JLabel("");
 		lblMensagemReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMensagemReuniaoMarcada.setBounds(411, 0, 132, 75);
 		pReuniaoMarcado.add(lblMensagemReuniaoMarcada);
@@ -615,7 +612,9 @@ public class Tela extends JFrame {
 
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMessageReuniaoMarcada, tableReuniaoMarcada);
 
+		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
 		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
 		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 		btnBuscarRA1.addActionListener(bRaCont1);

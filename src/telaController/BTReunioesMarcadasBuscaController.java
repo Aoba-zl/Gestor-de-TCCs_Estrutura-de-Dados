@@ -1,11 +1,14 @@
 package telaController;
 
 import br.fatec.ListObject.ListObject;
+import br.fatec.StackObject.StackObject;
 import controller.ManterReunião;
 import model.Grupo;
 import model.Reuniao;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,23 +16,22 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-public class BTReuniaoSalvaController implements ActionListener {
+public class BTReunioesMarcadasBuscaController implements ActionListener {
+
 
     private JFormattedTextField cod;
-    private JFormattedTextField assunto;
-    private JFormattedTextField data;
     private JLabel mensagem;
+    private JTable tabela;
 
 
-    public BTReuniaoSalvaController(JFormattedTextField cod, JFormattedTextField assunto, JFormattedTextField data, JLabel mensagem) {
+    public BTReunioesMarcadasBuscaController(JFormattedTextField cod, JLabel mensagem, JTable tabela) {
         this.cod = cod;
-        this.assunto = assunto;
-        this.data = data;
         this.mensagem = mensagem;
+        this.tabela = tabela;
     }
 
-    public void actionPerformed(ActionEvent e){
-
+    @Override
+    public void actionPerformed(ActionEvent e) {
         if (!validaCampoCod(cod)){
             mensagem.setForeground(Color.RED);
             return;
@@ -37,72 +39,83 @@ public class BTReuniaoSalvaController implements ActionListener {
 
 
         try {
-            mensagem.setForeground(Color.black);
+            int codigo= Integer.parseInt(cod.getText());
+            Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
+//            grupo.setStatus(false);
 
-            Grupo grupo;
-            Reuniao reuniao= new Reuniao();
 
-            reuniao.setCodigoGrupo(Integer.parseInt(cod.getText()));
-            reuniao.setAssunto(assunto.getText());
-            reuniao.setData(data.getText());
-            reuniao.setStatus(false);
-
-            grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), reuniao.getCodigoGrupo());
-
-            File file= new File(getArquivoReunioes(), "Reuniões.csv");
-
-            boolean reuniaoExiste;
-            if (grupo == null){
+            if (grupo == null) {
                 mensagem.setForeground(Color.RED);
                 mensagem.setText("<html> Grupo não encontrado no Sistema" +
                         "<br> Por favor, digite novamente." +
                         "</html>");
-            } else if (grupo.getStatus()) {
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Este grupo já concluiu o trabalho" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            } else {
-                mensagem.setForeground(Color.black);
-                if (!validaCampoAssunto(assunto)){
-                    return;
-                }
-                if (!validaCampoData(data)){
-                    return;
-                }
-                if (file.exists()){
-                    Reuniao reuniaoVerifica= ManterReunião.validaReuniao(getReunioes(), reuniao.getCodigoGrupo());
-                    if (reuniaoVerifica != null && !reuniaoVerifica.isStatus()){
-
-                        mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
-                                "<br> Clique em \"Salvar\" para alterar os dados" +
-                                "</html>");
-                        assunto.setText(reuniao.getAssunto());
-                        data.setText(reuniao.getData());
-                        reuniaoExiste= true;
-                        ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
-                        mensagem.setText("<html> Reunião atualizada <html>");
-                    }
-                    else {
-                        reuniaoExiste= false;
-                        ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
-                        mensagem.setText("<html> Reunião gerada <html>");
-                    }
-                }
-                else {
-                    ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), false);
-                    mensagem.setText("<html> Reunião gerada <html>");
-                }
-                cod.setText("");
-                assunto.setText("");
-                data.setText("");
             }
+            else {
+                mensagem.setForeground(Color.black);
+                StackObject pilha= getReunioes(codigo);
+                if (pilha.size() != 0 && !grupo.getStatus()){
+                    mensagem.setText("<html> Ultima reunião Marcada/Concluída: ");
+                    Reuniao reuniao= (Reuniao) pilha.pop();
+
+                    String[] vetor= new String[4];
+                    vetor[0]= String.valueOf(reuniao.getCodigoGrupo());
+                    vetor[1]= reuniao.getAssunto();
+                    vetor[2]= reuniao.getData();
+                    if (!reuniao.isStatus()){
+                        vetor[3]= "não concluida";
+                    }
+                    tabela.setModel(new DefaultTableModel(new Object[][] {{vetor[0], vetor[1], vetor[2], vetor[3]},}, new String[] {"Grupo","Tema","Data","Status"} ));
+
+                }
+                else if (pilha.size() != 0) {
+                    mensagem.setText("<html> Este grupo concluiu seu trabalho" +
+                            "<br> Todas as reuniões realizadas: " +
+                            "</html>");
+                    int tamanho= pilha.size();
+                    Object dado= 0;
+                    Object[][] reunioes= new Object[tamanho][4];
+                    for (int x=0; x<tamanho; x++){
+                        Reuniao reuniao= (Reuniao) pilha.pop();
+                        for (int y=0; y<4; y++){
+                            if (y == 0){
+                                dado= reuniao.getCodigoGrupo();
+                            }
+                            if (y == 1) {
+                                dado= reuniao.getAssunto();
+                            }
+                            if (y == 2){
+                                dado= reuniao.getData();
+                            }
+                            if (y == 3){
+                                dado= reuniao.isStatus();
+                            }
+                            reunioes[x][y]= dado;
+                        }
+                    }
+                    String[] colunas= {"Grupo","Tema","Data","Status"};
+                    tabela.setModel(new DefaultTableModel(reunioes, colunas));
+                } else {
+                    mensagem.setForeground(Color.RED);
+                    mensagem.setText("<html> Este grupo não possuí nenhuma reunião marcada" +
+                            "<br> Por favor, digite novamente." +
+                            "</html>");
+                }
+            }
+
+
+
+
+
+
+
+
 
 
 
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
+
     }
 
     private boolean validaCampoCod(JFormattedTextField campo){
@@ -118,27 +131,6 @@ public class BTReuniaoSalvaController implements ActionListener {
         return (campo.getText().length() == 4);
     }
 
-    private boolean validaCampoAssunto(JFormattedTextField campo){
-        if (campo.getText().length() == 0){
-            mensagem.setText("Digite o assunto");
-        }
-        return (campo.getText().length() > 0);
-    }
-
-    private boolean validaCampoData(JFormattedTextField campo){
-        if (campo.getText().length() == 0){
-            mensagem.setText("Digite a data");
-        }
-        else if (campo.getText().length() < 10){
-            mensagem.setText("Data inválida");
-        }
-        else if(campo.getText().length() > 10){
-            mensagem.setText("Data inválida");
-        }
-        return (campo.getText().length() == 10);
-    }
-
-
     private String getArquivoReunioes(){
         String caminhoRaiz, caminhoArquivo;
 
@@ -148,11 +140,11 @@ public class BTReuniaoSalvaController implements ActionListener {
         return caminhoRaiz;
     }
 
-    public ListObject getReunioes() throws Exception{
+    public StackObject getReunioes(int codigo) throws Exception{
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reunioes.csv");
+            File file= new File(caminhoArquivo, "Reuniões.csv");
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -166,29 +158,27 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             String[] reuniaoVet= content.toString().split("\n");
 
-            ListObject lista= new ListObject();
+            StackObject pilha= new StackObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 1; i < tamanho; i++) {
+            for (int i = 0; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
                 reuniao.setAssunto(dados[1]);
                 reuniao.setData(dados[2]);
                 reuniao.setStatus(Boolean.parseBoolean(dados[3]));
-                if (lista.isEmpty()){
-                    lista.addFirst(reuniao);
-                }
-                else {
-                    lista.addLast(reuniao);
+                if (reuniao.getCodigoGrupo() == codigo){
+                    pilha.push(reuniao);
                 }
             }
 
-            return lista;
+            return pilha;
         }
         else {
             return null;
         }
     }
+
 
     private String getArquivoGrupos(){
         String caminhoRaiz, caminhoArquivo;
@@ -204,6 +194,7 @@ public class BTReuniaoSalvaController implements ActionListener {
         String arquivoGrupos= getArquivoGrupos();
         File arq = new File(arquivoGrupos);
         if (arq.exists() && arq.isFile()) {
+
 
             FileReader lerFlux = new FileReader(arq);
             BufferedReader buffer = new BufferedReader(lerFlux);
@@ -236,3 +227,4 @@ public class BTReuniaoSalvaController implements ActionListener {
 
     }
 }
+
