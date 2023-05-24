@@ -136,20 +136,26 @@ public class ManterGrupo {
 			String arqDiretorio = getArqDiretorio("Grupos.csv");
 			File arq = new File(arqDiretorio);
 			boolean existe = false;
-			if (!arq.exists())
-				existe = true;
 			
 			String arqContent = getArq(arqDiretorio);
 			Aluno[] alunos = grupo.getAlunos();
 			int tamAlunos = alunos.length;
-			String content = grupo.codigo + ";" + grupo.tema;
-			
+			String content = "";
+			if (!arq.exists())
+				existe = true;
+				content = "Código;Tema;Intergrante_1;Intergrante_2;Intergrante_3;Intergrante_4\n";
+				
+			content += grupo.codigo + ";" + grupo.tema;
 			for (int i = 0; i < tamAlunos; i++)
 			{
 				content += ";" + alunos[i].getRa();
 			}
 			
-			content = arqContent + content;
+			if (!existe)
+			{
+				content = arqContent + content;				
+			}
+			
 			
 			FileWriter write = new FileWriter(arq, existe);
 			PrintWriter arqWriter = new PrintWriter(write);
