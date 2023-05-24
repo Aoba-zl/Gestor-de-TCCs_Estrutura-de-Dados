@@ -29,7 +29,7 @@ public class ManterGrupo {
             lerFlux.close();
 			return content.toString();
 		}
-		return null;
+		return "false";
 	}
 	
     public String getArqDiretorio(String nomeArq)
@@ -142,8 +142,11 @@ public class ManterGrupo {
 			int tamAlunos = alunos.length;
 			String content = "";
 			if (!arq.exists())
+			{
 				existe = true;
 				content = "Código;Tema;Intergrante_1;Intergrante_2;Intergrante_3;Intergrante_4\n";
+			}
+			
 				
 			content += grupo.codigo + ";" + grupo.tema;
 			for (int i = 0; i < tamAlunos; i++)
@@ -155,7 +158,6 @@ public class ManterGrupo {
 			{
 				content = arqContent + content;				
 			}
-			
 			
 			FileWriter write = new FileWriter(arq, existe);
 			PrintWriter arqWriter = new PrintWriter(write);
