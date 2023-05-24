@@ -36,6 +36,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 	private JComboBox<String> cbSubArea;
 	private JButton btnSalvaAlteraGrupos;
 	private JButton btnExcluirGrupos;
+	private JLabel[] lblMensagemRAGrupo;
 	
 	public BotaoGrupoPesquisaController(JFormattedTextField pesq, JLabel mensagemGrupo, int conf)
 	{
@@ -57,7 +58,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.listaSubArea = subArea;
 	}
 	
-	public void setComand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
+	public void setCommand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos, JLabel[] lblMensagemRAGrupo)
 	{
 		this.RA = RA;
 		this.ftTema = ftTema;
@@ -66,6 +67,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.mensagemGrupoCad = mensagemGrupoCad;
 		this.btnSalvaAlteraGrupos = btnSalvaAlteraGrupos;
 		this.btnExcluirGrupos = btnExcluirGrupos;
+		this.lblMensagemRAGrupo = lblMensagemRAGrupo;
 	}
 	
 	public int hashCodeArea(String area)
@@ -148,9 +150,13 @@ public class BotaoGrupoPesquisaController implements ActionListener
 						{
 							RA[i].setText("");
 						}
+			        	for (JLabel msg : lblMensagemRAGrupo)
+							msg.setText("");
 			        	ftTema.setText("");
 			        	cbArea.setSelectedIndex(0);
 			        	cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+			        	cbSubArea.setEnabled(false);
+			        	pesq.setText(cod);
 			        	return;
 					}
 					
@@ -166,13 +172,15 @@ public class BotaoGrupoPesquisaController implements ActionListener
 					Aluno[] aluno = grupo.getAlunos();
 					int tamAluno = aluno.length;
 					for (int i = 0; i < tamAluno; i++)
-					{
 						RA[i].setText(aluno[i].getRa());
-					}
+					
 					for (int i = 3; i >= tamAluno; i--)
-					{
 						RA[i].setText("");
-					}
+					
+					for (JLabel msg : lblMensagemRAGrupo)
+						msg.setText("");
+						
+					
 					ftTema.setText(grupo.getTema());
 					cbArea.setSelectedIndex(hash);
 					cbSubArea.setSelectedIndex(hashCodeSubArea(cod));
