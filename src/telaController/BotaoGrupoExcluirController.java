@@ -39,7 +39,7 @@ public class BotaoGrupoExcluirController implements ActionListener
 		this.mensagem = mensagem;
 	}
 	
-	public void command(JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
+	public void setCommands(JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
 	{
 		this.btnExcluirGrupos = btnExcluirGrupos;
 		this.btnSalvaAlteraGrupos = btnSalvaAlteraGrupos;
