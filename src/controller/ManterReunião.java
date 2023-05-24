@@ -18,6 +18,8 @@ public class ManterReunião {
 			if (Integer.toString(codigo).equals(dados[0])){
 				Grupo grupo= new Grupo();
 				grupo.setCodigo(Integer.parseInt(dados[0]));
+				boolean statusGrupo = !dados[6].contains("não") && !dados[6].contains("nao");
+				grupo.setStatus(statusGrupo);
 				return grupo;
 			}
 		}
@@ -48,7 +50,8 @@ public class ManterReunião {
 				}
 				FileWriter fileWriter= new FileWriter(arq, existe);
 				PrintWriter print= new PrintWriter(fileWriter);
-				print.write(reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus() +"\n");
+				String reuniaoStatus = reuniao.isStatus()?"Concluída": "não Concluída";
+				print.write(reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniaoStatus +"\n");
 				print.flush();
 				print.close();
 				fileWriter.close();
@@ -74,7 +77,8 @@ public class ManterReunião {
 				content.append(linha).append("\n");
 			}
 			else {
-				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus();;
+				String reuniaoStatus = reuniao.isStatus()?"Concluída": "não Concluída";
+				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniaoStatus;;
 				content.append(linha).append("\n");
 			}
 			linha= buffer.readLine();

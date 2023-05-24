@@ -69,8 +69,7 @@ public class PassosBtnSalvarPassos implements ActionListener
 
             validaCampos();
             ListObject reunioesGrupo = getReuinioesGrupo(valorDoCampoCodigo, reunioes);
-            manterPassos.salvarDados(valorDoCampoCodigo, valorDoCampoAssunto,
-                    valorDoCampoPassos, valorDoCheckBox, reunioesGrupo);
+            manterPassos.salvarDados(valorDoCampoPassos, valorDoCheckBox, reunioesGrupo);
             System.out.println(valorDoCampoCodigo);
             System.out.println(valorDoCampoAssunto);
             System.out.println(valorDoCheckBox);

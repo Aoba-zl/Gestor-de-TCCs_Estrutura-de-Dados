@@ -174,7 +174,8 @@ public class BTReuniaoSalvaController implements ActionListener {
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
                 reuniao.setAssunto(dados[1]);
                 reuniao.setData(dados[2]);
-                reuniao.setStatus(Boolean.parseBoolean(dados[3]));
+                boolean statusReuniao = !dados[3].contains("não") && !dados[3].contains("nao");
+                reuniao.setStatus(statusReuniao);
                 if (lista.isEmpty()){
                     lista.addFirst(reuniao);
                 }

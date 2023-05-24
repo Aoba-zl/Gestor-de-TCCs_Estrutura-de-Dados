@@ -1,6 +1,7 @@
 package controller;
 
 import br.fatec.ListObject.ListObject;
+import model.Grupo;
 import model.Reuniao;
 
 import java.io.*;
@@ -69,22 +70,34 @@ public class ManterPassos {
 		return reuniao;
 	}
 
-	public void salvarDados(String strCodigo, String assuntoReuniao, String passos,
-							boolean trabalhoFinalizado, ListObject reunioes)
+	public void salvarDados(String passos, boolean trabalhoFinalizado, ListObject reunioes)
 			throws Exception
 	{
 		Reuniao ultimaReuinaoFeita = (Reuniao) reunioes.get(0);
-		String data = ultimaReuinaoFeita.getData().replace("/", "-");
+		ultimaReuinaoFeita.setStatus(true);
+
+		alterarArquivoReunioes(ultimaReuinaoFeita);
+		if (trabalhoFinalizado)
+			alterarArquivoGrupos(ultimaReuinaoFeita);
+		criarArquivoPassos(ultimaReuinaoFeita, trabalhoFinalizado, passos);
+	}
+
+	private void criarArquivoPassos(Reuniao reuniao, boolean trabalhoFinalizado, String passos) throws IOException
+	{
+		String data = reuniao.getData().replace("/", "-");
+		int codigo = reuniao.getCodigoGrupo();
+		String assunto = reuniao.getAssunto();
+
 		String divisor = " - ";
-		String tccConcluido = trabalhoFinalizado? "TCC Concluido" : "";
-		String nomeArquivo = "Grupo: " + strCodigo + divisor + data + divisor +
-				assuntoReuniao + ".csv";
+		String tccConcluido = trabalhoFinalizado ? "TCC Concluido" : "";
+		String nomeArquivo = "Grupo: " + codigo + divisor + data + divisor +
+				assunto + ".csv";
 		if (!tccConcluido.isEmpty())
 			nomeArquivo += divisor + tccConcluido;
 		String caminhoArquivo = System.getProperty("user.home") + File.separator +
 				"TEMP" + File.separator;
 		divisor = ";";
-		String primeiraLinha = strCodigo + divisor + data + divisor + assuntoReuniao;
+		String primeiraLinha = codigo + divisor + data + divisor + assunto;
 		if (!tccConcluido.isEmpty())
 			primeiraLinha += divisor + tccConcluido;
 
@@ -100,6 +113,113 @@ public class ManterPassos {
 		fileWriter.flush();
 		fileWriter.close();
 		write.close();
+	}
+
+	private void alterarArquivoReunioes(Reuniao reuniao) throws Exception
+	{
+		/*
+		String caminhoArquivo = System.getProperty("user.home") + File.separator +
+				"TEMP" + File.separator + "Reunioes.csv";
+		File readFile = new File(caminhoArquivo);
+		FileReader read = new FileReader(readFile);
+		BufferedReader buffer = new BufferedReader(read);
+
+		String line;
+		ListObject linhas = new ListObject();
+
+		line = buffer.readLine();
+		while (line != null)
+		{
+			linhas.addFirst(line);
+			line = buffer.readLine();
+		}
+
+		int size = linhas.size();
+		StringBuilder content = new StringBuilder();
+		for (int i = 0; i < size; i++)
+		{
+			line = (String) linhas.get(i);
+			String[] dados = line.split(";");
+			StringBuilder novaLinha = new StringBuilder();
+			if (line.contains(Integer.toString(reuniao.getCodigoGrupo())))
+			{
+				for (String dado : dados)
+				{
+					if (dado.contains("nao")||dado.contains("não"))
+						dado = "Concluído";
+					novaLinha.append(dado).append(";");
+				}
+				line = novaLinha.toString();
+			}
+		}
+		//TODO gravar corretamente o arquivo
+		while (size > 0)
+		{
+			line = (String) linhas.get(size - 1);
+			content.append(line).append("\n");
+		}
+
+		String caminho= System.getProperty("user.home") + File.separator +
+				"TEMP" + File.separator;
+		String arquivo = "Reunioes.csv";
+		File file = new File(caminho, arquivo);
+		FileWriter write = new FileWriter(file);
+		PrintWriter fileWriter = new PrintWriter(write);
+
+		fileWriter.write(content.toString());
+		fileWriter.flush();
+		fileWriter.close();
+		write.close();
+		 */
+	}
+
+	private void alterarArquivoGrupos(Reuniao reuniao) throws IOException
+	{
+		String caminhoArquivo = System.getProperty("user.home") + File.separator +
+				"TEMP" + File.separator + "Grupos.csv";
+		File readFile = new File(caminhoArquivo);
+		FileReader read = new FileReader(readFile);
+		BufferedReader buffer = new BufferedReader(read);
+
+		String line;
+		StringBuilder content = new StringBuilder();
+
+		line = buffer.readLine();
+		content.append(line).append("\n");
+		line = buffer.readLine();
+		while (line != null)
+		{
+			String[] dados = line.split(";");
+			StringBuilder novaLinha = new StringBuilder();
+			int codigoAux = Integer.parseInt(dados[0]);
+			if (codigoAux == reuniao.getCodigoGrupo())
+			{
+				for (String dado : dados)
+				{
+					if (dado.contains("nao")||dado.contains("não"))
+						dado = "Concluído";
+					novaLinha.append(dado).append(";");
+				}
+				line = novaLinha.toString();
+			}
+			System.out.println(line);
+			content.append(line).append("\n");
+			line = buffer.readLine();
+
+			String caminho= System.getProperty("user.home") + File.separator +
+					"TEMP" + File.separator;
+			String arquivo = "Grupos.csv";
+			File file = new File(caminho, arquivo);
+			FileWriter write = new FileWriter(file);
+			PrintWriter fileWriter = new PrintWriter(write);
+
+			fileWriter.write(content.toString());
+			fileWriter.flush();
+			fileWriter.close();
+			write.close();
+		}
+
+
 	}
 
 }
