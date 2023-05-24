@@ -628,9 +628,6 @@ public class Tela extends JFrame {
 		bExGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 
 		btnBuscarRA1.addActionListener(bRaCont1); //Grupo RA
-		bCodCont.setComand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad, btnSalvaAlteraGrupos, btnExcluirGrupos);
-		bSGrupoCont.commands(btnSalvaAlteraGrupos, btnExcluirGrupos);
-		bExGrupoCont.command(btnSalvaAlteraGrupos, btnExcluirGrupos);
 
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
