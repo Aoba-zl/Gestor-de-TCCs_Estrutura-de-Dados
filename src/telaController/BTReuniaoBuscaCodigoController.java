@@ -50,7 +50,12 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                         "<br> Por favor, digite novamente." +
                         "</html>");
             }
-            else if (reuniao != null && !reuniao.isStatus()){
+            else if (grupo.getStatus()) {
+                mensagem.setForeground(Color.RED);
+                mensagem.setText("<html> Este grupo já concluiu o trabalho" +
+                        "<br> Por favor, digite novamente." +
+                        "</html>");
+            } else if (reuniao != null && !reuniao.isStatus()){
                 mensagem.setForeground(Color.black);
                 mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
                         "<br> Clique em \"Salvar\" para alterar os dados." +

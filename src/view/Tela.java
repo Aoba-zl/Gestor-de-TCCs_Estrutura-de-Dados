@@ -483,7 +483,7 @@ public class Tela extends JFrame {
 		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
 		pMarcaReuniao.add(btnBuscarCodReuniao);
 		
-		JLabel lblMessageReuniao = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		JLabel lblMessageReuniao = new JLabel("");
 		lblMessageReuniao.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessageReuniao.setBounds(410, 11, 132, 75);
 		pMarcaReuniao.add(lblMessageReuniao);
@@ -591,10 +591,7 @@ public class Tela extends JFrame {
 		spReuniaoMarcada.setViewportView(tableReuniaoMarcada);
 		tableReuniaoMarcada.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{null, null, null, null}
 			},
 			new String[] {
 				"C\u00F3d. Grupo", "Tema", "Data", "Status"
@@ -603,7 +600,7 @@ public class Tela extends JFrame {
 		tableReuniaoMarcada.setEnabled(false);
 		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
 		
-		JLabel lblMessageReuniaoMarcada = new JLabel("aaaaaaaaaaaaaaaaaaaaaaaaaa");
+		JLabel lblMessageReuniaoMarcada = new JLabel("");
 		lblMessageReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMessageReuniaoMarcada.setBounds(411, 0, 132, 75);
 		pReuniaoMarcado.add(lblMessageReuniaoMarcada);
@@ -650,7 +647,9 @@ public class Tela extends JFrame {
 		ComboBoxGrupoController cbAreaConsultCont = new ComboBoxGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMessageReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMessageReuniao);
+		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMessageReuniaoMarcada, tableReuniaoMarcada);
 
+		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
 		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
 		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 		btnBuscarRA1.addActionListener(bRaCont1);
