@@ -261,6 +261,7 @@ public class Tela extends JFrame {
 		pCadGrupo.add(cbArea);
 		
 		JComboBox<String> cbSubArea = new JComboBox<String>();
+		cbSubArea.setEnabled(false);
 		cbSubArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubArea.setBounds(341, 133, 213, 20);
 		pCadGrupo.add(cbSubArea);
@@ -319,12 +320,14 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(lblNewLabel_1_2_4_2_1_1);
 		
 		JComboBox<String> cbSubAreaConsulta = new JComboBox<String>();
+		cbSubAreaConsulta.setEnabled(false);
 		cbSubAreaConsulta.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
 		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
 		JButton btnPesquisarGrupos = new JButton("Pesquisar");
 		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
+		btnPesquisarGrupos.setEnabled(false);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
 		JScrollPane spGrupoCad = new JScrollPane();
@@ -334,9 +337,9 @@ public class Tela extends JFrame {
 		
 		tableGrupoCad = new JTable();
 		spGrupoCad.setViewportView(tableGrupoCad);
+		tableGrupoCad.setEnabled(false);
 		tableGrupoCad.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
+			new Object[0][0] ,
 			new String[] {
 				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 			}
@@ -585,28 +588,46 @@ public class Tela extends JFrame {
 		lblMessageCodGrupo.setBounds(442, 57, 23, 20);
 		pCadGrupo.add(lblMessageCodGrupo);
 		
-		JLabel lblMensagemGrupoCad = new JLabel("");
-		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemGrupoCad.setBounds(30, 197, 192, 48);
-		pCadGrupo.add(lblMensagemGrupoCad);
-
+		JLabel lblMensagemGrupo = new JLabel("");
+		lblMensagemGrupo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemGrupo.setBounds(30, 197, 192, 48);
+		pCadGrupo.add(lblMensagemGrupo);
+		
 		JButton btnExcluirGrupos = new JButton("Excluir");
 		btnExcluirGrupos.setBounds(329, 217, 100, 30);
 		btnExcluirGrupos.setVisible(false);
 		pCadGrupo.add(btnExcluirGrupos);
 
+		JLabel lblMensagemGrupoCad = new JLabel("");
+		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensagemGrupoCad.setBounds(322, 205, 182, 38);
+		pConsultarGrupos.add(lblMensagemGrupoCad);
+
+		JLabel[] lblMensagemRAGrupo = {lblMensagemRA1Grupo, lblMensagemRA2Grupo, lblMensagemRA3Grupo, lblMensagemRA4Grupo};
 		JFormattedTextField[] RA = {ftRA_1, ftRA_2, ftRA_3, ftRA_4};
-		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(ftRA_1, lblMensagemRA1Grupo, 0);
+		BotaoGrupoPesquisaController bRaCont1 = new BotaoGrupoPesquisaController(ftRA_1, lblMensagemRA1Grupo, 0); //Pesquisar RA no grupo
 		BotaoGrupoPesquisaController bRaCont2 = new BotaoGrupoPesquisaController(ftRA_2, lblMensagemRA2Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont3 = new BotaoGrupoPesquisaController(ftRA_3, lblMensagemRA3Grupo, 0);
 		BotaoGrupoPesquisaController bRaCont4 = new BotaoGrupoPesquisaController(ftRA_4, lblMensagemRA4Grupo, 0);
-		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(ftCodGrupo, lblMessageCodGrupo, 1);
-		BotaoGrupoSalvarController bSGrupoCont = new BotaoGrupoSalvarController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad);
-		BotaoGrupoExcluirController bExGrupoCont = new BotaoGrupoExcluirController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad);
-		ComboBoxAreaGrupoController cbAreaCont = new ComboBoxAreaGrupoController(cbArea, cbSubArea, area, listaSubArea);
-		ComboBoxSubAreaController cbSubAreaCont = new ComboBoxSubAreaController(cbArea, cbSubArea, ftCodGrupo);
-		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+
+		BotaoGrupoPesquisaController bCodCont = new BotaoGrupoPesquisaController(ftCodGrupo, lblMessageCodGrupo, 1); //Pesquisar se o grupo existe
+
+		BotaoGrupoSalvarController bSGrupoCont = new BotaoGrupoSalvarController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupo); //Salvar grupo e alterar grupo
+		BotaoGrupoExcluirController bExGrupoCont = new BotaoGrupoExcluirController(RA, ftCodGrupo, ftTema, cbArea, cbSubArea, lblMensagemGrupo); //Excluir grupo
+
+		ComboBoxAreaGrupoController cbAreaCont = new ComboBoxAreaGrupoController(cbArea, cbSubArea, area, listaSubArea); //ComboBox Area e SubArea do grupo
+		ComboBoxSubAreaGrupoController cbSubAreaCont = new ComboBoxSubAreaGrupoController(cbArea, cbSubArea, ftCodGrupo);
+
+		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea); //ComboBox Area e SubArea do grupo cadastrado
+		ComboBoxSubAreaConsultaController cbSubAreaConsultaCont = new ComboBoxSubAreaConsultaController(btnPesquisarGrupos);
+		BotaoConsultaGrupoController bConsultCont = new BotaoConsultaGrupoController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad); //Consultar grupos por Area e subArea
+
 		bCodCont.setList(listaSubArea, area);
+		bCodCont.setCommand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
+		bSGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
+		bExGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
+
+		btnBuscarRA1.addActionListener(bRaCont1); //Grupo RA
 		bCodCont.setComand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupoCad, btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bSGrupoCont.commands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bExGrupoCont.command(btnSalvaAlteraGrupos, btnExcluirGrupos);
@@ -622,6 +643,18 @@ public class Tela extends JFrame {
 		btnBuscarRA2.addActionListener(bRaCont2);
 		btnBuscarRA3.addActionListener(bRaCont3);
 		btnBuscarRA4.addActionListener(bRaCont4);
+
+		btnBuscarCodGrupo.addActionListener(bCodCont); //Grupo pesquisar
+
+		btnSalvaAlteraGrupos.addActionListener(bSGrupoCont); //Grupo salvar/alterar
+		btnExcluirGrupos.addActionListener(bExGrupoCont); //grupo excluir
+
+		cbArea.addActionListener(cbAreaCont); //Grupo ComboBox
+		cbSubArea.addActionListener(cbSubAreaCont);
+
+		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
+		cbSubAreaConsulta.addActionListener(cbSubAreaConsultaCont);
+		btnPesquisarGrupos.addActionListener(bConsultCont); //CadGrupo consulta
 		btnBuscarCodGrupo.addActionListener(bCodCont);
 		btnSalvaAlteraGrupos.addActionListener(bSGrupoCont);
 		btnExcluirGrupos.addActionListener(bExGrupoCont);

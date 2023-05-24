@@ -58,5 +58,7 @@ public class ComboBoxAreaGrupoController implements ActionListener
 			}
 		}
 		this.subArea.setModel(new DefaultComboBoxModel<String>(subArea));
+		this.subArea.setEnabled(true);
+		this.subArea.setSelectedIndex(0);
 	}
 }

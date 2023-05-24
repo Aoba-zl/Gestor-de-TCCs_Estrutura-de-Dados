@@ -47,7 +47,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 			alterar();
 	}
 	
-	public void commands(JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
+	public void setCommands(JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos)
 	{
 		this.btnSalvaAlteraGrupos = btnSalvaAlteraGrupos;
 		this.btnExcluirGrupos = btnExcluirGrupos;
@@ -123,11 +123,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 			this.mensagem.setText("O codigo tem quer 4 digitos.");
 			return false;
 		}
-		if (this.cod.getText().toString().length() != 4)
-		{
-			this.mensagem.setText("O codigo tem quer 4 digitos.");
-			return false;
-		}
+		
 		return true;
 	}
 	
@@ -136,15 +132,12 @@ public class BotaoGrupoSalvarController implements ActionListener
 		if (!verificacao())
 			return;
 		
-		
-		
 		if (!this.cod.getText().toString().substring(0, 2).equals(this.area.getSelectedItem().toString().substring(0, 1)
 			+ this.subArea.getSelectedItem().toString().substring(0, 1)))
 		{
 			this.mensagem.setText("<html>Os dois primeiros digitos tem <br>que ser igual a área e a subárea!");
 			return;
 		}
-		
 		
 		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
 		String arqAlunos = manterGrupo.getArqDiretorio("Alunos.csv");
@@ -190,8 +183,6 @@ public class BotaoGrupoSalvarController implements ActionListener
 		Grupo grupo = new Grupo();
 		grupo = setGrupo();	
 		
-		if (!verifica.verificaGrupoExiste(arqGrupo, grupo, this.mensagem))
-			return;
 			
 		if (!verifica.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
 			return;
@@ -206,5 +197,4 @@ public class BotaoGrupoSalvarController implements ActionListener
 	
 	
 	
-
 }

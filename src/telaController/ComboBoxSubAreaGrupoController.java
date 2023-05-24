@@ -9,14 +9,14 @@ import javax.swing.JFormattedTextField;
 
 import controller.ManterGrupo;
 
-public class ComboBoxSubAreaController implements ActionListener
+public class ComboBoxSubAreaGrupoController implements ActionListener
 {
 	private JComboBox<String> area;
 	private JComboBox<String> subArea;
 	private JFormattedTextField cod;
 	private ManterGrupo manterGrupo = new ManterGrupo();
 	
-	public ComboBoxSubAreaController(JComboBox<String> area, JComboBox<String> subArea, JFormattedTextField cod) 
+	public ComboBoxSubAreaGrupoController(JComboBox<String> area, JComboBox<String> subArea, JFormattedTextField cod) 
 	{
 		this.area = area;
 		this.subArea = subArea;
