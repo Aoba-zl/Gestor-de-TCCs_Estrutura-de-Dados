@@ -102,6 +102,11 @@ public class BotaoGrupoSalvarController implements ActionListener
 				}
 			}
 		}
+		if (this.subArea.getSelectedItem().equals("") )
+		{
+			this.mensagem.setText("Selecione uma subArea!");
+			return false;
+		}
 		if (this.tema.getText().equals("") )
 		{
 			this.mensagem.setText("Digite o tema do grupo!");
@@ -131,11 +136,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 		if (!verificacao())
 			return;
 		
-		if (this.subArea.getSelectedItem().equals("") )
-		{
-			this.mensagem.setText("Selecione uma subArea!");
-			return;
-		}
+		
 		
 		if (!this.cod.getText().toString().substring(0, 2).equals(this.area.getSelectedItem().toString().substring(0, 1)
 			+ this.subArea.getSelectedItem().toString().substring(0, 1)))
