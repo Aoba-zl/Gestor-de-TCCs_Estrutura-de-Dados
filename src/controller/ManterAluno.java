@@ -1,9 +1,8 @@
 package controller;
 
-import br.fatec.FileLibrary.FileLibrary;
 import model.Aluno;
 
-import java.io.File;
+import java.io.*;
 
 public class ManterAluno {
 	public Aluno pesquisarAluno(String[] alunos, String ra)
@@ -26,26 +25,72 @@ public class ManterAluno {
 		return null;
 	}
 
-	public void salvarDados(Aluno aluno, String caminhoArquivo, boolean alunoExiste) throws Exception
+	public void salvarDados(Aluno aluno, String caminhoArquivo, boolean alunoExiste,
+							String pathName, String fileName) throws Exception
 	{
-		FileLibrary abreArquivoAluno = new FileLibrary(caminhoArquivo);
-		String conteudoArquivoAluno = abreArquivoAluno.getContentFile();
+		File readFile = new File(caminhoArquivo);
+		if (!readFile .exists())
+			readFile .createNewFile();
+		FileReader read = new FileReader(readFile);
+		BufferedReader buffer = new BufferedReader(read);
+
+		String line;
+		StringBuilder content = new StringBuilder();
+
+		line = buffer.readLine();
+		while (line != null)
+		{
+			content.append(line).append("\n");
+			line = buffer.readLine();
+		}
 		String strAluno = aluno.toString();
+
+		String conteudoArquivoAluno = content.toString();
 		if (!alunoExiste)
 			conteudoArquivoAluno += strAluno + "\n";
 		else
 		{
 			conteudoArquivoAluno = atualizaDados(conteudoArquivoAluno, strAluno, aluno.getRa());
 		}
-		abreArquivoAluno.writeInFile(caminhoArquivo, conteudoArquivoAluno);
+
+		File file = new File(pathName, fileName);
+		FileWriter write = new FileWriter(file);
+		PrintWriter fileWriter = new PrintWriter(write);
+
+		fileWriter.write(conteudoArquivoAluno);
+		fileWriter.flush();
+		fileWriter.close();
+		write.close();
 	}
 
-	public void excluirDadosAluno(Aluno aluno, String caminhoArquivo) throws Exception {
-		FileLibrary abreArquivoAluno = new FileLibrary(caminhoArquivo);
-		String conteudoArquivoAluno = abreArquivoAluno.getContentFile();
+	public void excluirDadosAluno(Aluno aluno, String caminhoArquivo,
+								  String pathName, String fileName) throws Exception {
+		File readFile = new File(caminhoArquivo);
+		if (!readFile .exists())
+			readFile .createNewFile();
+		FileReader read = new FileReader(readFile);
+		BufferedReader buffer = new BufferedReader(read);
+
+		String line;
+		StringBuilder content = new StringBuilder();
+
+		line = buffer.readLine();
+		while (line != null)
+		{
+			content.append(line).append("\n");
+			line = buffer.readLine();
+		}
+		String conteudoArquivoAluno = content.toString();
 
 		conteudoArquivoAluno = removerDado(conteudoArquivoAluno, aluno.getRa());
-		abreArquivoAluno.writeInFile(caminhoArquivo, conteudoArquivoAluno);
+		File writeFile = new File(pathName, fileName);
+		FileWriter write = new FileWriter(writeFile);
+		PrintWriter fileWriter = new PrintWriter(write);
+
+		fileWriter.write(conteudoArquivoAluno);
+		fileWriter.flush();
+		fileWriter.close();
+		write.close();
 	}
 
 	private String atualizaDados(String conteudoArquivoAluno, String strAluno, String raAluno) {

@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.NumberFormatter;
 
-import br.fatec.FileLibrary.FileLibrary;
 import br.fatec.ListString.ListString;
 import telaController.*;
 
