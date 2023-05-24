@@ -505,7 +505,8 @@ public class Tela extends JFrame {
 						ftAssuntoReuniaoPassos, taPassos, btnSalvarPassos);
 		PassosBtnSalvarPassos btnSalvarPassosCtrl =
 				new PassosBtnSalvarPassos(lblMensagemDefinirPassos, ftCodGrupoPassos,
-						ftAssuntoReuniaoPassos, taPassos, checkBoxStatus_Passos);
+						ftAssuntoReuniaoPassos, taPassos, checkBoxStatus_Passos,
+						btnSalvarPassos);
 		btnBuscarCodPassos.addActionListener(btnBuscaGrupo);
 		btnSalvarPassos.addActionListener(btnSalvarPassosCtrl);
 		// TODO add passos >

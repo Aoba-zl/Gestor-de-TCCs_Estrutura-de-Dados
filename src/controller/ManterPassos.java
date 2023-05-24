@@ -1,6 +1,7 @@
 package controller;
 
 import br.fatec.ListObject.ListObject;
+import br.fatec.StackObject.StackObject;
 import model.Grupo;
 import model.Reuniao;
 
@@ -117,51 +118,39 @@ public class ManterPassos {
 
 	private void alterarArquivoReunioes(Reuniao reuniao) throws Exception
 	{
-		/*
-		String caminhoArquivo = System.getProperty("user.home") + File.separator +
-				"TEMP" + File.separator + "Reunioes.csv";
-		File readFile = new File(caminhoArquivo);
+		String caminho= System.getProperty("user.home") + File.separator +
+				"TEMP" + File.separator;
+		String arquivo = "Reunioes.csv";
+		File readFile = new File(caminho+arquivo);
 		FileReader read = new FileReader(readFile);
 		BufferedReader buffer = new BufferedReader(read);
 
 		String line;
-		ListObject linhas = new ListObject();
+		StringBuilder content = new StringBuilder();
+		StackObject pReuioes = new StackObject();
 
 		line = buffer.readLine();
 		while (line != null)
 		{
-			linhas.addFirst(line);
+			pReuioes.push(line);
 			line = buffer.readLine();
 		}
 
-		int size = linhas.size();
-		StringBuilder content = new StringBuilder();
-		for (int i = 0; i < size; i++)
-		{
-			line = (String) linhas.get(i);
-			String[] dados = line.split(";");
-			StringBuilder novaLinha = new StringBuilder();
-			if (line.contains(Integer.toString(reuniao.getCodigoGrupo())))
-			{
-				for (String dado : dados)
-				{
-					if (dado.contains("nao")||dado.contains("não"))
-						dado = "Concluído";
-					novaLinha.append(dado).append(";");
-				}
-				line = novaLinha.toString();
-			}
-		}
-		//TODO gravar corretamente o arquivo
+		int size = pReuioes.size();
+		boolean substitue = true;
 		while (size > 0)
 		{
-			line = (String) linhas.get(size - 1);
-			content.append(line).append("\n");
+			String aux = ((String) pReuioes.pop()).toLowerCase();
+			if (aux.contains(Integer.toString(reuniao.getCodigoGrupo()))&&substitue)
+			{
+				aux = aux.replace("não","");
+				substitue = false;
+			}
+			aux += "\n";
+			content.insert(0, aux);
+			size--;
 		}
 
-		String caminho= System.getProperty("user.home") + File.separator +
-				"TEMP" + File.separator;
-		String arquivo = "Reunioes.csv";
 		File file = new File(caminho, arquivo);
 		FileWriter write = new FileWriter(file);
 		PrintWriter fileWriter = new PrintWriter(write);
@@ -170,7 +159,6 @@ public class ManterPassos {
 		fileWriter.flush();
 		fileWriter.close();
 		write.close();
-		 */
 	}
 
 	private void alterarArquivoGrupos(Reuniao reuniao) throws IOException

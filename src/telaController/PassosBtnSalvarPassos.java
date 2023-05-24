@@ -15,6 +15,7 @@ public class PassosBtnSalvarPassos implements ActionListener
     private final JFormattedTextField campoCodGrupo, campoAssunto;
     private final JTextArea campoPassos;
     private final JCheckBox checkBoxStatus;
+    private final JButton btnSalvarPassos;
     private boolean valorDoCheckBox;
     private String valorDoCampoCodigo, valorDoCampoAssunto, valorDoCampoPassos;
     private ManterPassos manterPassos = new ManterPassos();
@@ -22,13 +23,14 @@ public class PassosBtnSalvarPassos implements ActionListener
 
     public PassosBtnSalvarPassos(JLabel lblMensagem, JFormattedTextField campoCodGrupo,
                                  JFormattedTextField campoAssunto, JTextArea campoPassos,
-                                 JCheckBox checkBoxStatus)
+                                 JCheckBox checkBoxStatus, JButton btnSalvarPassos)
     {
         this.lblMensagem = lblMensagem;
         this.campoCodGrupo = campoCodGrupo;
         this.campoAssunto = campoAssunto;
         this.campoPassos = campoPassos;
         this.checkBoxStatus = checkBoxStatus;
+        this.btnSalvarPassos = btnSalvarPassos;
     }
 
     private String getArquivoReunioes()
@@ -70,9 +72,12 @@ public class PassosBtnSalvarPassos implements ActionListener
             validaCampos();
             ListObject reunioesGrupo = getReuinioesGrupo(valorDoCampoCodigo, reunioes);
             manterPassos.salvarDados(valorDoCampoPassos, valorDoCheckBox, reunioesGrupo);
-            System.out.println(valorDoCampoCodigo);
-            System.out.println(valorDoCampoAssunto);
-            System.out.println(valorDoCheckBox);
+            campoAssunto.setText("");
+            campoPassos.setText("");
+            campoCodGrupo.setText("");
+            checkBoxStatus.setSelected(false);
+            btnSalvarPassos.setEnabled(false);
+            lblMensagem.setText("Passos definidos");
 
         } catch (Exception e) {
             lblMensagem.setText(e.getMessage());
