@@ -35,37 +35,59 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
             return;
         }
 
+
         try {
             mensagem.setForeground(Color.black);
             int codigo= Integer.parseInt(cod.getText());
             ListObject grupos= getGrupos();
 
-            grupo= ManterReunião.pesquisarCodGrupo(grupos, codigo);
-            Reuniao reuniao= ManterReunião.validaReuniao(getReunioes(), codigo);
 
-            if (grupo == null){
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Grupo não encontrado no Sistema" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            }
-            else if (grupo.getStatus()) {
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Este grupo já concluiu o trabalho" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            } else if (reuniao != null && !reuniao.isStatus()){
-                mensagem.setForeground(Color.black);
-                mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
-                        "<br> Clique em \"Salvar\" para alterar os dados." +
-                        "</html>");
-                assunto.setText(reuniao.getAssunto());
-                data.setText(reuniao.getData());
+            File arquivoGrupos= new File(getArquivoGrupos());
+            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+
+            if (arquivoGrupos.exists()){
+                grupo= ManterReunião.pesquisarCodGrupo(grupos, codigo);
+
+                if (arquivoReunioes.exists()){
+                    Reuniao reuniao= ManterReunião.validaReuniao(getReunioes(), codigo);
+
+                    if (grupo == null){
+                        mensagem.setForeground(Color.RED);
+                        mensagem.setText("<html> Grupo não encontrado no Sistema" +
+                                "<br> Por favor, digite novamente." +
+                                "</html>");
+                    }
+                    else if (grupo.getStatus()) {
+                        mensagem.setForeground(Color.RED);
+                        mensagem.setText("<html> Este grupo já concluiu o trabalho" +
+                                "<br> Por favor, digite novamente." +
+                                "</html>");
+                    } else if (reuniao != null && !reuniao.isStatus()){
+                        mensagem.setForeground(Color.black);
+                        mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
+                                "<br> Clique em \"Salvar\" para alterar os dados." +
+                                "</html>");
+                        assunto.setText(reuniao.getAssunto());
+                        data.setText(reuniao.getData());
+                    }
+                    else {
+
+                        mensagem.setForeground(Color.black);
+                        mensagem.setText("<html> Grupo validado </html>");
+                    }
+                }
+                else {
+                    mensagem.setForeground(Color.RED);
+                    mensagem.setText("<html> Nenhuma reunião encontrada" +
+                            "<br> Por favor, crie uma reunião" +
+                            "</html>");
+                }
             }
             else {
-
-                mensagem.setForeground(Color.black);
-                mensagem.setText("<html> Grupo validado </html>");
+                mensagem.setForeground(Color.RED);
+                mensagem.setText("<html> Nenhum grupo encontrado" +
+                        "<br> Por favor, crie um grupo para continuar." +
+                        "</html>");
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);

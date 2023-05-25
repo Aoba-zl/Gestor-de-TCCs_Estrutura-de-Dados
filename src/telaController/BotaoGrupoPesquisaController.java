@@ -59,7 +59,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.listaSubArea = subArea;
 	}
 	
-	public void setCommand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos, JLabel[] lblMensagemRAGrupo)
+	public void setCommands(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos, JLabel[] lblMensagemRAGrupo)
 	{
 		this.RA = RA;
 		this.ftTema = ftTema;
@@ -171,7 +171,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 					area.setSubArea(listaSubArea[hash].get(hashCodeSubArea(cod)));
 					grupo.setArea(area);
 					Aluno[] aluno = grupo.getAlunos();
-					int tamAluno = aluno.length;
+					int tamAluno = aluno.length - 1;
 					for (int i = 0; i < tamAluno; i++)
 						RA[i].setText(aluno[i].getRa());
 
