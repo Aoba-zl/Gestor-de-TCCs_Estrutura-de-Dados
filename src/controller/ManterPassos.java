@@ -4,6 +4,7 @@ import br.fatec.ListObject.ListObject;
 import br.fatec.StackObject.StackObject;
 import model.Grupo;
 import model.Reuniao;
+import telaController.Constantes;
 
 import java.io.*;
 
@@ -95,8 +96,7 @@ public class ManterPassos {
 				assunto + ".csv";
 		if (!tccConcluido.isEmpty())
 			nomeArquivo += divisor + tccConcluido;
-		String caminhoArquivo = System.getProperty("user.home") + File.separator +
-				"TEMP" + File.separator;
+		String caminhoArquivo = Constantes.HOME;
 		divisor = ";";
 		String primeiraLinha = codigo + divisor + data + divisor + assunto;
 		if (!tccConcluido.isEmpty())
@@ -118,9 +118,8 @@ public class ManterPassos {
 
 	private void alterarArquivoReunioes(Reuniao reuniao) throws Exception
 	{
-		String caminho= System.getProperty("user.home") + File.separator +
-				"TEMP" + File.separator;
-		String arquivo = "Reunioes.csv";
+		String caminho= Constantes.HOME;
+		String arquivo = Constantes.REUINOES;
 		File readFile = new File(caminho+arquivo);
 		FileReader read = new FileReader(readFile);
 		BufferedReader buffer = new BufferedReader(read);
@@ -163,9 +162,7 @@ public class ManterPassos {
 
 	private void alterarArquivoGrupos(Reuniao reuniao) throws IOException
 	{
-		String caminhoArquivo = System.getProperty("user.home") + File.separator +
-				"TEMP" + File.separator + "Grupos.csv";
-		File readFile = new File(caminhoArquivo);
+		File readFile = new File(Constantes.H_GRUPOS);
 		FileReader read = new FileReader(readFile);
 		BufferedReader buffer = new BufferedReader(read);
 
@@ -194,9 +191,8 @@ public class ManterPassos {
 			content.append(line).append("\n");
 			line = buffer.readLine();
 
-			String caminho= System.getProperty("user.home") + File.separator +
-					"TEMP" + File.separator;
-			String arquivo = "Grupos.csv";
+			String caminho= Constantes.HOME;
+			String arquivo = Constantes.GRUPOS;
 			File file = new File(caminho, arquivo);
 			FileWriter write = new FileWriter(file);
 			PrintWriter fileWriter = new PrintWriter(write);

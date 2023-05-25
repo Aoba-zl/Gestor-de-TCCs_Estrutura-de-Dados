@@ -36,13 +36,7 @@ public class PassosBtnBuscaGrupo implements ActionListener
 
     private String getArquivoReunioes()
     {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Reunioes.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_REUINOES;
     }
 
     @Override

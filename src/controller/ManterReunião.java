@@ -3,6 +3,7 @@ package controller;
 import br.fatec.ListObject.ListObject;
 import model.Grupo;
 import model.Reuniao;
+import telaController.Constantes;
 
 import java.io.*;
 
@@ -42,7 +43,7 @@ public class ManterReunião {
 	public static void salvarReuniao(Reuniao reuniao, String caminhoArquivo, boolean reuniaoExiste) throws Exception {
 		File dir= new File(caminhoArquivo);
 		if (dir.exists() && dir.isDirectory()){
-			File arq= new File(caminhoArquivo, "Reuniões.csv");
+			File arq= new File(caminhoArquivo, Constantes.REUINOES);
 			if (!reuniaoExiste){
 				boolean existe= false;
 				if (arq.exists()){
@@ -66,7 +67,7 @@ public class ManterReunião {
 	}
 
 	private static void atualizaDados(String caminhoArquivo, Reuniao reuniao) throws Exception {
-		File file= new File(caminhoArquivo, "Reuniões.csv");
+		File file= new File(caminhoArquivo, Constantes.REUINOES);
 		FileReader lerFlux = new FileReader(file);
 		BufferedReader buffer = new BufferedReader(lerFlux);
 		StringBuilder content = new StringBuilder();

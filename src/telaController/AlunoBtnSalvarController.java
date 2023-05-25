@@ -24,18 +24,7 @@ public class AlunoBtnSalvarController implements ActionListener
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
-        this.arquivoAluno = getArquivoAluno();
-    }
-
-    private String getArquivoAluno()
-    {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Alunos.csv";
-
-        return caminhoArquivo;
+        this.arquivoAluno = Constantes.H_ALUNO;
     }
 
     private String[] getAlunos(String arquivoAluno) throws Exception {
@@ -99,10 +88,7 @@ public class AlunoBtnSalvarController implements ActionListener
                 aluno.setRa(campoRA.getText());
             }
 
-            String caminho = System.getProperty("user.home") + File.separator +
-                    "TEMP" + File.separator;
-            String arquivo = "Alunos.csv";
-            manterAluno.salvarDados(aluno, arquivoAluno, alunoExiste, caminho, arquivo);
+            manterAluno.salvarDados(aluno, arquivoAluno, alunoExiste, Constantes.HOME, Constantes.ALUNO);
             mensagem.setText("Dados salvos no systema!");
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");

@@ -44,7 +44,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.pesq = pesq;
 		this.mensagemGrupo = mensagemGrupo;
 		this.conf = conf;
-		this.arquivoGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
+		this.arquivoGrupo = manterGrupo.getArqDiretorio(Constantes.GRUPOS);
 	}
 	
 	@Override

@@ -62,13 +62,7 @@ public class ComboBoxController
 	
 	private String getArquivoArea()
     {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "ProfessorAreasdeAtuacao.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_AREAS;
     }
 	
 	public String[] area() throws Exception

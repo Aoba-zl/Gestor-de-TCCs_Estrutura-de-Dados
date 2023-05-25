@@ -49,7 +49,7 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), reuniao.getCodigoGrupo());
 
-            File file= new File(getArquivoReunioes(), "Reuniões.csv");
+            File file= new File(getArquivoReunioes(), Constantes.REUINOES);
 
             boolean reuniaoExiste;
             if (grupo == null){
@@ -140,19 +140,14 @@ public class BTReuniaoSalvaController implements ActionListener {
 
 
     private String getArquivoReunioes(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP";
-
-        return caminhoRaiz;
+        return Constantes.HOME;
     }
 
     public ListObject getReunioes() throws Exception{
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reunioes.csv");
+            File file= new File(caminhoArquivo, Constantes.REUINOES);
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -174,8 +169,7 @@ public class BTReuniaoSalvaController implements ActionListener {
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
                 reuniao.setAssunto(dados[1]);
                 reuniao.setData(dados[2]);
-                boolean statusReuniao = !dados[3].contains("não") && !dados[3].contains("nao");
-                reuniao.setStatus(statusReuniao);
+                reuniao.setStatus(Boolean.parseBoolean(dados[3]));
                 if (lista.isEmpty()){
                     lista.addFirst(reuniao);
                 }
@@ -192,13 +186,7 @@ public class BTReuniaoSalvaController implements ActionListener {
     }
 
     private String getArquivoGrupos(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Grupos.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_GRUPOS;
     }
 
     public ListObject getGrupos() throws Exception {

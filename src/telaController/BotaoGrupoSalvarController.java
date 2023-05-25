@@ -139,8 +139,8 @@ public class BotaoGrupoSalvarController implements ActionListener
 			return;
 		}
 		
-		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
-		String arqAlunos = manterGrupo.getArqDiretorio("Alunos.csv");
+		String arqGrupo = manterGrupo.getArqDiretorio(Constantes.GRUPOS);
+		String arqAlunos = manterGrupo.getArqDiretorio(Constantes.ALUNO);
 		try {
 			arqGrupo = manterGrupo.getArq(arqGrupo);
 			arqAlunos = manterGrupo.getArq(arqAlunos);
@@ -168,8 +168,8 @@ public class BotaoGrupoSalvarController implements ActionListener
 		if (!verificacao())
 			return;
 		
-		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
-		String arqAlunos = manterGrupo.getArqDiretorio("Alunos.csv");
+		String arqGrupo = manterGrupo.getArqDiretorio(Constantes.GRUPOS);
+		String arqAlunos = manterGrupo.getArqDiretorio(Constantes.ALUNO);
 		try {
 			arqGrupo = manterGrupo.getArq(arqGrupo);
 			arqAlunos = manterGrupo.getArq(arqAlunos);

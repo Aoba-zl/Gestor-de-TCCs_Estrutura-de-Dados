@@ -26,19 +26,8 @@ public class AlunoBtnBuscaController implements ActionListener
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
-        this.arquivoAluno = getArquivoAluno();
+        this.arquivoAluno = Constantes.H_ALUNO;
         this.btnExcluir = btnExcluir;
-    }
-
-    private String getArquivoAluno()
-    {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Alunos.csv";
-
-        return caminhoArquivo;
     }
 
     private String[] getAlunos(String arquivoAluno) throws Exception {
