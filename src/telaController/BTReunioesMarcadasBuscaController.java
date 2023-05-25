@@ -42,7 +42,7 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
             int codigo= Integer.parseInt(cod.getText());
 
             File arquivoGrupos= new File(getArquivoGrupos());
-            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+            File arquivoReunioes= new File(getArquivoReunioes(), Constantes.REUINOES);
 
             if (arquivoGrupos.exists()){
                 Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
@@ -164,7 +164,7 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
             StackObject pilha= new StackObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 0; i < tamanho; i++) {
+            for (int i = 1; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
