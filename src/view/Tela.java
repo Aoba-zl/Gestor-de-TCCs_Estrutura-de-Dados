@@ -68,7 +68,7 @@ public class Tela extends JFrame {
 		});
 	}
 
-	public Tela() {
+	public Tela()  {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 375);
 		contentPane = new JPanel();
@@ -257,6 +257,7 @@ public class Tela extends JFrame {
 		JComboBox<String> cbArea = new JComboBox<String>();
 		cbArea.setModel(new DefaultComboBoxModel<String>(area));
 		cbArea.setSelectedIndex(0);
+
 		cbArea.setBounds(341, 108, 213, 20);
 		pCadGrupo.add(cbArea);
 		
@@ -406,11 +407,20 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_5_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_5_2.setBounds(55, 126, 127, 20);
 		pMarcaReuniao.add(lblNewLabel_1_2_5_2);
-		
-		JFormattedTextField ftDataReuniao = new JFormattedTextField();
+
+
+		MaskFormatter dateFormatter= null;
+		try {
+			dateFormatter = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			throw new RuntimeException(e);
+		}
+		JFormattedTextField ftDataReuniao = new JFormattedTextField(dateFormatter);
 		ftDataReuniao.setBounds(192, 128, 119, 20);
 		pMarcaReuniao.add(ftDataReuniao);
-		
+
+
+
 		JButton btnSalvaReuniao = new JButton("Salvar");
 		btnSalvaReuniao.setBounds(330, 160, 100, 30);
 		pMarcaReuniao.add(btnSalvaReuniao);

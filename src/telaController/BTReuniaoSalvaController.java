@@ -144,9 +144,6 @@ public class BTReuniaoSalvaController implements ActionListener {
         else if(campo.getText().length() > 10){
             mensagem.setText("Data inválida");
         }
-        else if(data.substring(0).matches("[A-Z]*")){
-            mensagem.setText("Data inválida");
-        }
         return (campo.getText().length() == 10);
     }
 

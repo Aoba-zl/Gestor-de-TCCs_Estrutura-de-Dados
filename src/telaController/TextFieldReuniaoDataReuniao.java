@@ -34,26 +34,7 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 			ftDataReuniao.setEditable(false);
 			return;
 		}
-		
-		if(ftDataReuniao.getText().length() == 2)
-		{
-			ftDataReuniao.setText(ftDataReuniao.getText() + "/");
-		}
-		if (ftDataReuniao.getText().length() == 5)
-		{
-			ftDataReuniao.setText(ftDataReuniao.getText() + "/");
-		}
-		if (ftDataReuniao.getText().length() >= 10)
-		{
-			ftDataReuniao.setEditable(false);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
-		{
-			ftDataReuniao.setEditable(true);
-		}
-		
-		
-		
+
 	}
 
 	@Override
