@@ -337,7 +337,7 @@ public class Tela extends JFrame {
 		
 		tableGrupoCad = new JTable();
 		spGrupoCad.setViewportView(tableGrupoCad);
-		tableGrupoCad.setEnabled(false);
+		tableGrupoCad.setEnabled(true);
 		tableGrupoCad.setModel(new DefaultTableModel(
 			new Object[][] {
 			},

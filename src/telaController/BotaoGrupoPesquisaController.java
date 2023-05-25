@@ -171,7 +171,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 					area.setSubArea(listaSubArea[hash].get(hashCodeSubArea(cod)));
 					grupo.setArea(area);
 					Aluno[] aluno = grupo.getAlunos();
-					int tamAluno = aluno.length;
+					int tamAluno = aluno.length - 1;
 					for (int i = 0; i < tamAluno; i++)
 						RA[i].setText(aluno[i].getRa());
 
