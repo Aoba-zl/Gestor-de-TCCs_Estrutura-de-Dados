@@ -63,18 +63,13 @@ public class BotaoConsultaGrupoController implements ActionListener
 					new String[] {
 							"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 					}));
-			return;			
+			return;
 		}
 		lblMensagemGrupoCad.setText("");
 		
 		StackObject pilha = new StackObject();
 		
-		StringTokenizer stPilha = null;
-		try {
-			stPilha = new StringTokenizer(content, "\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		StringTokenizer stPilha = new StringTokenizer(content, "\n");
 		
 		stPilha.nextToken();
 		
