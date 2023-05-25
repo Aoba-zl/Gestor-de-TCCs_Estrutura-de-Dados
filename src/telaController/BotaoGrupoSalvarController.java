@@ -3,6 +3,7 @@ package telaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -22,7 +23,6 @@ public class BotaoGrupoSalvarController implements ActionListener
 	private JComboBox<String> subArea;
 	private ManterGrupo manterGrupo = new ManterGrupo();
 	private JLabel mensagem;
-	private VerificacaoGrupoController verifica = new VerificacaoGrupoController();
 	private JButton btnSalvaAlteraGrupos;
 	private JButton btnExcluirGrupos;
 	
@@ -150,10 +150,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 		
 		Grupo grupo = setGrupo();
 		
-		if (!verifica.verificaGrupoExiste(arqGrupo, grupo, this.mensagem))
-			return;
-			
-		if (!verifica.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
+		if (!manterGrupo.verificaGrupoExiste(arqGrupo, grupo, this.mensagem) || !manterGrupo.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
 			return;
 		
 		try {
@@ -165,7 +162,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void alterar() 
 	{
 		if (!verificacao())
@@ -180,15 +177,30 @@ public class BotaoGrupoSalvarController implements ActionListener
 			e.printStackTrace();
 		}
 		
-		Grupo grupo = new Grupo();
-		grupo = setGrupo();	
-		
+		if (arqGrupo == "false")
+		{
+			btnSalvaAlteraGrupos.setText("Salvar");
+			btnExcluirGrupos.setVisible(false);
+			for (JFormattedTextField RAs : RA)
+				RAs.setText("");
 			
-		if (!verifica.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
+			area.setSelectedIndex(0);
+			subArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+			subArea.setEnabled(false);
+			cod.setText("");
+			mensagem.setText("O arquivo grupo não existe!");
+			tema.setText("");
+			return;
+		}
+		
+		Grupo grupo = new Grupo();
+		grupo = setGrupo();
+		
+		this.mensagem.setText("1");
+		if (!manterGrupo.verificaGrupoExiste(arqGrupo, grupo, this.mensagem) || !manterGrupo.verificaAlunoExiste(grupo.getAlunos(), this.mensagem))
 			return;
 		
 		manterGrupo.excluirGrupo(grupo);
-		
 		
 		manterGrupo.salvarGrupo(grupo);
 		this.mensagem.setText("Grupo alterado!");
