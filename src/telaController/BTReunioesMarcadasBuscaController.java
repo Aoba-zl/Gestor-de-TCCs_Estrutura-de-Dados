@@ -46,7 +46,6 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
             if (arquivoGrupos.exists()){
                 Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
-                grupo.setStatus(false);
 
                 if (arquivoReunioes.exists()){
 
@@ -237,4 +236,3 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
     }
 }
-

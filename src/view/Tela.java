@@ -326,26 +326,28 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
 		JButton btnPesquisarGrupos = new JButton("Pesquisar");
-		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
+		btnPesquisarGrupos.setBounds(425, 229, 100, 30);
 		btnPesquisarGrupos.setEnabled(false);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
 		JScrollPane spGrupoCad = new JScrollPane();
 		spGrupoCad.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		spGrupoCad.setBounds(30, 98, 267, 86);
+		spGrupoCad.setBounds(30, 98, 509, 104);
 		pConsultarGrupos.add(spGrupoCad);
 		
 		tableGrupoCad = new JTable();
 		spGrupoCad.setViewportView(tableGrupoCad);
-		tableGrupoCad.setEnabled(false);
+		tableGrupoCad.setEnabled(true);
 		tableGrupoCad.setModel(new DefaultTableModel(
-			new Object[0][0] ,
+			new Object[][] {
+			},
 			new String[] {
 				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 			}
 		));
-		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(78);
-		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(83);
+		tableGrupoCad.getColumnModel().getColumn(0).setPreferredWidth(30);
+		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(180);
+		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(60);
 		tableGrupoCad.setCellSelectionEnabled(true);
 		tableGrupoCad.setColumnSelectionAllowed(true);
 		
@@ -427,91 +429,7 @@ public class Tela extends JFrame {
 		tabbedPane_3.addTab("Adicionar Passos", null, pAddPassos, null);
 		pAddPassos.setLayout(null);
 
-		JLabel lblDefinirPassos = new JLabel("Definir Passos");
-		lblDefinirPassos.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblDefinirPassos.setBackground(Color.WHITE);
-		lblDefinirPassos.setBounds(30, 11, 108, 20);
-		pAddPassos.add(lblDefinirPassos);
-
-		JLabel lblNewLabel_1_2_5_3 = new JLabel("Código do grupo:");
-		lblNewLabel_1_2_5_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3.setBounds(55, 50, 127, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3);
-
-		JLabel lblNewLabel_1_2_5_3_1 = new JLabel("Assunto da Reunião:");
-		lblNewLabel_1_2_5_3_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_1.setBounds(55, 81, 127, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3_1);
-
-		JLabel lblNewLabel_1_2_5_3_2 = new JLabel("Passos:");
-		lblNewLabel_1_2_5_3_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_3_2.setBounds(55, 112, 61, 20);
-		pAddPassos.add(lblNewLabel_1_2_5_3_2);
-
-		JFormattedTextField ftCodGrupoPassos = new JFormattedTextField();
-		ftCodGrupoPassos.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				char i = e.getKeyChar();
-				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
-				{
-					ftCodGrupoPassos.setEditable(true);
-				}
-				else
-				{
-					ftCodGrupoPassos.setEditable(false);
-				}
-			}
-		});
-		ftCodGrupoPassos.setBounds(192, 52, 108, 18);
-		pAddPassos.add(ftCodGrupoPassos);
-
-		JFormattedTextField ftAssuntoReuniaoPassos = new JFormattedTextField();
-		ftAssuntoReuniaoPassos.setBounds(192, 83, 108, 18);
-		pAddPassos.add(ftAssuntoReuniaoPassos);
-
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(126, 112, 174, 72);
-		pAddPassos.add(scrollPane);
-
-		JTextArea taPassos = new JTextArea();
-		taPassos.setLineWrap(true);
-		scrollPane.setViewportView(taPassos);
-
-		JButton btnSalvarPassos = new JButton("Salvar");
-		btnSalvarPassos.setBounds(330, 160, 100, 30);
-		btnSalvarPassos.setEnabled(false);
-		pAddPassos.add(btnSalvarPassos);
-
-		JButton btnBuscarCodPassos = new JButton("Buscar");
-		btnBuscarCodPassos.setBounds(310, 51, 79, 23);
-		pAddPassos.add(btnBuscarCodPassos);
-
-//        JButton btnBuscarAssunto = new JButton("Buscar");
-//        btnBuscarAssunto.setBounds(310, 82, 79, 23);
-//        pAddPassos.add(btnBuscarAssunto);
-
-		JCheckBox checkBoxStatus_Passos = new JCheckBox("Trabalho concluido");
-		checkBoxStatus_Passos.setBounds(19, 232, 243, 23);
-		pAddPassos.add(checkBoxStatus_Passos);
-
-		JLabel lblMensagemDefinirPassos = new JLabel("");
-		lblMensagemDefinirPassos.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemDefinirPassos.setBounds(411, 0, 132, 75);
-		pAddPassos.add(lblMensagemDefinirPassos);
-
-		PassosBtnBuscaGrupo btnBuscaGrupo =
-				new PassosBtnBuscaGrupo(lblMensagemDefinirPassos, ftCodGrupoPassos,
-						ftAssuntoReuniaoPassos, taPassos, btnSalvarPassos);
-		PassosBtnSalvarPassos btnSalvarPassosCtrl =
-				new PassosBtnSalvarPassos(lblMensagemDefinirPassos, ftCodGrupoPassos,
-						ftAssuntoReuniaoPassos, taPassos, checkBoxStatus_Passos,
-						btnSalvarPassos);
-		btnBuscarCodPassos.addActionListener(btnBuscaGrupo);
-		btnSalvarPassos.addActionListener(btnSalvarPassosCtrl);
+		TelaDeifinirPassos.setElements(pAddPassos);
 		// TODO add passos >
 		JPanel pReuniaoMarcado = new JPanel();
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
@@ -600,7 +518,7 @@ public class Tela extends JFrame {
 
 		JLabel lblMensagemGrupoCad = new JLabel("");
 		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemGrupoCad.setBounds(322, 205, 182, 38);
+		lblMensagemGrupoCad.setBounds(30, 221, 182, 38);
 		pConsultarGrupos.add(lblMensagemGrupoCad);
 
 		JLabel[] lblMensagemRAGrupo = {lblMensagemRA1Grupo, lblMensagemRA2Grupo, lblMensagemRA3Grupo, lblMensagemRA4Grupo};
@@ -623,20 +541,11 @@ public class Tela extends JFrame {
 		BotaoConsultaGrupoController bConsultCont = new BotaoConsultaGrupoController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad); //Consultar grupos por Area e subArea
 
 		bCodCont.setList(listaSubArea, area);
-		bCodCont.setCommand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
+		bCodCont.setCommands(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
 		bSGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bExGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 
 		btnBuscarRA1.addActionListener(bRaCont1); //Grupo RA
-
-		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
-
-		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
-		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
-		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
-		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
 		btnBuscarRA3.addActionListener(bRaCont3);
 		btnBuscarRA4.addActionListener(bRaCont4);
@@ -652,93 +561,19 @@ public class Tela extends JFrame {
 		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
 		cbSubAreaConsulta.addActionListener(cbSubAreaConsultaCont);
 		btnPesquisarGrupos.addActionListener(bConsultCont); //CadGrupo consulta
-		btnBuscarCodGrupo.addActionListener(bCodCont);
-		btnSalvaAlteraGrupos.addActionListener(bSGrupoCont);
-		btnExcluirGrupos.addActionListener(bExGrupoCont);
-		cbArea.addActionListener(cbAreaCont);
-		cbSubArea.addActionListener(cbSubAreaCont);
-		cbAreaConsulta.addActionListener(cbAreaConsultCont);
+		
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
+		TextFieldReuniaoDataReuniao ftReuniaoDataCont = new TextFieldReuniaoDataReuniao(ftDataReuniao);
+		
+		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
+		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
+		ftDataReuniao.addKeyListener(ftReuniaoDataCont);
 
 		// Tela Aluno
-		JLabel lblAlunoDados = new JLabel("Dados Aluno");
-		lblAlunoDados.setBounds(30, 11, 100, 31);
-		lblAlunoDados.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblAlunoDados.setBackground(UIManager.getColor("Button.disabledShadow"));
-		pAluno.add(lblAlunoDados);
-
-		JLabel lblAlunoRA = new JLabel("RA:");
-		lblAlunoRA.setBounds(105, 118, 68, 14);
-		lblAlunoRA.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pAluno.add(lblAlunoRA);
-
-		JLabel lblAlunoNome = new JLabel("Nome:");
-		lblAlunoNome.setBounds(105, 143, 68, 14);
-		lblAlunoNome.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pAluno.add(lblAlunoNome);
-		JButton btnSalvaAluno = new JButton("Salvar");
-		btnSalvaAluno.setBounds(459, 257, 100, 30);
-		pAluno.add(btnSalvaAluno);
-
-		JFormattedTextField tfRA = new JFormattedTextField();
-		tfRA.setBounds(158, 117, 144, 20);
-		tfRA.addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent e)
-			{
-				char i = e.getKeyChar();
-				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
-				{
-					tfRA.setEditable(true);
-				}
-				else
-				{
-					tfRA.setEditable(false);
-				}
-			}
-		});
-		pAluno.add(tfRA);
-
-		JFormattedTextField tfNome = new JFormattedTextField();
-		tfNome.setBounds(158, 143, 144, 20);
-		tfNome.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e)
-			{
-				char c = e.getKeyChar();
-				if (Character.isLetter(c) || Character.isWhitespace(c) || Character.isISOControl(c))
-				{
-					tfNome.setEditable(true);
-				}
-				else
-				{
-					tfNome.setEditable(false);
-				}
-			}
-		});
-		pAluno.add(tfNome);
-
-		JButton btnBuscarAluno = new JButton("Buscar");
-		btnBuscarAluno.setBounds(321, 116, 76, 23);
-		pAluno.add(btnBuscarAluno);
-
-		JButton btnExcluirAluno = new JButton("Excluir");
-		btnExcluirAluno.setBounds(349, 257, 100, 30);
-		pAluno.add(btnExcluirAluno);
-		btnExcluirAluno.setVisible(false);
-
-		JLabel lblMensagemAluno = new JLabel("");
-		lblMensagemAluno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemAluno.setBounds(300, 21, 280, 70);
-		pAluno.add(lblMensagemAluno);
-
-		AlunoBtnBuscaController buscaController = new AlunoBtnBuscaController(tfRA, tfNome,
-				lblMensagemAluno, btnExcluirAluno);
-		AlunoBtnSalvarController salvarController = new AlunoBtnSalvarController(tfRA, tfNome,
-				lblMensagemAluno);
-		AlunoBtnExcluirController excluirController = new AlunoBtnExcluirController(tfRA, tfNome,
-				lblMensagemAluno, btnExcluirAluno);
-		btnBuscarAluno.addActionListener(buscaController);
-		btnSalvaAluno.addActionListener(salvarController);
-		btnExcluirAluno.addActionListener(excluirController);
+		TelaCadastroAluno.setElements(pAluno);
 
 	}
 }
