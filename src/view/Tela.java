@@ -565,10 +565,12 @@ public class Tela extends JFrame {
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
-
+		TextFieldReuniaoDataReuniao ftReuniaoDataCont = new TextFieldReuniaoDataReuniao(ftDataReuniao);
+		
 		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
 		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
 		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
+		ftDataReuniao.addKeyListener(ftReuniaoDataCont);
 
 		// Tela Aluno
 		TelaCadastroAluno.setElements(pAluno);
