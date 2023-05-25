@@ -135,6 +135,7 @@ public class BTReuniaoSalvaController implements ActionListener {
     }
 
     private boolean validaCampoData(JFormattedTextField campo){
+        String data= campo.getText();
         if (campo.getText().length() == 0){
             mensagem.setText("Digite a data");
         }
@@ -142,6 +143,9 @@ public class BTReuniaoSalvaController implements ActionListener {
             mensagem.setText("Data inválida");
         }
         else if(campo.getText().length() > 10){
+            mensagem.setText("Data inválida");
+        }
+        else if(data.substring(0).matches("[A-Z]*")){
             mensagem.setText("Data inválida");
         }
         return (campo.getText().length() == 10);

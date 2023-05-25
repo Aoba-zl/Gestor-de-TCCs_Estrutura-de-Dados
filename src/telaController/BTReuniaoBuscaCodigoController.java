@@ -77,17 +77,13 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                     }
                 }
                 else {
-                    mensagem.setForeground(Color.RED);
-                    mensagem.setText("<html> Nenhuma reunião encontrada" +
-                            "<br> Por favor, crie uma reunião" +
-                            "</html>");
+                    mensagem.setForeground(Color.black);
+                    mensagem.setText("<html> Grupo validado </html>");
                 }
             }
             else {
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Nenhum grupo encontrado" +
-                        "<br> Por favor, crie um grupo para continuar." +
-                        "</html>");
+                mensagem.setForeground(Color.black);
+                mensagem.setText("<html> Grupo validado </html>");
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
