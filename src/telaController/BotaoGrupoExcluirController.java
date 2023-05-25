@@ -22,7 +22,6 @@ public class BotaoGrupoExcluirController implements ActionListener
 	private JComboBox<String> subArea;
 	private ManterGrupo manterGrupo = new ManterGrupo();
 	private JLabel mensagem;
-	private VerificacaoGrupoController verifica = new VerificacaoGrupoController();
 	private JButton btnExcluirGrupos;
 	private JButton btnSalvaAlteraGrupos;
 	
@@ -87,7 +86,7 @@ public class BotaoGrupoExcluirController implements ActionListener
 		
 		grupo.setCodigo(Integer.parseInt(cod.getText()));
 		
-		if (verifica.verificaGrupoExiste(arqGrupo, grupo, this.mensagem))
+		if (manterGrupo.verificaGrupoExiste(arqGrupo, grupo, this.mensagem))
 		{
 			this.mensagem.setText("<html>Não existe um grupo <br> com esse código!</html>");
 			btnSalvaAlteraGrupos.setText("Salvar");

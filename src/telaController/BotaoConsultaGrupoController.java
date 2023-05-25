@@ -63,18 +63,16 @@ public class BotaoConsultaGrupoController implements ActionListener
 					new String[] {
 							"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 					}));
-			return;			
+			tableGrupoCad.getColumnModel().getColumn(0).setPreferredWidth(30);
+			tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(180);
+			tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(60);
+			return;
 		}
 		lblMensagemGrupoCad.setText("");
 		
 		StackObject pilha = new StackObject();
 		
-		StringTokenizer stPilha = null;
-		try {
-			stPilha = new StringTokenizer(content, "\n");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		StringTokenizer stPilha = new StringTokenizer(content, "\n");
 		
 		stPilha.nextToken();
 		
@@ -118,6 +116,9 @@ public class BotaoConsultaGrupoController implements ActionListener
 					"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 				}
 			));
+		tableGrupoCad.getColumnModel().getColumn(0).setPreferredWidth(30);
+		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(180);
+		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(60);
 		
 		
 	}
