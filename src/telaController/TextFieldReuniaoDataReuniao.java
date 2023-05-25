@@ -43,6 +43,15 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 		{
 			ftDataReuniao.setText(ftDataReuniao.getText() + "/");
 		}
+		if (ftDataReuniao.getText().length() >= 10)
+		{
+			ftDataReuniao.setEditable(false);
+		}
+		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+		{
+			ftDataReuniao.setEditable(true);
+		}
+		
 		
 		
 	}
