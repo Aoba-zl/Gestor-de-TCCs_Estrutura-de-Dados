@@ -7,6 +7,7 @@ import javax.swing.JFormattedTextField;
 
 public class TextFieldReuniaoDataReuniao implements KeyListener
 {
+	private final int MAX_LENGTH = 10;
 
 	private JFormattedTextField ftDataReuniao;
 
@@ -35,26 +36,30 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 			return;
 		}
 		
-		if(ftDataReuniao.getText().length() == 2)
-		{
-			ftDataReuniao.setText(ftDataReuniao.getText() + "/");
-		}
-		if (ftDataReuniao.getText().length() == 5)
-		{
-			ftDataReuniao.setText(ftDataReuniao.getText() + "/");
-		}
-		if (ftDataReuniao.getText().length() >= 10)
-		{
-			ftDataReuniao.setEditable(false);
-		}
-		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
-		{
-			ftDataReuniao.setEditable(true);
-		}
+		String text = ftDataReuniao.getText();
+        int keyCode = e.getKeyCode();
+
+        // Verifica se o texto atingiu o tamanho máximo ou se o usuário pressionou uma tecla não numérica
+        if (text.length() >= MAX_LENGTH || !Character.isDigit(e.getKeyChar())) {
+            return;
+        }
+
+        // Verifica se o texto já possui uma "/" no terceiro e sexto caractere, para não adicionar duplicado
+        if ((text.length() == 2 || text.length() == 5) && !text.endsWith("/")) {
+        	ftDataReuniao.setText(text + "/");
+        }
+
+        // Verifica se o usuário pressionou a tecla "Backspace" para remover a formatação
+        if (keyCode == KeyEvent.VK_BACK_SPACE && (text.length() == 3 || text.length() == 6)) {
+        	ftDataReuniao.setText(text.substring(0, text.length() - 1));
+        }
+        
+        
+    }
 		
 		
 		
-	}
+	
 
 	@Override
 	public void keyReleased(KeyEvent e) 
