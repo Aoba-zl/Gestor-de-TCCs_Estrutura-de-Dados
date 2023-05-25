@@ -40,77 +40,87 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
         try {
             int codigo= Integer.parseInt(cod.getText());
-            Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
-//            grupo.setStatus(false);
 
+            File arquivoGrupos= new File(getArquivoGrupos());
+            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
 
-            if (grupo == null) {
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Grupo não encontrado no Sistema" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            }
-            else {
-                mensagem.setForeground(Color.black);
-                StackObject pilha= getReunioes(codigo);
-                if (pilha.size() != 0 && !grupo.getStatus()){
-                    mensagem.setText("<html> Ultima reunião Marcada/Concluída: ");
-                    Reuniao reuniao= (Reuniao) pilha.pop();
+            if (arquivoGrupos.exists()){
+                Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
+                grupo.setStatus(false);
 
-                    String[] vetor= new String[4];
-                    vetor[0]= String.valueOf(reuniao.getCodigoGrupo());
-                    vetor[1]= reuniao.getAssunto();
-                    vetor[2]= reuniao.getData();
-                    if (!reuniao.isStatus()){
-                        vetor[3]= "não concluida";
+                if (arquivoReunioes.exists()){
+
+                    if (grupo == null) {
+                        mensagem.setForeground(Color.RED);
+                        mensagem.setText("<html> Grupo não encontrado no Sistema" +
+                                "<br> Por favor, digite novamente." +
+                                "</html>");
                     }
-                    tabela.setModel(new DefaultTableModel(new Object[][] {{vetor[0], vetor[1], vetor[2], vetor[3]},}, new String[] {"Grupo","Tema","Data","Status"} ));
+                    else {
+                        mensagem.setForeground(Color.black);
+                        StackObject pilha= getReunioes(codigo);
+                        if (pilha.size() != 0 && !grupo.getStatus()){
+                            mensagem.setText("<html> Ultima reunião Marcada/Concluída: ");
+                            Reuniao reuniao= (Reuniao) pilha.pop();
 
-                }
-                else if (pilha.size() != 0) {
-                    mensagem.setText("<html> Este grupo concluiu seu trabalho" +
-                            "<br> Todas as reuniões realizadas: " +
-                            "</html>");
-                    int tamanho= pilha.size();
-                    Object dado= 0;
-                    Object[][] reunioes= new Object[tamanho][4];
-                    for (int x=0; x<tamanho; x++){
-                        Reuniao reuniao= (Reuniao) pilha.pop();
-                        for (int y=0; y<4; y++){
-                            if (y == 0){
-                                dado= reuniao.getCodigoGrupo();
+                            String[] vetor= new String[4];
+                            vetor[0]= String.valueOf(reuniao.getCodigoGrupo());
+                            vetor[1]= reuniao.getAssunto();
+                            vetor[2]= reuniao.getData();
+                            if (!reuniao.isStatus()){
+                                vetor[3]= "Não concluído";
                             }
-                            if (y == 1) {
-                                dado= reuniao.getAssunto();
+                            tabela.setModel(new DefaultTableModel(new Object[][] {{vetor[0], vetor[1], vetor[2], vetor[3]},}, new String[] {"Grupo","Tema","Data","Status"} ));
+
+                        }
+                        else if (pilha.size() != 0) {
+                            mensagem.setText("<html> Este grupo concluiu seu trabalho" +
+                                    "<br> Todas as reuniões realizadas: " +
+                                    "</html>");
+                            int tamanho= pilha.size();
+                            Object dado= 0;
+                            Object[][] reunioes= new Object[tamanho][4];
+                            for (int x=0; x<tamanho; x++){
+                                Reuniao reuniao= (Reuniao) pilha.pop();
+                                for (int y=0; y<4; y++){
+                                    if (y == 0){
+                                        dado= reuniao.getCodigoGrupo();
+                                    }
+                                    if (y == 1) {
+                                        dado= reuniao.getAssunto();
+                                    }
+                                    if (y == 2){
+                                        dado= reuniao.getData();
+                                    }
+                                    if (y == 3){
+                                        dado= reuniao.isStatus();
+                                    }
+                                    reunioes[x][y]= dado;
+                                }
                             }
-                            if (y == 2){
-                                dado= reuniao.getData();
-                            }
-                            if (y == 3){
-                                dado= reuniao.isStatus();
-                            }
-                            reunioes[x][y]= dado;
+                            String[] colunas= {"Grupo","Tema","Data","Status"};
+                            tabela.setModel(new DefaultTableModel(reunioes, colunas));
+                        } else {
+                            mensagem.setForeground(Color.RED);
+                            mensagem.setText("<html> Este grupo não possuí nenhuma reunião marcada" +
+                                    "<br> Por favor, digite novamente." +
+                                    "</html>");
                         }
                     }
-                    String[] colunas= {"Grupo","Tema","Data","Status"};
-                    tabela.setModel(new DefaultTableModel(reunioes, colunas));
-                } else {
+                }
+                else {
                     mensagem.setForeground(Color.RED);
-                    mensagem.setText("<html> Este grupo não possuí nenhuma reunião marcada" +
-                            "<br> Por favor, digite novamente." +
+                    mensagem.setText("<html> Nenhuma reunião encontrada" +
+                            "<br> Por favor, crie uma reunião" +
                             "</html>");
                 }
             }
-
-
-
-
-
-
-
-
-
-
+            else {
+                mensagem.setForeground(Color.RED);
+                mensagem.setText("<html> Nenhum grupo encontrado" +
+                        "<br> Por favor, crie um grupo para continuar." +
+                        "</html>");
+            }
 
         } catch (Exception ex) {
             throw new RuntimeException(ex);

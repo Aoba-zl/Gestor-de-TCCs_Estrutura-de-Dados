@@ -45,57 +45,66 @@ public class BTReuniaoSalvaController implements ActionListener {
             reuniao.setCodigoGrupo(Integer.parseInt(cod.getText()));
             reuniao.setAssunto(assunto.getText());
             reuniao.setData(data.getText());
-            reuniao.setStatus(false);
 
-            grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), reuniao.getCodigoGrupo());
 
-            File file= new File(getArquivoReunioes(), "Reuniões.csv");
+
+            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+            File arquivoGrupos= new File(getArquivoGrupos());
 
             boolean reuniaoExiste;
-            if (grupo == null){
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Grupo não encontrado no Sistema" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            } else if (grupo.getStatus()) {
-                mensagem.setForeground(Color.RED);
-                mensagem.setText("<html> Este grupo já concluiu o trabalho" +
-                        "<br> Por favor, digite novamente." +
-                        "</html>");
-            } else {
-                mensagem.setForeground(Color.black);
-                if (!validaCampoAssunto(assunto)){
-                    return;
-                }
-                if (!validaCampoData(data)){
-                    return;
-                }
-                if (file.exists()){
-                    Reuniao reuniaoVerifica= ManterReunião.validaReuniao(getReunioes(), reuniao.getCodigoGrupo());
-                    if (reuniaoVerifica != null && !reuniaoVerifica.isStatus()){
+            if (arquivoGrupos.exists()){
+                grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), reuniao.getCodigoGrupo());
+                grupo.setStatus(false);
 
-                        mensagem.setText("<html> Grupo já possuí uma Reunião marcada" +
-                                "<br> Clique em \"Salvar\" para alterar os dados" +
-                                "</html>");
-                        assunto.setText(reuniao.getAssunto());
-                        data.setText(reuniao.getData());
-                        reuniaoExiste= true;
-                        ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
-                        mensagem.setText("<html> Reunião atualizada <html>");
+                if (grupo == null){
+                    mensagem.setForeground(Color.RED);
+                    mensagem.setText("<html> Grupo não encontrado no Sistema" +
+                            "<br> Por favor, digite novamente." +
+                            "</html>");
+                } else if (grupo.getStatus()) {
+                    mensagem.setForeground(Color.RED);
+                    mensagem.setText("<html> Este grupo já concluiu o trabalho" +
+                            "<br> Por favor, digite novamente." +
+                            "</html>");
+                } else {
+                    mensagem.setForeground(Color.black);
+                    if (!validaCampoAssunto(assunto)){
+                        return;
+                    }
+                    if (!validaCampoData(data)){
+                        return;
+                    }
+                    if (arquivoReunioes.exists()){
+                        Reuniao reuniaoVerifica= ManterReunião.validaReuniao(getReunioes(), reuniao.getCodigoGrupo());
+                        if (reuniaoVerifica != null && !reuniaoVerifica.isStatus()){
+
+
+                            assunto.setText(reuniao.getAssunto());
+                            data.setText(reuniao.getData());
+                            reuniaoExiste= true;
+                            ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
+                            mensagem.setText("<html> Reunião atualizada <html>");
+                        }
+                        else {
+                            reuniaoExiste= false;
+                            ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
+                            mensagem.setText("<html> Reunião gerada <html>");
+                        }
                     }
                     else {
-                        reuniaoExiste= false;
-                        ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), reuniaoExiste);
+                        ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), false);
                         mensagem.setText("<html> Reunião gerada <html>");
                     }
+                    cod.setText("");
+                    assunto.setText("");
+                    data.setText("");
                 }
-                else {
-                    ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), false);
-                    mensagem.setText("<html> Reunião gerada <html>");
-                }
-                cod.setText("");
-                assunto.setText("");
-                data.setText("");
+            }
+            else {
+                mensagem.setForeground(Color.RED);
+                mensagem.setText("<html> Nenhum grupo encontrado" +
+                        "<br> Por favor, crie um grupo para continuar." +
+                        "</html>");
             }
 
 
@@ -152,7 +161,7 @@ public class BTReuniaoSalvaController implements ActionListener {
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reunioes.csv");
+            File file= new File(caminhoArquivo, "Reuniões.csv");
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -168,14 +177,13 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             ListObject lista= new ListObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 1; i < tamanho; i++) {
+            for (int i = 0; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
                 reuniao.setAssunto(dados[1]);
                 reuniao.setData(dados[2]);
-                boolean statusReuniao = !dados[3].contains("não") && !dados[3].contains("nao");
-                reuniao.setStatus(statusReuniao);
+                reuniao.setStatus(Boolean.parseBoolean(dados[3]));
                 if (lista.isEmpty()){
                     lista.addFirst(reuniao);
                 }
