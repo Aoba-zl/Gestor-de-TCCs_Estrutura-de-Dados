@@ -49,7 +49,6 @@ public class BTReuniaoSalvaController implements ActionListener {
 
 
             File arquivoReunioes= new File(getArquivoReunioes(), Constantes.REUINOES);
-            //TODO Constante
             File arquivoGrupos= new File(getArquivoGrupos());
 
             boolean reuniaoExiste;

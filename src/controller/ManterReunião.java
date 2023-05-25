@@ -19,7 +19,7 @@ public class ManterReunião {
 			if (Integer.toString(codigo).equals(dados[0])){
 				Grupo grupo= new Grupo();
 				grupo.setCodigo(Integer.parseInt(dados[0]));
-//				grupo.setStatus(Boolean.valueOf(dados[6]));
+				grupo.setStatus(Boolean.valueOf(dados[6]));
 				return grupo;
 			}
 		}
