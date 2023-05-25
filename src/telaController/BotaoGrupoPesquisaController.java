@@ -59,7 +59,7 @@ public class BotaoGrupoPesquisaController implements ActionListener
 		this.listaSubArea = subArea;
 	}
 	
-	public void setCommand(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos, JLabel[] lblMensagemRAGrupo)
+	public void setCommands(JFormattedTextField[] RA, JFormattedTextField ftTema, JComboBox<String> cbArea, JComboBox<String> cbSubArea, JLabel mensagemGrupoCad, JButton btnSalvaAlteraGrupos, JButton btnExcluirGrupos, JLabel[] lblMensagemRAGrupo)
 	{
 		this.RA = RA;
 		this.ftTema = ftTema;

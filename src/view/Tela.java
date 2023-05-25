@@ -326,26 +326,28 @@ public class Tela extends JFrame {
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
 		JButton btnPesquisarGrupos = new JButton("Pesquisar");
-		btnPesquisarGrupos.setBounds(334, 123, 100, 30);
+		btnPesquisarGrupos.setBounds(425, 229, 100, 30);
 		btnPesquisarGrupos.setEnabled(false);
 		pConsultarGrupos.add(btnPesquisarGrupos);
 		
 		JScrollPane spGrupoCad = new JScrollPane();
 		spGrupoCad.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		spGrupoCad.setBounds(30, 98, 267, 86);
+		spGrupoCad.setBounds(30, 98, 509, 104);
 		pConsultarGrupos.add(spGrupoCad);
 		
 		tableGrupoCad = new JTable();
 		spGrupoCad.setViewportView(tableGrupoCad);
 		tableGrupoCad.setEnabled(false);
 		tableGrupoCad.setModel(new DefaultTableModel(
-			new Object[0][0] ,
+			new Object[][] {
+			},
 			new String[] {
 				"C\u00F3digo", "Tema", "\u00DAltima Reuniao"
 			}
 		));
-		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(78);
-		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(83);
+		tableGrupoCad.getColumnModel().getColumn(0).setPreferredWidth(30);
+		tableGrupoCad.getColumnModel().getColumn(1).setPreferredWidth(180);
+		tableGrupoCad.getColumnModel().getColumn(2).setPreferredWidth(60);
 		tableGrupoCad.setCellSelectionEnabled(true);
 		tableGrupoCad.setColumnSelectionAllowed(true);
 		
@@ -600,7 +602,7 @@ public class Tela extends JFrame {
 
 		JLabel lblMensagemGrupoCad = new JLabel("");
 		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemGrupoCad.setBounds(322, 205, 182, 38);
+		lblMensagemGrupoCad.setBounds(30, 221, 182, 38);
 		pConsultarGrupos.add(lblMensagemGrupoCad);
 
 		JLabel[] lblMensagemRAGrupo = {lblMensagemRA1Grupo, lblMensagemRA2Grupo, lblMensagemRA3Grupo, lblMensagemRA4Grupo};
@@ -623,20 +625,11 @@ public class Tela extends JFrame {
 		BotaoConsultaGrupoController bConsultCont = new BotaoConsultaGrupoController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad); //Consultar grupos por Area e subArea
 
 		bCodCont.setList(listaSubArea, area);
-		bCodCont.setCommand(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
+		bCodCont.setCommands(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
 		bSGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 		bExGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
 
 		btnBuscarRA1.addActionListener(bRaCont1); //Grupo RA
-
-		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
-
-		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
-		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
-		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
-		btnBuscarRA1.addActionListener(bRaCont1);
 		btnBuscarRA2.addActionListener(bRaCont2);
 		btnBuscarRA3.addActionListener(bRaCont3);
 		btnBuscarRA4.addActionListener(bRaCont4);
@@ -652,12 +645,14 @@ public class Tela extends JFrame {
 		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
 		cbSubAreaConsulta.addActionListener(cbSubAreaConsultaCont);
 		btnPesquisarGrupos.addActionListener(bConsultCont); //CadGrupo consulta
-		btnBuscarCodGrupo.addActionListener(bCodCont);
-		btnSalvaAlteraGrupos.addActionListener(bSGrupoCont);
-		btnExcluirGrupos.addActionListener(bExGrupoCont);
-		cbArea.addActionListener(cbAreaCont);
-		cbSubArea.addActionListener(cbSubAreaCont);
-		cbAreaConsulta.addActionListener(cbAreaConsultCont);
+		
+		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
+		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
+
+		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
+		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
+		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
 
 		// Tela Aluno
 		JLabel lblAlunoDados = new JLabel("Dados Aluno");
