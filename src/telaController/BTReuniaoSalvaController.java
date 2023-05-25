@@ -54,7 +54,6 @@ public class BTReuniaoSalvaController implements ActionListener {
             boolean reuniaoExiste;
             if (arquivoGrupos.exists()){
                 grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), reuniao.getCodigoGrupo());
-                grupo.setStatus(false);
 
                 if (grupo == null){
                     mensagem.setForeground(Color.RED);
