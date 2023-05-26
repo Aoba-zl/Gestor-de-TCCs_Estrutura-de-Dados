@@ -94,6 +94,25 @@ public class BotaoGrupoExcluirController implements ActionListener
 			return;
 		}
 		
+		String cod = this.cod.getText();
+		String[] procGrupo = null;
+		try {
+			procGrupo = manterGrupo.getArq(Constantes.H_GRUPOS).split("\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int tamProcGrupo = procGrupo.length;
+		String[] aux;
+		for (int i = 1; i < tamProcGrupo; i++)
+		{
+			aux = procGrupo[i].split(";");
+			if (Boolean.valueOf(aux[6]) && cod.equals(aux[0]))
+			{
+				this.mensagem.setText("<html>O grupo que já foi concluído <br>não pode ser excluído!</html>");
+				return;
+			}
+		}
+		
 		manterGrupo.excluirGrupo(grupo);
 		
 		this.mensagem.setText("Grupo excluido com sucesso!");
