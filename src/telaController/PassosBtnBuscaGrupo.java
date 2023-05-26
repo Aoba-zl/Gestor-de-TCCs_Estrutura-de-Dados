@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class PassosBtnBuscaGrupo implements ActionListener
@@ -65,8 +66,17 @@ public class PassosBtnBuscaGrupo implements ActionListener
         return false;
     }
 
+    //TODO verificar file grupo.
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
+        if (!validaArquivoGrupo())
+        {
+            lblMensagem.setText("<html>Erro na leitura" +
+                    "<br>do arquivo Grupos.csv</html>");
+            lblMensagem.setForeground(Color.red);
+            return;
+        }
+
         btnSalvar.setEnabled(false);
 
         lblMensagem.setText("");
@@ -116,6 +126,12 @@ public class PassosBtnBuscaGrupo implements ActionListener
             lblMensagem.setForeground(Color.red);
             lblMensagem.setText("Houve algum erro inesperado");
         }
+    }
+
+    private boolean validaArquivoGrupo()
+    {
+        File readFile = new File(Constantes.H_GRUPOS);
+        return readFile.exists();
     }
 
     private Reuniao pegarUltimaReunião(int codigo, ListObject reunioes) throws Exception {
