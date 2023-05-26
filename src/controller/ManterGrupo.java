@@ -155,7 +155,7 @@ public class ManterGrupo {
 				content += ";" + alunos[i].getRa();
 			}
 			
-			content += ";" + Boolean.valueOf("false");
+			content += ";" + grupo.getStatus();
 			
 			if (!existe)
 			{
