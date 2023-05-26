@@ -2,6 +2,7 @@ package controller;
 
 import model.Aluno;
 import model.Grupo;
+import telaController.Constantes;
 
 import java.io.*;
 import java.util.StringTokenizer;
@@ -38,8 +39,7 @@ public class ManterGrupo {
     {
         String caminhoRaiz, caminhoArquivo;
 
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
+        caminhoRaiz = Constantes.HOME;
         caminhoArquivo = caminhoRaiz + nomeArq;
 
         return caminhoArquivo;
@@ -48,7 +48,7 @@ public class ManterGrupo {
 	public Aluno buscarAluno(String ra) throws IOException
 	{
 		try {
-			String arquivoAluno = getArqDiretorio("Alunos.csv");
+			String arquivoAluno = getArqDiretorio(Constantes.ALUNO);
 			String[] alunos = getArq(arquivoAluno).split("\n");
 
 			if (raValido(ra))
@@ -76,7 +76,7 @@ public class ManterGrupo {
 	{
 		if (codValido(cod))
 		{
-			String arqAluno = getArqDiretorio("Alunos.csv");
+			String arqAluno = getArqDiretorio(Constantes.ALUNO);
 			String[] alunos = null;
 			try {
 				alunos = getArq(arqAluno).split("\n");
@@ -135,7 +135,7 @@ public class ManterGrupo {
 	public void salvarGrupo(Grupo grupo)
 	{
 		try {
-			String arqDiretorio = getArqDiretorio("Grupos.csv");
+			String arqDiretorio = getArqDiretorio(Constantes.GRUPOS);
 			File arq = new File(arqDiretorio);
 			boolean existe = false;
 
@@ -175,7 +175,7 @@ public class ManterGrupo {
 
 	public void excluirGrupo(Grupo grupo)
 	{
-		String arqDiretorio = getArqDiretorio("Grupos.csv");
+		String arqDiretorio = getArqDiretorio(Constantes.GRUPOS);
 		File arq = new File(arqDiretorio);
 		String content = "";
 		try {
@@ -248,7 +248,7 @@ public class ManterGrupo {
 	public boolean verificaAlunoExiste(Aluno[] aluno, JLabel mensagem)
 	{
 		ManterGrupo manterGrupo = new ManterGrupo();
-		String arq = manterGrupo.getArqDiretorio("Alunos.csv");
+		String arq = manterGrupo.getArqDiretorio(Constantes.ALUNO);
 		String[] content = null;
 		try {
 			content = manterGrupo.getArq(arq).split("\n");

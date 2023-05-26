@@ -106,19 +106,14 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
     }
 
     private String getArquivoReunioes(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP";
-
-        return caminhoRaiz;
+        return Constantes.HOME;
     }
 
     public ListObject getReunioes() throws Exception{
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reuniões.csv");
+            File file= new File(caminhoArquivo, Constantes.REUINOES);
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -159,13 +154,7 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
 
 
     private String getArquivoGrupos(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Grupos.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_GRUPOS;
     }
 
     public ListObject getGrupos() throws Exception {

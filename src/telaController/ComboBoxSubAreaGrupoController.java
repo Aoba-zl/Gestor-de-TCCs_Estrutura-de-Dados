@@ -35,7 +35,7 @@ public class ComboBoxSubAreaGrupoController implements ActionListener
 		
 		String[] content = {};
 		try {
-			content = manterGrupo.getArq(manterGrupo.getArqDiretorio("Grupos.csv")).split("\n");
+			content = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.GRUPOS)).split("\n");
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

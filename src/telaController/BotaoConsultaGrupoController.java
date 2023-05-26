@@ -51,7 +51,7 @@ public class BotaoConsultaGrupoController implements ActionListener
 		ManterGrupo manterGrupo = new ManterGrupo();
 		String content = null;
 		try {
-			content = manterGrupo.getArq(manterGrupo.getArqDiretorio("Grupos.csv"));
+			content = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.GRUPOS));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

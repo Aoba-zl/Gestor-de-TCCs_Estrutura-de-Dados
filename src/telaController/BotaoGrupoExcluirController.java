@@ -75,7 +75,7 @@ public class BotaoGrupoExcluirController implements ActionListener
 
 	private void Excluir() 
 	{
-		String arqGrupo = manterGrupo.getArqDiretorio("Grupos.csv");
+		String arqGrupo = manterGrupo.getArqDiretorio(Constantes.GRUPOS);
 		try {
 			arqGrupo = manterGrupo.getArq(arqGrupo);
 		} catch (Exception e) {

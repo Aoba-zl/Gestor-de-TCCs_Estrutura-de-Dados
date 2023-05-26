@@ -48,7 +48,7 @@ public class BTReuniaoSalvaController implements ActionListener {
 
 
 
-            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+            File arquivoReunioes= new File(getArquivoReunioes(), Constantes.REUINOES);
             File arquivoGrupos= new File(getArquivoGrupos());
 
             boolean reuniaoExiste;
@@ -149,19 +149,14 @@ public class BTReuniaoSalvaController implements ActionListener {
 
 
     private String getArquivoReunioes(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP";
-
-        return caminhoRaiz;
+        return Constantes.HOME;
     }
 
     public ListObject getReunioes() throws Exception{
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reuniões.csv");
+            File file= new File(caminhoArquivo, Constantes.REUINOES);
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -177,7 +172,7 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             ListObject lista= new ListObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 0; i < tamanho; i++) {
+            for (int i = 1; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
@@ -200,13 +195,7 @@ public class BTReuniaoSalvaController implements ActionListener {
     }
 
     private String getArquivoGrupos(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Grupos.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_GRUPOS;
     }
 
     public ListObject getGrupos() throws Exception {

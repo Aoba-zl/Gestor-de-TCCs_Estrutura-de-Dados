@@ -42,7 +42,7 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
             int codigo= Integer.parseInt(cod.getText());
 
             File arquivoGrupos= new File(getArquivoGrupos());
-            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+            File arquivoReunioes= new File(getArquivoReunioes(), Constantes.REUINOES);
 
             if (arquivoGrupos.exists()){
                 Grupo grupo= ManterReunião.pesquisarCodGrupo(getGrupos(), codigo);
@@ -141,19 +141,14 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
     }
 
     private String getArquivoReunioes(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP";
-
-        return caminhoRaiz;
+        return Constantes.HOME;
     }
 
     public StackObject getReunioes(int codigo) throws Exception{
         String caminhoArquivo= getArquivoReunioes();
         File dir = new File(caminhoArquivo);
         if (dir.exists() && dir.isDirectory()){
-            File file= new File(caminhoArquivo, "Reuniões.csv");
+            File file= new File(caminhoArquivo, Constantes.REUINOES);
             FileReader lerFlux = new FileReader(file);
             BufferedReader buffer = new BufferedReader(lerFlux);
             String linha = buffer.readLine();
@@ -169,7 +164,7 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
             StackObject pilha= new StackObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 0; i < tamanho; i++) {
+            for (int i = 1; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
@@ -190,13 +185,7 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
 
 
     private String getArquivoGrupos(){
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Grupos.csv";
-
-        return caminhoArquivo;
+        return Constantes.H_GRUPOS;
     }
 
     public ListObject getGrupos() throws Exception {

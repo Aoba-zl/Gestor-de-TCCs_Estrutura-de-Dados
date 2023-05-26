@@ -25,19 +25,8 @@ public class AlunoBtnExcluirController implements ActionListener
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
-        this.arquivoAluno = getArquivoAluno();
+        this.arquivoAluno = Constantes.H_ALUNO;
         this.btnExcluir = btnExcluir;
-    }
-
-    private String getArquivoAluno()
-    {
-        String caminhoRaiz, caminhoArquivo;
-
-        caminhoRaiz = System.getProperty("user.home") + File.separator;
-        caminhoRaiz += "TEMP" + File.separator;
-        caminhoArquivo = caminhoRaiz + "Alunos.csv";
-
-        return caminhoArquivo;
     }
 
     private String[] getAlunos(String arquivoAluno) throws Exception {
@@ -76,9 +65,8 @@ public class AlunoBtnExcluirController implements ActionListener
             String[] alunos = getAlunos(arquivoAluno);
             Aluno aluno = procuraAluno(alunos, ra);
 
-            String caminho = System.getProperty("user.home") + File.separator +
-                    "TEMP" + File.separator;
-            String arquivo = "Alunos.csv";
+            String caminho = Constantes.HOME;
+            String arquivo = Constantes.ALUNO;
             manterAluno.excluirDadosAluno(aluno, arquivoAluno, caminho, arquivo);
             campoRA.setText("");
             campoNome.setText("");
