@@ -49,7 +49,8 @@ public class PassosBtnBuscaGrupo implements ActionListener
 
         while (line!=null)
         {
-            if (line.contains(codigo) && line.contains("true"))
+            String[] dados = line.split(";");
+            if (dados[0].contains(codigo) && line.contains("true"))
             {
             	buffer.close();
                 System.out.println("grupo " + codigo + "Já concluio");

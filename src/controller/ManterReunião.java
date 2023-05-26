@@ -28,6 +28,8 @@ public class ManterReunião {
 
 
 	public static Reuniao validaReuniao(ListObject reunioes, int codigo) throws Exception {
+		if (reunioes == null)
+			return null;
 		int tamanho= reunioes.size();
 
 		for (int i = 0; i < tamanho; i++) {
