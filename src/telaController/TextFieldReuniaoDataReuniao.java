@@ -39,11 +39,6 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 		String text = ftDataReuniao.getText();
         int keyCode = e.getKeyCode();
 
-        // Verifica se o texto atingiu o tamanho máximo ou se o usuário pressionou uma tecla não numérica
-        if (text.length() >= MAX_LENGTH || !Character.isDigit(e.getKeyChar())) {
-            return;
-        }
-
         // Verifica se o texto já possui uma "/" no terceiro e sexto caractere, para não adicionar duplicado
         if ((text.length() == 2 || text.length() == 5) && !text.endsWith("/")) {
         	ftDataReuniao.setText(text + "/");
@@ -54,6 +49,14 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
         	ftDataReuniao.setText(text.substring(0, text.length() - 1));
         }
 
+		if (ftDataReuniao.getText().length() >= 10)
+		{
+			ftDataReuniao.setEditable(false);
+		}
+		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+		{
+			ftDataReuniao.setEditable(true);
+		}
 
     }
 

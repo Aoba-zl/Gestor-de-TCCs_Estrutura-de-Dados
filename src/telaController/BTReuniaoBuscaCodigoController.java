@@ -43,21 +43,21 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
 
 
             File arquivoGrupos= new File(getArquivoGrupos());
-            File arquivoReunioes= new File(getArquivoReunioes(), "Reuniões.csv");
+            File arquivoReunioes= new File(getArquivoReunioes(), Constantes.REUINOES);
 
             if (arquivoGrupos.exists()){
                 grupo= ManterReunião.pesquisarCodGrupo(grupos, codigo);
 
-                if (arquivoReunioes.exists()){
+                if (grupo == null){
+                    mensagem.setForeground(Color.RED);
+                    mensagem.setText("<html> Grupo não encontrado no Sistema" +
+                            "<br> Por favor, digite novamente." +
+                            "</html>");
+                }
+                else if (arquivoReunioes.exists()){
                     Reuniao reuniao= ManterReunião.validaReuniao(getReunioes(), codigo);
 
-                    if (grupo == null){
-                        mensagem.setForeground(Color.RED);
-                        mensagem.setText("<html> Grupo não encontrado no Sistema" +
-                                "<br> Por favor, digite novamente." +
-                                "</html>");
-                    }
-                    else if (grupo.getStatus()) {
+                    if (grupo.getStatus()) {
                         mensagem.setForeground(Color.RED);
                         mensagem.setText("<html> Este grupo já concluiu o trabalho" +
                                 "<br> Por favor, digite novamente." +
@@ -80,10 +80,13 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                     mensagem.setForeground(Color.black);
                     mensagem.setText("<html> Grupo validado </html>");;
                 }
+
             }
             else {
-                mensagem.setForeground(Color.black);
-                mensagem.setText("<html> Grupo validado </html>");
+                mensagem.setForeground(Color.RED);
+                mensagem.setText("<html> Nenhum grupo encontrado" +
+                        "<br> Por favor, crie um grupo para continuar." +
+                        "</html>");
             }
         } catch (Exception ex) {
             throw new RuntimeException(ex);
@@ -129,7 +132,7 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
 
             ListObject lista= new ListObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 1; i < tamanho; i++) {
+            for (int i = 0; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));

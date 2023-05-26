@@ -367,57 +367,19 @@ public class Tela extends JFrame {
 		lblNewLabel_1_2_5.setBounds(55, 64, 127, 20);
 		pMarcaReuniao.add(lblNewLabel_1_2_5);
 		
-		JFormattedTextField ftCodGrupoReuniao = new JFormattedTextField();
-		ftCodGrupoReuniao.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) 
-			{
-				char i = e.getKeyChar();
-				if (!Character.isLetter(i) || Character.isWhitespace(i) || Character.isISOControl(i))
-				{
-					ftCodGrupoReuniao.setEditable(true);
-				}
-				else
-				{
-					ftCodGrupoReuniao.setEditable(false);
-				}
-			}
-		});
-		
-		ftCodGrupoReuniao.setBounds(192, 66, 119, 20);
-		pMarcaReuniao.add(ftCodGrupoReuniao);
+
 		
 		JLabel lblNewLabel_1_2_5_1 = new JLabel("Assunto da reunião:");
 		lblNewLabel_1_2_5_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_5_1.setBounds(55, 95, 127, 20);
 		pMarcaReuniao.add(lblNewLabel_1_2_5_1);
-		
-		JFormattedTextField ftAssuntoReuniao = new JFormattedTextField();
-		ftAssuntoReuniao.setBounds(192, 97, 119, 20);
-		pMarcaReuniao.add(ftAssuntoReuniao);
+
 		
 		JLabel lblNewLabel_1_2_5_2 = new JLabel("Data:");
 		lblNewLabel_1_2_5_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_1_2_5_2.setBounds(55, 126, 127, 20);
 		pMarcaReuniao.add(lblNewLabel_1_2_5_2);
 
-
-		JFormattedTextField ftDataReuniao = new JFormattedTextField();
-		ftDataReuniao.setBounds(192, 128, 119, 20);
-		pMarcaReuniao.add(ftDataReuniao);
-
-		JButton btnSalvaReuniao = new JButton("Salvar");
-		btnSalvaReuniao.setBounds(330, 160, 100, 30);
-		pMarcaReuniao.add(btnSalvaReuniao);
-		
-		JButton btnBuscarCodReuniao = new JButton("Buscar");
-		btnBuscarCodReuniao.setBounds(321, 65, 79, 23);
-		pMarcaReuniao.add(btnBuscarCodReuniao);
-		
-		JLabel lblMensagemReuniao = new JLabel("");
-		lblMensagemReuniao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemReuniao.setBounds(410, 11, 132, 75);
-		pMarcaReuniao.add(lblMensagemReuniao);
 
 		// TODO add passos <
 		JPanel pAddPassos = new JPanel();
@@ -429,49 +391,7 @@ public class Tela extends JFrame {
 		JPanel pReuniaoMarcado = new JPanel();
 		tabbedPane_3.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
 		pReuniaoMarcado.setLayout(null);
-		
-		JLabel lblReuniao = new JLabel("Reunião");
-		lblReuniao.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblReuniao.setBackground(Color.WHITE);
-		lblReuniao.setBounds(30, 11, 74, 20);
-		pReuniaoMarcado.add(lblReuniao);
-		
-		JLabel lblCodGrupoReunMarcada = new JLabel("Código do grupo:");
-		lblCodGrupoReunMarcada.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCodGrupoReunMarcada.setBounds(37, 58, 109, 20);
-		pReuniaoMarcado.add(lblCodGrupoReunMarcada);
-		
-		JFormattedTextField ftPesquisarReuniao = new JFormattedTextField();
-		ftPesquisarReuniao.setBounds(156, 60, 121, 18);
-		pReuniaoMarcado.add(ftPesquisarReuniao);
-		
-		JButton btnPesquisarReuniao = new JButton("Pesquisar");
-		btnPesquisarReuniao.setBounds(286, 55, 100, 30);
-		pReuniaoMarcado.add(btnPesquisarReuniao);
-		
-		JScrollPane spReuniaoMarcada = new JScrollPane();
-		spReuniaoMarcada.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		spReuniaoMarcada.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		spReuniaoMarcada.setBounds(20, 89, 523, 170);
-		pReuniaoMarcado.add(spReuniaoMarcada);
-		
-		tableReuniaoMarcada = new JTable();
-		spReuniaoMarcada.setViewportView(tableReuniaoMarcada);
-		tableReuniaoMarcada.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null}
-			},
-			new String[] {
-				"C\u00F3d. Grupo", "Tema", "Data", "Status"
-			}
-		));
-		tableReuniaoMarcada.setEnabled(false);
-		tableReuniaoMarcada.getColumnModel().getColumn(3).setPreferredWidth(64);
 
-		JLabel lblMensagemReuniaoMarcada = new JLabel("");
-		lblMensagemReuniaoMarcada.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemReuniaoMarcada.setBounds(411, 0, 132, 75);
-		pReuniaoMarcado.add(lblMensagemReuniaoMarcada);
 		
 		
 		
@@ -554,19 +474,12 @@ public class Tela extends JFrame {
 
 		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
 		cbSubAreaConsulta.addActionListener(cbSubAreaConsultCont);
-		
-		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
-		BTReunioesMarcadasBuscaController BTReunioesMarcadasBusca= new BTReunioesMarcadasBuscaController(ftPesquisarReuniao, lblMensagemReuniaoMarcada, tableReuniaoMarcada);
-		TextFieldReuniaoDataReuniao ftReuniaoDataCont = new TextFieldReuniaoDataReuniao(ftDataReuniao);
-		
-		btnPesquisarReuniao.addActionListener(BTReunioesMarcadasBusca);
-		btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
-		btnSalvaReuniao.addActionListener(BTReuniaoSalva);
-		ftDataReuniao.addKeyListener(ftReuniaoDataCont);
+
 
 		// Tela Aluno
 		TelaCadastroAluno.setElements(pAluno);
+		TelaReunioesMarcadas.setElements(pReuniaoMarcado);
+		TelaMarcarReuniao.setElements(pMarcaReuniao);
 
 	}
 }
