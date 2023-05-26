@@ -90,7 +90,7 @@ public class TelaConsultaGrupo extends JFrame
 		
 		JLabel lblMensagemGrupoCad = new JLabel("");
 		lblMensagemGrupoCad.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMensagemGrupoCad.setBounds(30, 221, 182, 38);
+		lblMensagemGrupoCad.setBounds(30, 232, 182, 38);
 		pConsultarGrupos.add(lblMensagemGrupoCad);
 		
 		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
