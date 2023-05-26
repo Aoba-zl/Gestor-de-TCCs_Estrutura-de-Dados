@@ -33,7 +33,10 @@ public class ManterPassos {
 
 		line = buffer.readLine();
 		if (line == null)
-			return null;
+		{
+			buffer.close();
+			return null;			
+		}
 		while (line != null)
 		{
 			content.append(line).append("\n");
@@ -67,7 +70,6 @@ public class ManterPassos {
 
 	private Reuniao montarReuniao (String[] dadosReuniao)
 	{
-		int c = dadosReuniao.length;
 		Reuniao reuniao = new Reuniao();
 
 		reuniao.setCodigoGrupo(Integer.parseInt(dadosReuniao[0]));

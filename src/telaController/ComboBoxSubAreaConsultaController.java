@@ -9,10 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import br.fatec.ListObject.ListObject;
 import br.fatec.StackObject.StackObject;
 import controller.ManterGrupo;
-import controller.ManterPassos;
 import model.Grupo;
 import model.Reuniao;
 
