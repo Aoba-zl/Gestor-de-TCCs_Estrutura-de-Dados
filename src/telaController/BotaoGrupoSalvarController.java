@@ -98,6 +98,17 @@ public class BotaoGrupoSalvarController implements ActionListener
 			if (Boolean.valueOf(aux[6]) && cod.equals(aux[0]))
 			{
 				this.mensagem.setText("O grupo já foi concluído!");
+				for (int j = 0; j < 4; j++)
+				{
+					RA[j].setText("");
+				}
+				this.cod.setText("");
+				this.tema.setText("");
+				this.area.setSelectedIndex(0);
+				this.subArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+	        	this.subArea.setEnabled(false);
+				btnSalvaAlteraGrupos.setText("Salvar");
+				btnExcluirGrupos.setVisible(false);
 				return false;
 			}
 		}

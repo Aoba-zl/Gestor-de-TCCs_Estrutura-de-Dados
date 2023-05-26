@@ -3,6 +3,7 @@ package telaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -109,6 +110,17 @@ public class BotaoGrupoExcluirController implements ActionListener
 			if (Boolean.valueOf(aux[6]) && cod.equals(aux[0]))
 			{
 				this.mensagem.setText("<html>O grupo que já foi concluído <br>não pode ser excluído!</html>");
+				for (int j = 0; j < 4; j++)
+				{
+					RA[j].setText("");
+				}
+				this.cod.setText("");
+				this.tema.setText("");
+				this.area.setSelectedIndex(0);
+				this.subArea.setModel(new DefaultComboBoxModel<String>(new String[] {""}));
+	        	this.subArea.setEnabled(false);
+				btnSalvaAlteraGrupos.setText("Salvar");
+				btnExcluirGrupos.setVisible(false);
 				return;
 			}
 		}
