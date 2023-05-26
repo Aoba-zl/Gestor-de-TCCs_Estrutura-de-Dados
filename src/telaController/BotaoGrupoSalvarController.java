@@ -188,7 +188,7 @@ public class BotaoGrupoSalvarController implements ActionListener
 		
 		try {
 			manterGrupo.salvarGrupo(grupo);
-			this.mensagem.setText("O grupo foi salvo no banco!");
+			this.mensagem.setText("<html>O grupo foi <br>salvo no sistema!</html>");
 			btnSalvaAlteraGrupos.setText("Alterar");
 			btnExcluirGrupos.setVisible(true);
 		} catch (Exception e) {
