@@ -48,29 +48,44 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 	private void Consulta() 
 	{
 		ManterGrupo manterGrupo = new ManterGrupo();
-		ManterPassos manterPassos = new ManterPassos();
 		
 		String contentGrupo = null;
-		ListObject contentReuniao = null;
+		String[] contentReuniao = null;
 		try {
 			contentGrupo = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.GRUPOS));
-			contentReuniao = manterPassos.getReunioes(Constantes.H_REUINOES);
+			contentReuniao = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.REUINOES)).split("\n");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		int tamListReuniao = contentReuniao.size() + 1;
-		Reuniao[] reunioes = new Reuniao[tamListReuniao];
-		reunioes[0] = new Reuniao();
-		reunioes[0].setData("");
-		for (int i = 1; i < tamListReuniao; i++)
+		
+		int tamListReuniao = 0;
+		Reuniao[] reunioes = null;
+		if (!contentReuniao[0].equals("false"))
 		{
-			try {
-				Reuniao reuniao = (Reuniao) contentReuniao.get(0);
-				contentReuniao.removeFirst();
-				reunioes[i] = reuniao;
-			} catch (Exception e) {
-				e.printStackTrace();
+			tamListReuniao = contentReuniao.length + 1;
+			reunioes = new Reuniao[tamListReuniao];
+			reunioes[0] = new Reuniao();
+			reunioes[0].setData("");
+			for (int i = 1; i < tamListReuniao; i++)
+			{
+				try {
+					String[] aux = contentReuniao[i-1].split(";");
+					Reuniao reuniao = new Reuniao();
+					reuniao.setCodigoGrupo(Integer.parseInt(aux[0]));
+					reuniao.setData(aux[2]);
+					reuniao.setStatus(Boolean.valueOf(aux[3]));
+					
+					reunioes[i] = reuniao;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
+		}
+		else
+		{
+			reunioes = new Reuniao[1];
+			reunioes[0] = new Reuniao();
+			reunioes[0].setData("");
 		}
 		
 		if (contentGrupo.equals("false"))
