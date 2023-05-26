@@ -325,14 +325,9 @@ public class Tela extends JFrame {
 		cbSubAreaConsulta.setBounds(334, 49, 205, 20);
 		pConsultarGrupos.add(cbSubAreaConsulta);
 		
-		JButton btnPesquisarGrupos = new JButton("Pesquisar");
-		btnPesquisarGrupos.setBounds(425, 229, 100, 30);
-		btnPesquisarGrupos.setEnabled(false);
-		pConsultarGrupos.add(btnPesquisarGrupos);
-		
 		JScrollPane spGrupoCad = new JScrollPane();
 		spGrupoCad.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		spGrupoCad.setBounds(30, 98, 509, 104);
+		spGrupoCad.setBounds(30, 98, 509, 142);
 		pConsultarGrupos.add(spGrupoCad);
 		
 		tableGrupoCad = new JTable();
@@ -536,10 +531,9 @@ public class Tela extends JFrame {
 		ComboBoxAreaGrupoController cbAreaCont = new ComboBoxAreaGrupoController(cbArea, cbSubArea, area, listaSubArea); //ComboBox Area e SubArea do grupo
 		ComboBoxSubAreaGrupoController cbSubAreaCont = new ComboBoxSubAreaGrupoController(cbArea, cbSubArea, ftCodGrupo);
 
-		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea); //ComboBox Area e SubArea do grupo cadastrado
-		ComboBoxSubAreaConsultaController cbSubAreaConsultaCont = new ComboBoxSubAreaConsultaController(btnPesquisarGrupos);
-		BotaoConsultaGrupoController bConsultCont = new BotaoConsultaGrupoController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad); //Consultar grupos por Area e subArea
-
+		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
+		ComboBoxSubAreaConsultaController cbSubAreaConsultCont = new ComboBoxSubAreaConsultaController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad);
+		
 		bCodCont.setList(listaSubArea, area);
 		bCodCont.setCommands(RA, ftTema, cbArea, cbSubArea, lblMensagemGrupo, btnSalvaAlteraGrupos, btnExcluirGrupos, lblMensagemRAGrupo);
 		bSGrupoCont.setCommands(btnSalvaAlteraGrupos, btnExcluirGrupos);
@@ -559,8 +553,7 @@ public class Tela extends JFrame {
 		cbSubArea.addActionListener(cbSubAreaCont);
 
 		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
-		cbSubAreaConsulta.addActionListener(cbSubAreaConsultaCont);
-		btnPesquisarGrupos.addActionListener(bConsultCont); //CadGrupo consulta
+		cbSubAreaConsulta.addActionListener(cbSubAreaConsultCont);
 		
 		BTReuniaoSalvaController BTReuniaoSalva= new BTReuniaoSalvaController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
 		BTReuniaoBuscaCodigoController BTReuniaoBuscaCodigo= new BTReuniaoBuscaCodigoController(ftCodGrupoReuniao, ftAssuntoReuniao, ftDataReuniao, lblMensagemReuniao);
