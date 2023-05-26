@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.UIManager;
 import java.awt.Font;
+import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -31,8 +32,6 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Date;
 
@@ -46,7 +45,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ImageIcon;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
 
 public class Tela extends JFrame {
 
@@ -409,17 +407,9 @@ public class Tela extends JFrame {
 		pMarcaReuniao.add(lblNewLabel_1_2_5_2);
 
 
-		MaskFormatter dateFormatter= null;
-		try {
-			dateFormatter = new MaskFormatter("##/##/####");
-		} catch (ParseException e) {
-			throw new RuntimeException(e);
-		}
-		JFormattedTextField ftDataReuniao = new JFormattedTextField(dateFormatter);
+		JFormattedTextField ftDataReuniao = new JFormattedTextField();
 		ftDataReuniao.setBounds(192, 128, 119, 20);
 		pMarcaReuniao.add(ftDataReuniao);
-
-
 
 		JButton btnSalvaReuniao = new JButton("Salvar");
 		btnSalvaReuniao.setBounds(330, 160, 100, 30);
