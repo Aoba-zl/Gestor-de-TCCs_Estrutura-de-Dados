@@ -94,6 +94,7 @@ public class BTReuniaoSalvaController implements ActionListener {
                         ManterReunião.salvarReuniao(reuniao, getArquivoReunioes(), false);
                         mensagem.setText("<html> Reunião gerada <html>");
                     }
+                    data.setEditable(true);
                     cod.setText("");
                     assunto.setText("");
                     data.setText("");
