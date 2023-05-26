@@ -53,6 +53,9 @@ public class TelaDeifinirPassos extends JFrame {
 
         JFormattedTextField ftAssuntoReuniaoPassos = new JFormattedTextField();
         ftAssuntoReuniaoPassos.setBounds(192, 83, 108, 18);
+        ftAssuntoReuniaoPassos.setEnabled(false);
+        ftAssuntoReuniaoPassos.setDisabledTextColor(Color.black);
+        ftAssuntoReuniaoPassos.setSelectedTextColor(Color.black);
         pAddPassos.add(ftAssuntoReuniaoPassos);
 
         JScrollPane scrollPane = new JScrollPane();
