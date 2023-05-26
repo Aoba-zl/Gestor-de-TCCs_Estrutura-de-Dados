@@ -32,7 +32,7 @@ public class ManterReunião {
 			return null;
 		int tamanho= reunioes.size();
 
-		for (int i = 0; i < tamanho; i++) {
+		for (int i = tamanho - 1; i > 0; i--) {
 			Reuniao reuniao= (Reuniao) reunioes.get(i);
 			if (reuniao.getCodigoGrupo() == codigo){
 				return reuniao;
