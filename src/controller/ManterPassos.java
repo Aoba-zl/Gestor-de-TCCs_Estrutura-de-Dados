@@ -46,7 +46,7 @@ public class ManterPassos {
 		if (quantidadeReunioes == 0)
 			return null;
 
-		for (int index = 1; index < quantidadeReunioes; index++)
+		for (int index = 0; index < quantidadeReunioes; index++)
 		{
 			String[] dadosReuniao = linhasArquivo[index].split(";");
 			Reuniao reuniao = montarReuniao(dadosReuniao);
@@ -67,7 +67,7 @@ public class ManterPassos {
 		reuniao.setCodigoGrupo(Integer.parseInt(dadosReuniao[0]));
 		reuniao.setAssunto(dadosReuniao[1]);
 		reuniao.setData(dadosReuniao[2]);
-		boolean status = dadosReuniao[3].contains("não") ? false : true;
+		boolean status = Boolean.parseBoolean(dadosReuniao[3]);
 		reuniao.setStatus(status);
 		return reuniao;
 	}
