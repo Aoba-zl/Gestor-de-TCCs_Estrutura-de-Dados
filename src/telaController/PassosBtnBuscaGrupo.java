@@ -9,7 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class PassosBtnBuscaGrupo implements ActionListener
 {
@@ -39,6 +41,29 @@ public class PassosBtnBuscaGrupo implements ActionListener
         return Constantes.H_REUINOES;
     }
 
+    private boolean grupoTemReuniao(String codigo) throws Exception {
+        File readFile = new File(Constantes.H_GRUPOS);
+        FileReader read = new FileReader(readFile);
+        BufferedReader buffer = new BufferedReader(read);
+
+        String line;
+
+        line = buffer.readLine();
+
+        while (line!=null)
+        {
+            if (line.contains(codigo) && line.contains("true"))
+            {
+                System.out.println("grupo " + codigo + "Já concluio");
+                return true;
+            }
+
+            line = buffer.readLine();
+        }
+
+        return false;
+    }
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         btnSalvar.setEnabled(false);
@@ -52,10 +77,17 @@ public class PassosBtnBuscaGrupo implements ActionListener
             lblMensagem.setForeground(Color.red);
             return;
         }
-
         ManterPassos manterPassos = new ManterPassos();
 
         try {
+            if (grupoTemReuniao(campoCodGrupo.getText()))
+            {
+                lblMensagem.setForeground(Color.red);
+                lblMensagem.setText("<html>O grupo " + campoCodGrupo.getText() + " já " +
+                        "<br>termiou o TCC</html>");
+                return;
+            }
+
             this.reunioes = manterPassos.getReunioes(getArquivoReunioes());
 
             if (reunioes == null)
@@ -80,8 +112,8 @@ public class PassosBtnBuscaGrupo implements ActionListener
             btnSalvar.setEnabled(true);
         } catch (Exception e) {
             e.printStackTrace();
-            lblMensagem.setText("Houve algum erro inesperado");
             lblMensagem.setForeground(Color.red);
+            lblMensagem.setText("Houve algum erro inesperado");
         }
     }
 

@@ -2,12 +2,15 @@ package telaController;
 
 import br.fatec.ListObject.ListObject;
 import controller.ManterPassos;
+import model.Grupo;
 import model.Reuniao;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 public class PassosBtnSalvarPassos implements ActionListener
 {
@@ -38,9 +41,6 @@ public class PassosBtnSalvarPassos implements ActionListener
         return Constantes.H_REUINOES;
     }
 
-//    private boolean grupoTemReuniao(ListObject reunioes) throws Exception {
-//
-//    }
 
     private void validaCampos() throws Exception {
         valorDoCampoCodigo = campoCodGrupo.getText();
