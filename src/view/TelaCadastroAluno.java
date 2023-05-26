@@ -29,6 +29,7 @@ public class TelaCadastroAluno extends JFrame {
         pAluno.add(lblAlunoNome);
         JButton btnSalvaAluno = new JButton("Salvar");
         btnSalvaAluno.setBounds(459, 257, 100, 30);
+        btnSalvaAluno.setEnabled(false);
         pAluno.add(btnSalvaAluno);
 
         JFormattedTextField tfRA = new JFormattedTextField();
@@ -75,6 +76,7 @@ public class TelaCadastroAluno extends JFrame {
         JButton btnExcluirAluno = new JButton("Excluir");
         btnExcluirAluno.setBounds(349, 257, 100, 30);
         pAluno.add(btnExcluirAluno);
+        btnExcluirAluno.setEnabled(false);
         btnExcluirAluno.setVisible(false);
 
         JLabel lblMensagemAluno = new JLabel("");
@@ -83,11 +85,11 @@ public class TelaCadastroAluno extends JFrame {
         pAluno.add(lblMensagemAluno);
 
         AlunoBtnBuscaController buscaController = new AlunoBtnBuscaController(tfRA, tfNome,
-                lblMensagemAluno, btnExcluirAluno);
+                lblMensagemAluno, btnExcluirAluno, btnSalvaAluno);
         AlunoBtnSalvarController salvarController = new AlunoBtnSalvarController(tfRA, tfNome,
-                lblMensagemAluno);
+                lblMensagemAluno, btnSalvaAluno, btnExcluirAluno);
         AlunoBtnExcluirController excluirController = new AlunoBtnExcluirController(tfRA, tfNome,
-                lblMensagemAluno, btnExcluirAluno);
+                lblMensagemAluno, btnExcluirAluno, btnSalvaAluno);
         btnBuscarAluno.addActionListener(buscaController);
         btnSalvaAluno.addActionListener(salvarController);
         btnExcluirAluno.addActionListener(excluirController);

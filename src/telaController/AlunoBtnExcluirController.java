@@ -15,16 +15,18 @@ public class AlunoBtnExcluirController implements ActionListener
     private JFormattedTextField campoRA;
     private JFormattedTextField campoNome;
     private JLabel mensagem;
+    private final JButton btnSalvar;
     private String arquivoAluno;
     private ManterAluno manterAluno = new ManterAluno();
     private JButton btnExcluir;
 
     public AlunoBtnExcluirController (JFormattedTextField campoRA, JFormattedTextField campoNome,
-                                      JLabel mensagem, JButton btnExcluir)
+                                      JLabel mensagem, JButton btnExcluir, JButton btnSalvar)
     {
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
+        this.btnSalvar = btnSalvar;
         this.arquivoAluno = Constantes.H_ALUNO;
         this.btnExcluir = btnExcluir;
     }
@@ -70,8 +72,11 @@ public class AlunoBtnExcluirController implements ActionListener
             manterAluno.excluirDadosAluno(aluno, arquivoAluno, caminho, arquivo);
             campoRA.setText("");
             campoNome.setText("");
-            btnExcluir.setVisible(false);
             mensagem.setText("Aluno " + aluno.getNome() + " removido do sistema!");
+            btnExcluir.setVisible(false);
+            btnExcluir.setEnabled(false);
+            btnSalvar.setEnabled(false);
+            btnSalvar.setText("Salvar");
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");
             System.out.println(e);
