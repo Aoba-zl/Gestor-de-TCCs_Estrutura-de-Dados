@@ -8,7 +8,6 @@ import model.Reuniao;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,6 +68,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                             if (!reuniao.isStatus()){
                                 vetor[3]= "Não concluído";
                             }
+                            else {
+                                vetor[3]= "Concluída";
+                            }
                             tabela.setModel(new DefaultTableModel(new Object[][] {{vetor[0], vetor[1], vetor[2], vetor[3]},}, new String[] {"Grupo","Tema","Data","Status"} ));
 
                         }
@@ -92,7 +94,12 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                                         dado= reuniao.getData();
                                     }
                                     if (y == 3){
-                                        dado= reuniao.isStatus();
+                                        if (!reuniao.isStatus()){
+                                            dado= "Não concluído";
+                                        }
+                                        else {
+                                            dado= "Concluída";
+                                        }
                                     }
                                     reunioes[x][y]= dado;
                                 }
@@ -175,7 +182,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                     pilha.push(reuniao);
                 }
             }
-
+            
+            buffer.close();
+            
             return pilha;
         }
         else {
@@ -217,6 +226,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                     lista.addLast(grupo[i]);
                 }
             }
+            
+            buffer.close();
+            
             return lista;
         }
         else {

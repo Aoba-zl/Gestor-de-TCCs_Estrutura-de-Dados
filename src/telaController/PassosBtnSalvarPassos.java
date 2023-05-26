@@ -2,15 +2,11 @@ package telaController;
 
 import br.fatec.ListObject.ListObject;
 import controller.ManterPassos;
-import model.Grupo;
 import model.Reuniao;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 public class PassosBtnSalvarPassos implements ActionListener
 {
@@ -20,7 +16,7 @@ public class PassosBtnSalvarPassos implements ActionListener
     private final JCheckBox checkBoxStatus;
     private final JButton btnSalvarPassos;
     private boolean valorDoCheckBox;
-    private String valorDoCampoCodigo, valorDoCampoAssunto, valorDoCampoPassos;
+    private String valorDoCampoCodigo, valorDoCampoPassos;
     private ManterPassos manterPassos = new ManterPassos();
     private ListObject reunioes;
 
@@ -59,7 +55,7 @@ public class PassosBtnSalvarPassos implements ActionListener
         {
             this.valorDoCheckBox = checkBoxStatus.isSelected();
             this.valorDoCampoCodigo = campoCodGrupo.getText();
-            this.valorDoCampoAssunto = campoAssunto.getText();
+            campoAssunto.getText();
             this.valorDoCampoPassos = campoPassos.getText();
             this.reunioes = manterPassos.getReunioes(getArquivoReunioes());
 

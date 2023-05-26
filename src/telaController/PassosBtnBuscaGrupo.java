@@ -18,9 +18,7 @@ public class PassosBtnBuscaGrupo implements ActionListener
     private final JLabel lblMensagem;
     private final JFormattedTextField campoCodGrupo;
     private final JFormattedTextField campoAssunto;
-    private final JTextArea campoPassos;
     private final JButton btnSalvar;
-    private String caminhoArquivoReunioes;
     private ListObject reunioes;
     private Reuniao ultimaReuniaoGrupo;
 
@@ -31,9 +29,8 @@ public class PassosBtnBuscaGrupo implements ActionListener
         this.lblMensagem = lblMensagem;
         this.campoCodGrupo = campoCodGrupo;
         this.campoAssunto = campoAssunto;
-        this.campoPassos = campoPassos;
         this.btnSalvar = btnSalvar;
-        this.caminhoArquivoReunioes = getArquivoReunioes();
+        getArquivoReunioes();
     }
 
     private String getArquivoReunioes()
@@ -55,13 +52,16 @@ public class PassosBtnBuscaGrupo implements ActionListener
             String[] dados = line.split(";");
             if (dados[0].contains(codigo) && line.contains("true"))
             {
+            	buffer.close();
                 System.out.println("grupo " + codigo + "Já concluio");
                 return true;
             }
 
             line = buffer.readLine();
         }
-
+        
+        buffer.close();
+        
         return false;
     }
 

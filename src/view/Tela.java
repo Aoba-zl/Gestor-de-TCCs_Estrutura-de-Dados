@@ -1,38 +1,19 @@
 package view;
 
-import br.fatec.ListString.ListString;
-import telaController.*;
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-import javax.swing.text.NumberFormatter;
 
-import br.fatec.ListString.ListString;
-import telaController.*;
-
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.*;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import java.util.StringTokenizer;
-
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.io.File;
-import java.sql.Date;
-
-import javax.swing.table.DefaultTableModel;
 
 public class Tela extends JFrame {
 
+	/**
+	 * 1.0
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	
 	public static void main(String[] args) {
