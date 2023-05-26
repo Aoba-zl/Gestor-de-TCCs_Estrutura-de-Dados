@@ -36,6 +36,7 @@ public class ManterAluno {
 
 		String line;
 		StringBuilder content = new StringBuilder();
+		content.append("RA;Nome do Aluno").append("\n");
 
 		line = buffer.readLine();
 		while (line != null)
