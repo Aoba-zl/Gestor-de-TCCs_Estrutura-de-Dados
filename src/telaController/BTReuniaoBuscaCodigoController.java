@@ -122,6 +122,8 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
             String linha = buffer.readLine();
             StringBuilder content = new StringBuilder();
 
+            if (linha == null)
+                return null;
             while(linha != null)
             {
                 content.append(linha).append("\n");
