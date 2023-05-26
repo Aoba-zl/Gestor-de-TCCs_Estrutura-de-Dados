@@ -29,16 +29,14 @@ public class ManterAluno {
 							String pathName, String fileName) throws Exception
 	{
 		File readFile = new File(caminhoArquivo);
-		if (!readFile .exists())
-			readFile .createNewFile();
 		FileReader read = new FileReader(readFile);
 		BufferedReader buffer = new BufferedReader(read);
 
 		String line;
 		StringBuilder content = new StringBuilder();
-		content.append("RA;Nome do Aluno").append("\n");
-
 		line = buffer.readLine();
+		if (line==null)
+			content.append("RA;Nome do Aluno").append("\n");
 		while (line != null)
 		{
 			content.append(line).append("\n");
