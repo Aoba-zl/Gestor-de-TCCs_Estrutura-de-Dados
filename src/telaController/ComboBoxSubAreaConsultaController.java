@@ -10,9 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.fatec.ListObject.ListObject;
 import br.fatec.StackObject.StackObject;
 import controller.ManterGrupo;
+import controller.ManterPassos;
 import model.Grupo;
+import model.Reuniao;
 
 public class ComboBoxSubAreaConsultaController implements ActionListener
 {
@@ -46,13 +49,32 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 	private void Consulta() 
 	{
 		ManterGrupo manterGrupo = new ManterGrupo();
-		String content = null;
+		ManterPassos manterPassos = new ManterPassos();
+		
+		String contentGrupo = null;
+		ListObject contentReuniao = null;
 		try {
-			content = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.GRUPOS));
+			contentGrupo = manterGrupo.getArq(manterGrupo.getArqDiretorio(Constantes.GRUPOS));
+			contentReuniao = manterPassos.getReunioes(Constantes.H_REUINOES);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		if (content.equals("false"))
+		int tamListReuniao = contentReuniao.size() + 1;
+		Reuniao[] reunioes = new Reuniao[tamListReuniao];
+		reunioes[0] = new Reuniao();
+		reunioes[0].setData("");
+		for (int i = 1; i < tamListReuniao; i++)
+		{
+			try {
+				Reuniao reuniao = (Reuniao) contentReuniao.get(0);
+				contentReuniao.removeFirst();
+				reunioes[i] = reuniao;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (contentGrupo.equals("false"))
 		{
 			lblMensagemGrupoCad.setText("O arquivo de grupo não existe!");
 			tableGrupoCad.setModel(new DefaultTableModel(
@@ -69,7 +91,7 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 		
 		StackObject pilha = new StackObject();
 		
-		StringTokenizer stPilha = new StringTokenizer(content, "\n");
+		StringTokenizer stPilha = new StringTokenizer(contentGrupo, "\n");
 		
 		stPilha.nextToken();
 		
@@ -80,6 +102,7 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 			
 			grupo.setCodigo(Integer.parseInt(stGrupo[0]));
 			grupo.setTema(stGrupo[1]);
+			grupo.setStatus(Boolean.valueOf(stGrupo[6]));
 			pilha.push(grupo);
 		}
 		
@@ -91,9 +114,24 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 		for (int i = 0; i < tamPilha; i++)
 		{
 			Grupo grupo = new Grupo();
+			int tamReunioes = reunioes.length;
+			int contReuniao = 0;
 			grupo = (Grupo) pilha.pop();
+			
+			for (int cont = 1; cont < tamReunioes; cont++)
+			{
+				if (reunioes[cont].getCodigoGrupo() == grupo.getCodigo() && !reunioes[cont].isStatus())
+				{
+					contReuniao = cont;
+					break;
+				}
+				contReuniao = 0;
+				
+			}
+			
 			if (hashCode(grupo.codigo).substring(0, 1).equals(cbArea.getSelectedItem().toString().substring(0, 1))
-					&& hashCode(grupo.codigo).substring(1, 2).equals(cbSubArea.getSelectedItem().toString().substring(0, 1)))
+					&& hashCode(grupo.codigo).substring(1, 2).equals(cbSubArea.getSelectedItem().toString().substring(0, 1))
+					&& !grupo.getStatus())
 			{
 				tamTabela++;
 				Object[][] saveTabela = tabela;
@@ -102,9 +140,11 @@ public class ComboBoxSubAreaConsultaController implements ActionListener
 				{
 					tabela[j][0] = saveTabela[j][0];
 					tabela[j][1] = saveTabela[j][1];
+					tabela[j][2] = saveTabela[j][2];
 				}
 				tabela[tamTabela-1][0] = grupo.getCodigo();
 				tabela[tamTabela-1][1] = grupo.getTema();
+				tabela[tamTabela-1][2] = reunioes[contReuniao].getData();
 			}
 		}
 		tableGrupoCad.setModel(new DefaultTableModel(

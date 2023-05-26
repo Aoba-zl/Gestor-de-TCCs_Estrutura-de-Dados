@@ -75,12 +75,34 @@ public class BotaoGrupoSalvarController implements ActionListener
 		grupo.setTema(tema.getText());
 		grupo.setAlunos(aluno);
 		grupo.setArea(area);
+		grupo.setStatus(false);
 		
 		return grupo;
 	}
 	
 	private Boolean verificacao()
 	{
+		
+		String cod = this.cod.getText();
+		String[] procGrupo = null;
+		try {
+			procGrupo = manterGrupo.getArq(Constantes.H_GRUPOS).split("\n");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int tamProcGrupo = procGrupo.length;
+		String[] aux;
+		for (int i = 1; i < tamProcGrupo; i++)
+		{
+			aux = procGrupo[i].split(";");
+			if (Boolean.valueOf(aux[6]) && cod.equals(aux[0]))
+			{
+				this.mensagem.setText("O grupo já foi concluído!");
+				return false;
+			}
+		}
+		
+		
 		if (this.RA[0].getText().equals("") && this.RA[1].getText().equals("")
 				&& this.RA[2].getText().equals("") && this.RA[3].getText().equals(""))
 		{
@@ -206,7 +228,4 @@ public class BotaoGrupoSalvarController implements ActionListener
 		this.mensagem.setText("Grupo alterado!");
 		
 	}
-	
-	
-	
 }

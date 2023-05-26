@@ -134,6 +134,11 @@ public class BotaoGrupoPesquisaController implements ActionListener
 					for (int i = 1; i < tamProcGrupo; i++)
 					{
 						aux = procGrupo[i].split(";");
+						if (Boolean.valueOf(aux[6]) && cod.equals(aux[0]))
+						{
+							this.mensagemGrupoCad.setText("O grupo já foi concluído!");
+							return;
+						}
 						if (cod.equals(aux[0]))
 						{
 							test = true;
