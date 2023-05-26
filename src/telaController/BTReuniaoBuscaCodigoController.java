@@ -78,7 +78,7 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                 }
                 else {
                     mensagem.setForeground(Color.black);
-                    mensagem.setText("<html> Grupo validado </html>");
+                    mensagem.setText("<html> Grupo validado </html>");;
                 }
             }
             else {
