@@ -142,7 +142,7 @@ public class ManterPassos {
 			String aux = ((String) pReuioes.pop()).toLowerCase();
 			if (aux.contains(Integer.toString(reuniao.getCodigoGrupo()))&&substitue)
 			{
-				aux = aux.replace("não","");
+				aux = aux.replace("false","true");
 				substitue = false;
 			}
 			aux += "\n";
@@ -181,13 +181,12 @@ public class ManterPassos {
 			{
 				for (String dado : dados)
 				{
-					if (dado.contains("nao")||dado.contains("não"))
-						dado = "Concluído";
+					if (dado.contains("false"))
+						dado = "true";
 					novaLinha.append(dado).append(";");
 				}
 				line = novaLinha.toString();
 			}
-			System.out.println(line);
 			content.append(line).append("\n");
 			line = buffer.readLine();
 
