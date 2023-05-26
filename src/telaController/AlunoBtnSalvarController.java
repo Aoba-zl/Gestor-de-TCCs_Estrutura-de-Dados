@@ -15,15 +15,19 @@ public class AlunoBtnSalvarController implements ActionListener
     private JFormattedTextField campoRA;
     private JFormattedTextField campoNome;
     private JLabel mensagem;
+    private final JButton btnSalvar;
+    private final JButton btnExcluir;
     private String arquivoAluno;
     private ManterAluno manterAluno = new ManterAluno();
 
     public AlunoBtnSalvarController(JFormattedTextField campoRA, JFormattedTextField campoNome,
-                                    JLabel mensagem)
+                                    JLabel mensagem, JButton btnSalvar, JButton btnExcluir)
     {
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
+        this.btnSalvar = btnSalvar;
+        this.btnExcluir = btnExcluir;
         this.arquivoAluno = Constantes.H_ALUNO;
     }
 
@@ -90,6 +94,10 @@ public class AlunoBtnSalvarController implements ActionListener
 
             manterAluno.salvarDados(aluno, arquivoAluno, alunoExiste, Constantes.HOME, Constantes.ALUNO);
             mensagem.setText("Dados salvos no systema!");
+            btnSalvar.setEnabled(false);
+            btnSalvar.setText("Salvar");
+            btnExcluir.setVisible(false);
+            btnExcluir.setEnabled(false);
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");
             System.out.println(e);

@@ -15,17 +15,19 @@ public class AlunoBtnBuscaController implements ActionListener
     private JFormattedTextField campoRA;
     private JFormattedTextField campoNome;
     private JLabel mensagem;
+    private final JButton btnSalvar;
     private String arquivoAluno;
     private ManterAluno manterAluno = new ManterAluno();
     private Aluno aluno;
     private JButton btnExcluir;
 
     public AlunoBtnBuscaController(JFormattedTextField campoRA, JFormattedTextField campoNome,
-                                   JLabel mensagem, JButton btnExcluir)
+                                   JLabel mensagem, JButton btnExcluir, JButton btnSalvar)
     {
         this.campoRA = campoRA;
         this.campoNome = campoNome;
         this.mensagem = mensagem;
+        this.btnSalvar = btnSalvar;
         this.arquivoAluno = Constantes.H_ALUNO;
         this.btnExcluir = btnExcluir;
     }
@@ -63,6 +65,7 @@ public class AlunoBtnBuscaController implements ActionListener
             return;
 
         try {
+            btnSalvar.setEnabled(true);
             String ra = campoRA.getText();
 
             String[] alunos = getAlunos(arquivoAluno);
@@ -70,9 +73,11 @@ public class AlunoBtnBuscaController implements ActionListener
 
             if (aluno != null) {
                 mensagem.setText("<html> Aluno já está registrado no sistema." +
-                        "<br> Clique em \"Salvar\" para alterar os dados." +
+                        "<br> Clique em \"Atualizar\" para alterar os dados." +
                         "</html>");
                 campoNome.setText(aluno.getNome());
+                btnSalvar.setText("Atualizar");
+                btnExcluir.setEnabled(true);
                 btnExcluir.setVisible(true);
             }
             else {
@@ -81,6 +86,7 @@ public class AlunoBtnBuscaController implements ActionListener
                 btnExcluir.setVisible(false);
             }
         } catch (Exception e) {
+            btnSalvar.setEnabled(false);
             System.out.println(e);
         }
     }
