@@ -134,7 +134,6 @@ public class BTReuniaoSalvaController implements ActionListener {
     }
 
     private boolean validaCampoData(JFormattedTextField campo){
-        String data= campo.getText();
         if (campo.getText().length() == 0){
             mensagem.setText("Digite a data");
         }
@@ -186,6 +185,8 @@ public class BTReuniaoSalvaController implements ActionListener {
                     lista.addLast(reuniao);
                 }
             }
+            
+            buffer.close();
 
             return lista;
         }
@@ -226,6 +227,9 @@ public class BTReuniaoSalvaController implements ActionListener {
                     lista.addLast(grupo[i]);
                 }
             }
+            
+            buffer.close();
+            
             return lista;
         }
         else {

@@ -48,6 +48,9 @@ public class AlunoBtnBuscaController implements ActionListener
             content.append(line).append("\n");
             line = buffer.readLine();
         }
+        
+        buffer.close();
+        
         return content.toString().split("\n");
     }
 

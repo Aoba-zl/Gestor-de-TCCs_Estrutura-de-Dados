@@ -1,7 +1,6 @@
 package telaController;
 
 import br.fatec.ListObject.ListObject;
-import controller.ManterGrupo;
 import controller.ManterReunião;
 import model.Grupo;
 import model.Reuniao;
@@ -146,6 +145,8 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                     lista.addLast(reuniao);
                 }
             }
+            
+            buffer.close();
 
             return lista;
         }
@@ -189,6 +190,8 @@ public class BTReuniaoBuscaCodigoController implements ActionListener {
                     lista.addLast(grupo[i]);
                 }
             }
+            buffer.close();
+            
             return lista;
         }
         else {

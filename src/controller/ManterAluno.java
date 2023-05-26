@@ -57,6 +57,8 @@ public class ManterAluno {
 		FileWriter write = new FileWriter(file);
 		PrintWriter fileWriter = new PrintWriter(write);
 
+		buffer.close();
+		
 		fileWriter.write(conteudoArquivoAluno);
 		fileWriter.flush();
 		fileWriter.close();
@@ -87,6 +89,8 @@ public class ManterAluno {
 		FileWriter write = new FileWriter(writeFile);
 		PrintWriter fileWriter = new PrintWriter(write);
 
+		buffer.close();
+		
 		fileWriter.write(conteudoArquivoAluno);
 		fileWriter.flush();
 		fileWriter.close();

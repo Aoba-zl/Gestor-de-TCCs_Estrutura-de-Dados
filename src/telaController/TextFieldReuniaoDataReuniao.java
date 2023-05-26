@@ -7,7 +7,6 @@ import javax.swing.JFormattedTextField;
 
 public class TextFieldReuniaoDataReuniao implements KeyListener
 {
-	private final int MAX_LENGTH = 10;
 
 	private JFormattedTextField ftDataReuniao;
 

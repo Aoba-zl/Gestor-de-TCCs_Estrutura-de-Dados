@@ -8,7 +8,6 @@ import model.Reuniao;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -175,7 +174,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                     pilha.push(reuniao);
                 }
             }
-
+            
+            buffer.close();
+            
             return pilha;
         }
         else {
@@ -217,6 +218,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                     lista.addLast(grupo[i]);
                 }
             }
+            
+            buffer.close();
+            
             return lista;
         }
         else {

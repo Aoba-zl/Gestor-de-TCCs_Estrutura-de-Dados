@@ -2,7 +2,6 @@ package controller;
 
 import br.fatec.ListObject.ListObject;
 import br.fatec.StackObject.StackObject;
-import model.Grupo;
 import model.Reuniao;
 import telaController.Constantes;
 
@@ -42,7 +41,9 @@ public class ManterPassos {
 		String[] linhasArquivo = content.toString().split("\n");
 		int quantidadeReunioes = linhasArquivo.length;
 		ListObject reunioes = new ListObject();
-
+		
+		buffer.close();
+		
 		if (quantidadeReunioes == 0)
 			return null;
 
@@ -56,6 +57,8 @@ public class ManterPassos {
 			else
 				reunioes.addLast(reuniao);
 		}
+		
+		
 
 		return reunioes;
 	}
@@ -153,7 +156,9 @@ public class ManterPassos {
 		File file = new File(caminho, arquivo);
 		FileWriter write = new FileWriter(file);
 		PrintWriter fileWriter = new PrintWriter(write);
-
+		
+		buffer.close();
+		
 		fileWriter.write(content.toString());
 		fileWriter.flush();
 		fileWriter.close();
@@ -201,7 +206,8 @@ public class ManterPassos {
 			fileWriter.close();
 			write.close();
 		}
-
+		
+		buffer.close();
 
 	}
 
