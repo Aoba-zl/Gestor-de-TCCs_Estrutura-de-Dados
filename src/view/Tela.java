@@ -355,30 +355,6 @@ public class Tela extends JFrame {
 		JPanel pMarcaReuniao = new JPanel();
 		tabbedPane_3.addTab("Marcar Reunião", null, pMarcaReuniao, null);
 		pMarcaReuniao.setLayout(null);
-		
-		JLabel lblMarcarReuniao = new JLabel("Marcar Reunião");
-		lblMarcarReuniao.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblMarcarReuniao.setBackground(Color.WHITE);
-		lblMarcarReuniao.setBounds(30, 11, 127, 20);
-		pMarcaReuniao.add(lblMarcarReuniao);
-		
-		JLabel lblNewLabel_1_2_5 = new JLabel("Código do grupo:");
-		lblNewLabel_1_2_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5.setBounds(55, 64, 127, 20);
-		pMarcaReuniao.add(lblNewLabel_1_2_5);
-		
-
-		
-		JLabel lblNewLabel_1_2_5_1 = new JLabel("Assunto da reunião:");
-		lblNewLabel_1_2_5_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_1.setBounds(55, 95, 127, 20);
-		pMarcaReuniao.add(lblNewLabel_1_2_5_1);
-
-		
-		JLabel lblNewLabel_1_2_5_2 = new JLabel("Data:");
-		lblNewLabel_1_2_5_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1_2_5_2.setBounds(55, 126, 127, 20);
-		pMarcaReuniao.add(lblNewLabel_1_2_5_2);
 
 
 		// TODO add passos <
