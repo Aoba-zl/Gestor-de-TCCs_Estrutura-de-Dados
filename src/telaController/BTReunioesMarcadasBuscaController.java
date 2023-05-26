@@ -68,6 +68,9 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                             if (!reuniao.isStatus()){
                                 vetor[3]= "Não concluído";
                             }
+                            else {
+                                vetor[3]= "Concluída";
+                            }
                             tabela.setModel(new DefaultTableModel(new Object[][] {{vetor[0], vetor[1], vetor[2], vetor[3]},}, new String[] {"Grupo","Tema","Data","Status"} ));
 
                         }
@@ -91,7 +94,12 @@ public class BTReunioesMarcadasBuscaController implements ActionListener {
                                         dado= reuniao.getData();
                                     }
                                     if (y == 3){
-                                        dado= reuniao.isStatus();
+                                        if (!reuniao.isStatus()){
+                                            dado= "Não concluído";
+                                        }
+                                        else {
+                                            dado= "Concluída";
+                                        }
                                     }
                                     reunioes[x][y]= dado;
                                 }
