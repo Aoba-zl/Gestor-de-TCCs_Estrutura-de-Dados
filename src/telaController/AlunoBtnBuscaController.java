@@ -4,6 +4,7 @@ import controller.ManterAluno;
 import model.Aluno;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -64,6 +65,7 @@ public class AlunoBtnBuscaController implements ActionListener
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
+        mensagem.setForeground(Color.black);
         if (!validaCampoRA(campoRA))
             return;
 

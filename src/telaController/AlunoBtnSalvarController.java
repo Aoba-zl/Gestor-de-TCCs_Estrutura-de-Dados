@@ -4,6 +4,7 @@ import controller.ManterAluno;
 import model.Aluno;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -70,6 +71,7 @@ public class AlunoBtnSalvarController implements ActionListener
     @Override
     public void actionPerformed(ActionEvent actionEvent)
     {
+        mensagem.setForeground(Color.black);
         if (!validaCampoRA(campoRA))
             return;
         if (!validaCampoNome(campoNome))
@@ -96,13 +98,14 @@ public class AlunoBtnSalvarController implements ActionListener
             }
 
             manterAluno.salvarDados(aluno, arquivoAluno, alunoExiste, Constantes.HOME, Constantes.ALUNO);
-            mensagem.setText("Dados salvos no systema!");
+            mensagem.setText(campoNome.getText() + " salvo no sistema!");
             btnSalvar.setEnabled(false);
             btnSalvar.setText("Salvar");
             btnExcluir.setVisible(false);
             btnExcluir.setEnabled(false);
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");
+            mensagem.setForeground(Color.RED);
             System.out.println(e);
         }
     }
