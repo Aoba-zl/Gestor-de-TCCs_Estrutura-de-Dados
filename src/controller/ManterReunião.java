@@ -76,7 +76,7 @@ public class ManterReunião {
 		while(linha != null) {
 			String[] vet= linha.split(";");
 			Boolean status= Boolean.valueOf(vet[3]);
-			if (!status && !linha.contains(String.valueOf(reuniao.getCodigoGrupo()))){
+			if (!status && linha.contains(String.valueOf(reuniao.getCodigoGrupo()))){
 				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus();;
 				content.append(linha).append("\n");
 			}
