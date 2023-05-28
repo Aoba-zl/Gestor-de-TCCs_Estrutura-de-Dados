@@ -172,7 +172,7 @@ public class BTReuniaoSalvaController implements ActionListener {
 
             ListObject lista= new ListObject();
             int tamanho= reuniaoVet.length;
-            for (int i = 1; i < tamanho; i++) {
+            for (int i = 0; i < tamanho; i++) {
                 Reuniao reuniao= new Reuniao();
                 String[] dados= reuniaoVet[i].split(";");
                 reuniao.setCodigoGrupo(Integer.parseInt(dados[0]));
