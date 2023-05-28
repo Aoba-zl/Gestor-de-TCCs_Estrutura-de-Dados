@@ -106,7 +106,7 @@ public class AlunoBtnSalvarController implements ActionListener
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");
             mensagem.setForeground(Color.RED);
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

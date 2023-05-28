@@ -21,8 +21,6 @@ import telaController.ComboBoxSubAreaConsultaController;
 
 public class TelaConsultaGrupo extends JFrame
 {
-	
-	
 	public static void setElements (JPanel pConsultarGrupos)
 	{
 		JTable tableGrupoCad;
@@ -96,7 +94,7 @@ public class TelaConsultaGrupo extends JFrame
 		ComboBoxAreaGrupoController cbAreaConsultCont = new ComboBoxAreaGrupoController(cbAreaConsulta, cbSubAreaConsulta, area, listaSubArea);
 		ComboBoxSubAreaConsultaController cbSubAreaConsultCont = new ComboBoxSubAreaConsultaController(cbAreaConsulta, cbSubAreaConsulta, tableGrupoCad, lblMensagemGrupoCad);
 		
-		cbAreaConsulta.addActionListener(cbAreaConsultCont); //CadGrupo ComboBox
+		cbAreaConsulta.addActionListener(cbAreaConsultCont);
 		cbSubAreaConsulta.addActionListener(cbSubAreaConsultCont);
 	}
 }

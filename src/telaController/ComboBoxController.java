@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.StringTokenizer;
-
-
 import br.fatec.ListString.ListString;
 
 public class ComboBoxController 

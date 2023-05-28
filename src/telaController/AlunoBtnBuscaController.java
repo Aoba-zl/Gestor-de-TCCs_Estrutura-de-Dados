@@ -92,7 +92,7 @@ public class AlunoBtnBuscaController implements ActionListener
             }
         } catch (Exception e) {
             btnSalvar.setEnabled(false);
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

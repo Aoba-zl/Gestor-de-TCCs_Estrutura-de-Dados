@@ -82,7 +82,7 @@ public class AlunoBtnExcluirController implements ActionListener
             btnSalvar.setText("Salvar");
         } catch (Exception e) {
             mensagem.setText("Ocorreu Algum erro.");
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 }

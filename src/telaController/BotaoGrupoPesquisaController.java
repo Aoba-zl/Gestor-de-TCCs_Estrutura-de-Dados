@@ -117,11 +117,6 @@ public class BotaoGrupoPesquisaController implements ActionListener
 			            mensagemGrupo.setText("x");
 			        	mensagemGrupo.setForeground(Color.RED);
 					}
-					else
-					{
-						System.out.println(aluno);
-					}
-					
 				}
 				else if (conf == 1)
 				{

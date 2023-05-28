@@ -10,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class TelaMarcarReuniao extends JFrame {
-
     public static void setElements(JPanel pMarcarReuniao){
 
 
@@ -87,6 +86,5 @@ public class TelaMarcarReuniao extends JFrame {
         btnBuscarCodReuniao.addActionListener(BTReuniaoBuscaCodigo);
         btnSalvaReuniao.addActionListener(BTReuniaoSalva);
         ftDataReuniao.addKeyListener(ftReuniaoDataCont);
-
     }
 }

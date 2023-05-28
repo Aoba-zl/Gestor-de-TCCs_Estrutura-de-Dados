@@ -22,8 +22,6 @@ public class ComboBoxSubAreaGrupoController implements ActionListener
 		this.cod = cod;
 	}
 
-	
-	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -70,6 +68,4 @@ public class ComboBoxSubAreaGrupoController implements ActionListener
 		codSelecao += numDisponivel;
 		cod.setText(codSelecao);
 	}
-	
-	
 }

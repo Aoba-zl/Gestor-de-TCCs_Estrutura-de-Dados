@@ -7,11 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class TelaReunioesMarcadas extends JFrame {
-
     public static void setElements (JPanel pReuniaoMarcado){
-
-
-
         JLabel lblCodGrupoReunMarcada = new JLabel("Código do grupo:");
         lblCodGrupoReunMarcada.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblCodGrupoReunMarcada.setBounds(37, 58, 109, 20);

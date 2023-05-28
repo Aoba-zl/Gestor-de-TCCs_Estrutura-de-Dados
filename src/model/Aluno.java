@@ -5,11 +5,6 @@ public class Aluno
 	private String ra;
 	private String nome;
 
-	public boolean validaAlunoRA(String ra)
-	{
-		return (ra.length() == 13);
-	}
-
 	public String getRa() {
 		return ra;
 	}

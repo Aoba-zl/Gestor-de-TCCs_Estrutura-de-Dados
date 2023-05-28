@@ -46,7 +46,6 @@ public class PassosBtnSalvarPassos implements ActionListener
             throw new Exception("Código Inválido!");
         if (valorDoCampoPassos.length() == 0)
             throw new Exception("Nenhum passo inserido!");
-        //TODO validar conteudo passos
     }
 
     @Override

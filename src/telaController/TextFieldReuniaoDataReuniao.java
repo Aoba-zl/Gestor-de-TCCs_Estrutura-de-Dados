@@ -7,7 +7,6 @@ import javax.swing.JFormattedTextField;
 
 public class TextFieldReuniaoDataReuniao implements KeyListener
 {
-
 	private JFormattedTextField ftDataReuniao;
 
 	public TextFieldReuniaoDataReuniao(JFormattedTextField ftDataReuniao) 
@@ -16,9 +15,9 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) 
+	public void keyTyped(KeyEvent e)
 	{
-		
+
 	}
 
 	@Override
@@ -29,6 +28,7 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 		{
 			ftDataReuniao.setEditable(true);
 		}
+
 		else
 		{
 			ftDataReuniao.setEditable(false);
@@ -38,7 +38,7 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 		String text = ftDataReuniao.getText();
         int keyCode = e.getKeyCode();
 
-        // Verifica se o texto já possui uma "/" no terceiro e sexto caractere, para não adicionar duplicado
+        // Verifica se o texto da data já possui uma "/" no terceiro e sexto caractere, para não adicionar duplicado
         if ((text.length() == 2 || text.length() == 5) && !text.endsWith("/")) {
         	ftDataReuniao.setText(text + "/");
         }
@@ -52,21 +52,16 @@ public class TextFieldReuniaoDataReuniao implements KeyListener
 		{
 			ftDataReuniao.setEditable(false);
 		}
+
 		if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE)
 		{
 			ftDataReuniao.setEditable(true);
 		}
-
     }
 
-
-
-
-
 	@Override
-	public void keyReleased(KeyEvent e) 
+	public void keyReleased(KeyEvent e)
 	{
-		
+
 	}
-	
 }

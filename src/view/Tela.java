@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 
 public class Tela extends JFrame {
-
 	/**
 	 * 1.0
 	 */
@@ -71,13 +70,11 @@ public class Tela extends JFrame {
 		tpOrientacoes.addTab("Marcar Reunião", null, pMarcaReuniao, null);
 		pMarcaReuniao.setLayout(null);
 
-		// TODO add passos <
 		JPanel pAddPassos = new JPanel();
 		tpOrientacoes.addTab("Adicionar Passos", null, pAddPassos, null);
 		pAddPassos.setLayout(null);
 
 		TelaDeifinirPassos.setElements(pAddPassos);
-		// TODO add passos >
 		JPanel pReuniaoMarcado = new JPanel();
 		tpOrientacoes.addTab("Reuniões marcadas", null, pReuniaoMarcado, null);
 		pReuniaoMarcado.setLayout(null);
@@ -90,6 +87,5 @@ public class Tela extends JFrame {
 		//Tela Grupo
 		TelaCadastroGrupo.setElements(pCadGrupo);
 		TelaConsultaGrupo.setElements(pConsultarGrupos);
-
 	}
 }

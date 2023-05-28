@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class PassosBtnBuscaGrupo implements ActionListener
@@ -54,19 +53,15 @@ public class PassosBtnBuscaGrupo implements ActionListener
             if (dados[0].contains(codigo) && line.contains("true"))
             {
             	buffer.close();
-                System.out.println("grupo " + codigo + "Já concluio");
                 return true;
             }
 
             line = buffer.readLine();
         }
-        
         buffer.close();
-        
         return false;
     }
 
-    //TODO verificar file grupo.
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (!validaArquivoGrupo())

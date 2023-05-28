@@ -24,7 +24,6 @@ import telaController.ComboBoxSubAreaGrupoController;
 
 public class TelaCadastroGrupo extends JFrame
 {
-	
 	public static void setElements (JPanel pCadGrupo)
 	{
 		ListString[] listaSubArea = null;
@@ -291,8 +290,5 @@ public class TelaCadastroGrupo extends JFrame
 
 		cbArea.addActionListener(cbAreaCont); //Grupo ComboBox
 		cbSubArea.addActionListener(cbSubAreaCont);
-		
-		
-		
 	}
 }
