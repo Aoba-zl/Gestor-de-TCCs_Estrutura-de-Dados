@@ -32,7 +32,7 @@ public class ManterReunião {
 			return null;
 		int tamanho= reunioes.size();
 
-		for (int i = tamanho - 1; i > 0; i--) {
+		for (int i = tamanho - 1; i >= 0; i--) {
 			Reuniao reuniao= (Reuniao) reunioes.get(i);
 			if (reuniao.getCodigoGrupo() == codigo){
 				return reuniao;
@@ -74,11 +74,13 @@ public class ManterReunião {
 
 		String linha = buffer.readLine();
 		while(linha != null) {
-			if (!linha.contains(Integer.toString(reuniao.getCodigoGrupo()))){
+			String[] vet= linha.split(";");
+			Boolean status= Boolean.valueOf(vet[3]);
+			if (!status && !linha.contains(String.valueOf(reuniao.getCodigoGrupo()))){
+				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus();;
 				content.append(linha).append("\n");
 			}
 			else {
-				linha= reuniao.getCodigoGrupo() +";"+ reuniao.getAssunto() +";"+ reuniao.getData() +";"+ reuniao.isStatus();;
 				content.append(linha).append("\n");
 			}
 			linha= buffer.readLine();
