@@ -25,10 +25,16 @@ O projeto, multiplataforma, tem como objetivo que um professor orientador de TCC
 
 # Prints
 
-![[TelaAluno.png]]
-![[TelaCadGrupo.png]]
-![[TelaConsulGrupo.png]]
-![[TelaMarcarReuniao.png]]
-![[TelaMarcarPassos.png]]
-![[TelaConsulReuniões.png]]
-![[TelaConsulReuniões1.png]]
+<img src="./ImgsReadMe/TelaAluno.png">
+<br>
+<img src="./ImgsReadMe/TelaCadGrupo.png">
+<br>
+<img src="./ImgsReadMe/TelaConsulGrupo.png">
+<br>
+<img src="./ImgsReadMe/TelaMarcarReuniao.png">
+<br>
+<img src="./ImgsReadMe/TelaMarcarPassos.png">
+<br>
+<img src="./ImgsReadMe/TelaConsulReuniões.png">
+<br>
+<img src="./ImgsReadMe/TelaConsulReuniões1.png">
