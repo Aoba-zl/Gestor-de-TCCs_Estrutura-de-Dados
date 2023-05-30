@@ -23,6 +23,21 @@ O projeto, multiplataforma, tem como objetivo que um professor orientador de TCC
 	- Apenas a última reunião para grupos que não concluíram o Trabalho
 	- Todas as reuniões para grupos que já concluíram o Trabalho
 
+# Requisitos
+
+Para que o programa funcione o diretório TEMP, presente no diretório 'ProjetoJava/DataBase/', deve estar no diretório do usuário.
+<br>
+Para usuários Windows:
+`C:\users\UserName\TEMP`
+<br>
+Para usuários Linux:
+`/home/UserName/TEMP`
+<br>
+Aonde `UserName` é o nome do usuário do computador.
+<br>
+<br>
+Dentro do diretório TEMP, apenas o arquivo `ProfessorAreasdeAtuacao.csv` é **estritamente** necessário para o funcionamento do programa.
+
 # Prints
 
 <img src="./ImgsReadMe/TelaAluno.png">
